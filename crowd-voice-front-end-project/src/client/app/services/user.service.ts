@@ -9,7 +9,7 @@ export class UserService {
  
     registerUser(username: string, password: string, confirmPassword: string) {
         
-        let registerURL = 'http://localhost:52686/api/account/register';
+        let registerURL = 'http://localhost:56478/api/account/register';
         
         let headers = new Headers({
             'Accept': 'application/json', 

@@ -8,13 +8,13 @@
 				<div class="form-content">
 					
 					<div class="form-group" [ngClass]="{ 'has-error': loginUserForm.submitted && !username.valid }">
-						<label for="username">USERNAME</label>
+						<label for="username">EMAIL</label>
 						<input type="text" class="form-control input-underline input-lg" 
-							name="username" id="username" placeholder="Enter your username..."
+							name="username" id="username" placeholder="Enter yout email address..."
 							required [(ngModel)]="user.username"
 							#username="ngModel">
 						<div [hidden]="username.valid || username.pristine" class="error help-block">
-							Username is required my good sir/lady!
+							Email is required my good sir/lady!
 						</div>
 					</div>
 

@@ -30,12 +30,18 @@ export class SignupComponent {
     registerUser() {
         this.loading = true;
 		
+        if(!this.validateEmail(this.user.username)) {
+            this.alertService.error("Provided email address is not valid.");
+			this.loading = false;
+			return;
+        }
+        
 		if(this.user.password !== this.user.repeatPassword) {
-            //this.alertService.error("Provided passwords do not match.");
-			//this.loading = false;
-			//return;
+            this.alertService.error("Provided passwords do not match.");
+			this.loading = false;
+			return;
 		}
-		
+        
 		//alert(`registered!!! ${JSON.stringify(this.user)}`);
 		
         this.userService.registerUser(this.user.username, this.user.password, this.user.repeatPassword)
@@ -58,5 +64,10 @@ export class SignupComponent {
                     this.loading = false;
                 });
                 
+    }
+    
+    validateEmail(email: string) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
     }
 }
