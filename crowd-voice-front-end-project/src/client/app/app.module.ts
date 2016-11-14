@@ -8,13 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 
+import { ProjectProfileModule } from './projectProfile/projectProfile.module';
 import { LoginModule } from './login/login.module';
 import { SignupModule } from './signup/signup.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AlertComponent } from './directives/index';
-import { AlertService, AuthenticationService, UserService } from './services/index';
+import { AlertService, AuthenticationService, UserService, ProjectService } from './services/index';
 
 @NgModule({
 	imports: [
@@ -22,6 +23,7 @@ import { AlertService, AuthenticationService, UserService } from './services/ind
 		HttpModule,
 		RouterModule.forRoot(routes),
 		FormsModule,
+		ProjectProfileModule,
 		LoginModule,
 		SignupModule,
 		DashboardModule,
@@ -38,7 +40,8 @@ import { AlertService, AuthenticationService, UserService } from './services/ind
 		},
 		AlertService,
         AuthenticationService,
-		UserService
+		UserService,
+		ProjectService
 	],
 	bootstrap: [AppComponent]
 
