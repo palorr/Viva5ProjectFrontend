@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 
+import { userProfileModule} from './userProfile/userProfile.module'
 import { LoginModule } from './login/login.module';
 import { SignupModule } from './signup/signup.module';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -22,6 +23,7 @@ import { AlertService, AuthenticationService, UserService } from './services/ind
 		HttpModule,
 		RouterModule.forRoot(routes),
 		FormsModule,
+		userProfileModule,
 		LoginModule,
 		SignupModule,
 		DashboardModule,
