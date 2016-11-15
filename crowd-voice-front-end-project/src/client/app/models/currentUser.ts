@@ -1,7 +1,10 @@
 export class CurrentUser {
    	Id: number;
+	IsVerified: number;
 	CreatedDateTime: string;
 	UpdatedDateTime: string;
 	Name: string;
-	AvatarImage: string;	
+	ShortBio: string;
+	AvatarImage: string;
+	Username: string;	
 }

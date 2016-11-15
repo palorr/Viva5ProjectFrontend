@@ -3,7 +3,11 @@ import { Router } from '@angular/router';
 
 import { AuthGuard } from '../../guards/index';
 
-import { CurrentUserHelper } from '../../helpers/index';
+import { CurrentUserService } from '../../helpers/index';
+
+import { CurrentUser } from '../../models/index';
+
+import { AuthenticationService } from '../../services/index';
 
 @Component({
     moduleId: module.id,
@@ -15,9 +19,13 @@ export class TopNavComponent implements OnInit {
 	
 	isLoggedIn: boolean = false;
 	
+	currentUser = {}; 
+	
 	constructor(
 		private authGuard: AuthGuard,
-		private currentUserHelper: CurrentUserHelper
+		private currentUserService: CurrentUserService,
+		private authenticationService: AuthenticationService,
+		private router: Router
 	){}
 	
 	ngOnInit() {
@@ -25,14 +33,22 @@ export class TopNavComponent implements OnInit {
 			this.isLoggedIn = true;
 		}
 		
-		this.currentUserHelper.getUserMainInfo()
+		if(localStorage.getItem('currentUser')) {
+			this.currentUserService.getUserMainInfo()
 			.subscribe(
                 (data) => {
-                    console.log('DATA: ', data);
+                    this.currentUser = data;
+					console.log('Current User: ', this.currentUser);
                 },
                 (err) => {
                     console.log('ERROR: ', err);
-                });
+                });	
+		}
+	}
+	
+	logOut() {
+		this.authenticationService.logout();
+		this.router.navigate(['/login']);
 	}
 	
 	changeTheme(color: string): void {

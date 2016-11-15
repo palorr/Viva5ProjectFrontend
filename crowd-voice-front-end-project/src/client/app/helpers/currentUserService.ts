@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
- 
+import 'rxjs/add/operator/map';
+
+
 @Injectable()
-export class CurrentUserHelper {
+export class CurrentUserService {
     
     constructor(private http: Http) { }
    

@@ -24,7 +24,7 @@ import {
 
 import { AuthGuard } from './guards/index';
 
-import { CurrentUserHelper } from './helpers/index'
+import { CurrentUserService } from './helpers/index'
 
 @NgModule({
 	imports: [
@@ -52,7 +52,7 @@ import { CurrentUserHelper } from './helpers/index'
 		ProjectService,
 		UserService,
 		AuthGuard,
-		CurrentUserHelper
+		CurrentUserService
 	],
 	bootstrap: [AppComponent]
 
