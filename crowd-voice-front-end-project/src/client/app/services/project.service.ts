@@ -30,7 +30,7 @@ export class ProjectService {
  
     getProjectById(projectId: number) {
         
-        let projectURL = 'http://localhost:56378/api/project/'+projectId;
+        let projectURL = 'http://localhost:56378/api/projects/'+projectId;
         
         let headers = new Headers({
             'Accept': 'application/json', 

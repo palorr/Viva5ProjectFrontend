@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AlertService, UserService } from '../services/index';
+import { AlertService, RegistrationService } from '../services/index';
 
 import { User } from '../models/user';
 
@@ -24,7 +24,7 @@ export class SignupComponent {
     constructor(
         private router: Router,
         private alertService: AlertService,
-        private userService: UserService
+        private registrationService: RegistrationService
     ) { }
  
     registerUser() {
@@ -44,7 +44,7 @@ export class SignupComponent {
         
 		//alert(`registered!!! ${JSON.stringify(this.user)}`);
 		
-        this.userService.registerUser(this.user.username, this.user.password, this.user.repeatPassword)
+        this.registrationService.registerUser(this.user.username, this.user.password, this.user.repeatPassword)
             .subscribe(
                 (data) => {
                     // set success message and pass true paramater to persist the message after redirecting to the login page

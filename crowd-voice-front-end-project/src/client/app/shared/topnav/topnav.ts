@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AuthGuard } from '../../guards/index';
+
+import { CurrentUserHelper } from '../../helpers/index';
 
 @Component({
     moduleId: module.id,
@@ -6,7 +11,30 @@ import { Component } from '@angular/core';
     templateUrl: 'topnav.html',
 })
 
-export class TopNavComponent {
+export class TopNavComponent implements OnInit {
+	
+	isLoggedIn: boolean = false;
+	
+	constructor(
+		private authGuard: AuthGuard,
+		private currentUserHelper: CurrentUserHelper
+	){}
+	
+	ngOnInit() {
+		if(this.authGuard.isUserLoggedIn()) {
+			this.isLoggedIn = true;
+		}
+		
+		this.currentUserHelper.getUserMainInfo()
+			.subscribe(
+                (data) => {
+                    console.log('DATA: ', data);
+                },
+                (err) => {
+                    console.log('ERROR: ', err);
+                });
+	}
+	
 	changeTheme(color: string): void {
 		var link: any = $('<link>');
 		link

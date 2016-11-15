@@ -5,28 +5,42 @@ import 'rxjs/add/operator/map'
  
 @Injectable()
 export class UserService {
+    
     constructor(private http: Http) { }
- 
-    registerUser(username: string, password: string, confirmPassword: string) {
-        
-        let registerURL = 'http://localhost:56478/api/account/register';
+    
+    getAllUsers() {
+        let allUsersURL = 'http://localhost:56378/api/users';
         
         let headers = new Headers({
             'Accept': 'application/json', 
-            'Content-Type': 'application/json'
         });
-        
-        let postRequestBody = JSON.stringify({ 
-			username: username, 
-            password: password,
-			confirmPassword: confirmPassword
-		});
         
         let options = new RequestOptions({ headers: headers });
         
-        return this.http.post(registerURL, postRequestBody, options)
+        return this.http.get(allUsersURL, options)
             .map((response: Response) => {
-                //console.log('Register Server Response: ', response);
+                console.log('All Users Server Response: ', response);
+            })
+            .catch(res => {
+                console.log('CATCH: ', res.json());
+                throw(res.json());
+            });
+        
+    }
+ 
+    getUserMainInfo(userId: number) {
+        
+        let userURL = 'http://localhost:56378/api/users/'+userId;
+        
+        let headers = new Headers({
+            'Accept': 'application/json', 
+        });
+        
+        let options = new RequestOptions({ headers: headers });
+        
+        return this.http.get(userURL, options)
+            .map((response: Response) => {
+                console.log('Specific User Response: ', response);
             })
             .catch(res => {
                 console.log('CATCH: ', res.json());

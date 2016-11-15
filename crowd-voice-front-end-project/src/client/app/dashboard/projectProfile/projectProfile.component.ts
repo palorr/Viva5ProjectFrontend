@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 //import { Project } from '../models/project';
 
-import { AlertService, ProjectService } from '../services/index';
+import { AlertService, ProjectService } from '../../services/index';
 
 /**
 *	This class represents the lazy loaded ProjectProfileComponent.
