@@ -4,12 +4,12 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
  
 @Injectable()
-export class UserService {
+export class ProjectService {
     
     constructor(private http: Http) { }
     
-    getAllUsers() {
-        let allUsersURL = 'http://localhost:56378/api/users';
+    getAllProjects() {
+        let allProjectsURL = 'http://localhost:56378/api/projects';
         
         let headers = new Headers({
             'Accept': 'application/json', 
@@ -17,9 +17,9 @@ export class UserService {
         
         let options = new RequestOptions({ headers: headers });
         
-        return this.http.get(allUsersURL, options)
+        return this.http.get(allProjectsURL, options)
             .map((response: Response) => {
-                console.log('All Users Server Response: ', response);
+                console.log('All Projects Server Response: ', response);
             })
             .catch(res => {
                 console.log('CATCH: ', res.json());
@@ -28,9 +28,9 @@ export class UserService {
         
     }
  
-    getUserMainInfo(userId: number) {
+    getProjectById(projectId: number) {
         
-        let userURL = 'http://localhost:56378/api/users/'+userId;
+        let projectURL = 'http://localhost:56378/api/projects/'+projectId;
         
         let headers = new Headers({
             'Accept': 'application/json', 
@@ -38,9 +38,9 @@ export class UserService {
         
         let options = new RequestOptions({ headers: headers });
         
-        return this.http.get(userURL, options)
+        return this.http.get(projectURL, options)
             .map((response: Response) => {
-                console.log('Specific User Response: ', response);
+                console.log('Specific Project Response: ', response);
             })
             .catch(res => {
                 console.log('CATCH: ', res.json());

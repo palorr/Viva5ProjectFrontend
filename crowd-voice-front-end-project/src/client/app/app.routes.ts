@@ -10,5 +10,5 @@ export const routes: Routes = [
 	...LoginRoutes,
 	...SignupRoutes,
 	...DashboardRoutes,
-	{ path: '**', redirectTo: '' }
+	{ path: '**', redirectTo: 'dashboard/home' }
 ];
