@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import { userProfileComponent } from './userProfile.component';
+import { ProjectProfileComponent } from './projectProfile.component';
 
 @NgModule({
     imports: [
@@ -11,8 +11,8 @@ import { userProfileComponent } from './userProfile.component';
         RouterModule, 
         FormsModule
     ],
-    declarations: [userProfileComponent],
-    exports: [userProfileComponent]
+    declarations: [ProjectProfileComponent],
+    exports: [ProjectProfileComponent]
 })
 
-export class userProfileModule { }
+export class ProjectProfileModule { }
