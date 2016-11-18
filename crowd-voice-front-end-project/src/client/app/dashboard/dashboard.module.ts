@@ -4,8 +4,9 @@ import { RouterModule } from '@angular/router';
 import { DropdownModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 
-import { ProjectProfileModule } from './projectProfile/projectProfile.module';
+import { ProjectModule } from './project/project.module';
 import { ProjectListModule } from './projectList/projectList.module';
+
 import { HomeModule } from './home/home.module';
 import { ChartModule } from './charts/chart.module';
 import { BlankPageModule } from './blank-page/blankPage.module';
@@ -27,7 +28,7 @@ import {SidebarComponent} from '../shared/index';
     	RouterModule,
     	DropdownModule,
         ModalModule,
-        ProjectProfileModule,
+        ProjectModule,
         ProjectListModule,
     	HomeModule,
         ChartModule,

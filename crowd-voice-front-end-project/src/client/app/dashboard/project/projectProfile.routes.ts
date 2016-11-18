@@ -1,9 +1,9 @@
 import { Route } from '@angular/router';
-import { ProjectProfileComponent } from './index';
+import { ProjectProfileComponent } from './projectProfile.component';
 
 export const ProjectProfileRoutes: Route[] = [
   	{
-    	path: 'project/view/:id',
+    	path: 'view/:id',
     	component: ProjectProfileComponent
   	}
 ];

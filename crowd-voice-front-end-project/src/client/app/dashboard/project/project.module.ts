@@ -4,6 +4,9 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { ProjectProfileComponent } from './projectProfile.component';
+import { ProjectCreateComponent } from './projectCreate.component';
+
+import { ProjectComponent } from './project.component';
 
 @NgModule({
     imports: [
@@ -11,8 +14,8 @@ import { ProjectProfileComponent } from './projectProfile.component';
         RouterModule, 
         FormsModule
     ],
-    declarations: [ProjectProfileComponent],
-    exports: [ProjectProfileComponent]
+    declarations: [ProjectComponent, ProjectProfileComponent, ProjectCreateComponent],
+    exports: [ProjectComponent, ProjectProfileComponent, ProjectCreateComponent]
 })
 
-export class ProjectProfileModule { }
+export class ProjectModule { }
