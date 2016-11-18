@@ -14,7 +14,7 @@ import { FormModule } from './forms/forms.module';
 import { GridModule } from './grid/grid.module';
 import { BSComponentModule } from './bs-component/bsComponent.module';
 import { BSElementModule } from './bs-element/bsElement.module';
-
+import { userProfileModule } from './userProfile/userProfile.module';
 import { DashboardComponent } from './dashboard.component';
 
 import {TopNavComponent} from '../shared/index';
@@ -36,7 +36,8 @@ import {SidebarComponent} from '../shared/index';
         GridModule,
     	BSComponentModule,
         BSElementModule,
-        BlankPageModule
+        BlankPageModule,
+        userProfileModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent]
