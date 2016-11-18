@@ -1,5 +1,7 @@
 import { Route } from '@angular/router';
 
+import { ProjectRoutes } from './project/index';
+//import { ProjectListRoutes } from './projectList/index';
 import { HomeRoutes } from './home/index';
 import { ChartRoutes } from './charts/index';
 import { BlankPageRoutes } from './blank-page/index';
@@ -16,6 +18,8 @@ export const DashboardRoutes: Route[] = [
     	path: 'dashboard',
     	component: DashboardComponent,
     	children: [
+        ...ProjectRoutes,
+	    	//...ProjectListRoutes,
 	    	...HomeRoutes,
 	    	...ChartRoutes,
 	    	...BSComponentRoutes,

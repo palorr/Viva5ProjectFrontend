@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ProjectService } from '../../services/index';
+import { Project } from '../../models/index';
 
 /**
 *	This class represents the lazy loaded HomeComponent.
@@ -32,10 +34,13 @@ export class NotificationComponent { }
 	templateUrl: 'home.component.html'
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 	/* Carousel Variable */
+	projects: Array<Project> = [];
+	
 	myInterval: number = 5000;
 	index: number = 0;
+	
 	slides: Array<any> = [];
 	imgUrl: Array<any> = [
 		`assets/img/slider1.jpg`,
@@ -62,19 +67,37 @@ export class HomeComponent {
 	 }
 	/* END*/
 
-	constructor() {
-		for (let i = 0; i < 4; i++) {
-			this.addSlide();
-		}
+	constructor(
+		private projectService: ProjectService
+	) {
+		//for (let i = 0; i < 4; i++) {
+			//this.addSlide();
+		//}
 	}
+	
+	ngOnInit() {
+        this.projectService.getAllProjects()
+            .subscribe(
+                (data: Array<Project>) => {
+					this.projects = data;
+					console.log('this.projects: ', this.projects);
+					for (let i = 0; i < data.length; i++) {
+						this.addSlide();
+					}
+                },
+                (err) => {
+                    alert(err);
+                });
+    }
 
 	/* Carousel */
 	addSlide() {
 		let i = this.slides.length;
+		console.log("Slide " + i + ": " + this.projects[i].Title + " | " +  this.projects[i].Description);
 		this.slides.push({
 			image: this.imgUrl[i],
-			text: `${['Dummy ', 'Dummy ', 'Dummy ', 'Dummy '][this.slides.length % 4]}
-      			${['text 0', 'text 1', 'text 2', 'text 3'][this.slides.length % 4]}`
+			title: this.projects[i].Title,
+      		description: this.projects[i].Description
 		});
 	}
 	/* END */
