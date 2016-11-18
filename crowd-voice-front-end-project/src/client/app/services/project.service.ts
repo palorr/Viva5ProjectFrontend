@@ -18,9 +18,7 @@ export class ProjectService {
         let options = new RequestOptions({ headers: headers });
         
         return this.http.get(allProjectsURL, options)
-            .map((response: Response) => {
-                console.log('All Projects Server Response: ', response);
-            })
+            .map((response: Response) => response.json())
             .catch(res => {
                 console.log('CATCH: ', res.json());
                 throw(res.json());

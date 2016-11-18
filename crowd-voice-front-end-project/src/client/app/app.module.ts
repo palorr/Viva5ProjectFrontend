@@ -12,7 +12,7 @@ import { LoginModule } from './login/login.module';
 import { SignupModule } from './signup/signup.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
-import { userProfileModule } from './userProfile/userProfile.module'
+
 import { AlertComponent } from './directives/index';
 import { 
 	AlertService, 
@@ -35,7 +35,6 @@ import { CurrentUserService } from './helpers/index'
 		LoginModule,
 		SignupModule,
 		DashboardModule,
-		userProfileModule,
 		SharedModule.forRoot()
 	],
 	declarations: [
