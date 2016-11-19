@@ -10,7 +10,7 @@ import { FormRoutes } from './forms/index';
 import { GridRoutes } from './grid/index';
 import { BSComponentRoutes } from './bs-component/index';
 import { BSElementRoutes } from './bs-element/index';
-import { userProfileRoutes } from './userProfile/userProfile.routes';
+import { UserRoutes } from './user/user.routes';
 
 import { DashboardComponent } from './index';
 
@@ -29,7 +29,7 @@ export const DashboardRoutes: Route[] = [
         ...FormRoutes,
         ...GridRoutes,
         ...BSElementRoutes,
-		...userProfileRoutes
+		...UserRoutes
     	]
   	}
 ];

@@ -1,5 +1,5 @@
 /**
  * This barrel file provides the export for the lazy loaded AboutComponent.
  */
-export * from './userProfile.component';
-export * from './userProfile.routes';
+export * from './user.component';
+export * from './user.routes';

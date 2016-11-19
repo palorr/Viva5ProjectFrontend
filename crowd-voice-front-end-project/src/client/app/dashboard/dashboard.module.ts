@@ -7,7 +7,7 @@ import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { ProjectModule } from './project/project.module';
 import { ProjectListModule } from './projectList/projectList.module';
 
-import { userProfileModule } from './userProfile/userProfile.module' ; 
+import { UserModule } from './user/user.module' ; 
 
 import { HomeModule } from './home/home.module';
 import { ChartModule } from './charts/chart.module';
@@ -40,7 +40,7 @@ import {SidebarComponent} from '../shared/index';
     	BSComponentModule,
         BSElementModule,
         BlankPageModule,
-        userProfileModule
+        UserModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent]
