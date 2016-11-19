@@ -26,6 +26,8 @@ export class ProjectCreateComponent implements OnInit {
 	) { }
 	
     ngOnInit() {
+        //this.authGuard.canActivate();
+        
     	this.projectService.getProjectCategories()
 			.subscribe(
                 (data: ProjectCategory[]) => {

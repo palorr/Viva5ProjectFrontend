@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ProjectProfileComponent } from './projectProfile.component';
 import { ProjectCreateComponent } from './projectCreate.component';
+import { ProjectListComponent } from './projectList.component';
 
 import { ProjectComponent } from './project.component';
 
@@ -14,8 +15,18 @@ import { ProjectComponent } from './project.component';
         RouterModule, 
         FormsModule
     ],
-    declarations: [ProjectComponent, ProjectProfileComponent, ProjectCreateComponent],
-    exports: [ProjectComponent, ProjectProfileComponent, ProjectCreateComponent]
+    declarations: [
+        ProjectComponent, 
+        ProjectProfileComponent, 
+        ProjectCreateComponent, 
+        ProjectListComponent
+    ],
+    exports: [
+        ProjectComponent, 
+        ProjectProfileComponent, 
+        ProjectCreateComponent,
+        ProjectListComponent
+    ]
 })
 
 export class ProjectModule { }

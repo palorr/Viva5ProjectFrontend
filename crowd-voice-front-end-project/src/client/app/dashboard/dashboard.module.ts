@@ -5,7 +5,6 @@ import { DropdownModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { ProjectModule } from './project/project.module';
-import { ProjectListModule } from './projectList/projectList.module';
 
 import { UserModule } from './user/user.module' ; 
 
@@ -31,7 +30,6 @@ import {SidebarComponent} from '../shared/index';
     	DropdownModule,
         ModalModule,
         ProjectModule,
-        ProjectListModule,
     	HomeModule,
         ChartModule,
         TableModule,

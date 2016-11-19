@@ -1,9 +1,8 @@
-<div class="row">
-	<div class="col-lg-12">
-		<h1>CrowdVoice Project Profile Page</h1>
-		<span *ngIf="project">
-			<h3>{{project.Title}}</h3>
-			<h5>{{project.Description}}</h5>
-		</span>
-	</div>	
-</div>
+<h1>CrowdVoice Project Profile Page</h1>
+<div class="panel panel-default">
+	<div class="panel-heading"></div>
+	<div class="panel-body" *ngIf="project">
+		<h3>{{project.Title}}</h3>
+		<h5>{{project.Description}}</h5>
+	</div>
+</div>	
