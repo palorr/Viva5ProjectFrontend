@@ -12,42 +12,42 @@ import { Project } from '../../models/index';
 
 export class ProjectListComponent implements OnInit { 
 	projects: Array<Project> = [];
-	
+    
+    actionPassed: string = 'getAllProjects';
+    
 	constructor(
         private route: ActivatedRoute,
         private projectService: ProjectService
 	) {}
 	
 	ngOnInit() {
-        console.log("This.Route: ", this.route.data.value['action']);
-        
-        if (this.route.data && this.route.data.value['action']) {
-            alert(this.route.data.value['action']);
-            
-            switch(this.route.data.value['action']) {
-                case 'getAllProjects':
-                    this.projectService
-                        .getAllProjects()
-                        .subscribe(
-                            (data: Array<Project>) => {
-                                this.projects = data;
-                            },
-                            (err) => {
-                                alert(err);
-                            });
-                    break;
-                case 'getMyProjects':
-                    this.projectService
-                        .getProjectById(17)
-                        .subscribe(
-                            (data: Project) => {
-                                this.projects.push(data);
-                            },
-                            (err) => {
-                                alert(err);
-                            });
-            }
+        if(this.route.data) {
+            this.route.data
+                .subscribe(
+                    value => { 
+                        this.actionPassed = value['action'];
+                    }
+                );    
         }
+        
+        switch(this.actionPassed) {
+            case 'getAllProjects':
+                this.projectService
+                    .getAllProjects()
+                    .subscribe(
+                        (data: Array<Project>) => {
+                            this.projects = data;
+                        },
+                        (err) => {
+                            alert(err);
+                        });
+                break;
+            case 'getMyProjects':
+                //TODO 
+                break;
+            //TODO - ADD MORE ACTIONS FOR PROJECT LISTS
+        }
+        
         
         
     }

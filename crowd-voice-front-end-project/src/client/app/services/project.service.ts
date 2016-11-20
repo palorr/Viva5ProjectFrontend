@@ -29,9 +29,9 @@ export class ProjectService {
     }
  
     getProjectById(projectId: number, isLoggedIn: boolean) {
-        let projectURL;
-        let headers;
-        let options;
+        let projectURL: string;
+        let headers: Headers;
+        let options: RequestOptions;
         
         if(isLoggedIn) {
             projectURL = 'http://localhost:56378/api/projects/'+projectId;
