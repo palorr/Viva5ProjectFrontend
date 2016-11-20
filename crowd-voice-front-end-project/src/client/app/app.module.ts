@@ -54,6 +54,7 @@ import { CurrentUserService } from './helpers/index'
 		ProjectService,
 		UserService,
 		AuthGuard,
+		AuthorizationGuard,
 		CurrentUserService
 	],
 	bootstrap: [AppComponent]
