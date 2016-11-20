@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 
 import { ProjectProfileRoutes } from './projectProfile.routes';
 import { ProjectCreateRoutes } from './projectCreate.routes';
+import { ProjectEditRoutes } from './projectEdit.routes';
 import { ProjectListRoutes } from './projectList.routes';
 
 import { ProjectComponent } from './index';
@@ -13,6 +14,7 @@ export const ProjectRoutes: Route[] = [
     	children: [
         ...ProjectProfileRoutes,
         ...ProjectCreateRoutes,
+        ...ProjectEditRoutes,
 	    	...ProjectListRoutes
     	]
   	}

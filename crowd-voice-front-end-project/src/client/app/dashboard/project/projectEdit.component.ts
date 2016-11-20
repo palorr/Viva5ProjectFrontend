@@ -7,10 +7,10 @@ import { AlertService, ProjectService } from '../../services/index';
 
 @Component({
 	moduleId: module.id,
-	selector: 'project-create-cmp',
-	templateUrl: 'projectCreate.component.html'
+	selector: 'project-edit-cmp',
+	templateUrl: 'projectEdit.component.html'
 })
-export class ProjectCreateComponent implements OnInit {
+export class ProjectEditComponent implements OnInit {
 	
 	project: Project = new Project();
 	
@@ -26,9 +26,23 @@ export class ProjectCreateComponent implements OnInit {
 	) { }
 	
     ngOnInit() {
-        //this.authGuard.canActivate();
-        
-    	this.projectService.getProjectCategories()
+		this.route.params.forEach((params: Params) => {
+			console.log('THE PARAMS IN');
+			
+			let projectId = +params['id'];
+			
+			this.projectService.getProjectById(projectId)
+				.subscribe(
+					(data: Project) => {
+						this.project = data;
+						console.log('Project Data: ', this.project);
+					},
+					(err) => {
+						this.alertService.error(err.error_description);
+					}
+				);
+			
+			this.projectService.getProjectCategories()
 			.subscribe(
                 (data: ProjectCategory[]) => {
 					this.projectCategoryOptions = data;
@@ -38,9 +52,11 @@ export class ProjectCreateComponent implements OnInit {
                     this.alertService.error(err.error_description);
                 }
 			);
+			
+		});
 	}
 	
-	createProject() {
+	editProject() {
 		this.loading = true;
 		
         console.log("Project to send: ", this.project);

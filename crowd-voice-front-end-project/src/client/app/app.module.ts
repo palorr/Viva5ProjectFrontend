@@ -24,6 +24,8 @@ import {
 
 import { AuthGuard } from './guards/index';
 
+import { AuthorizationGuard } from './guards/index';
+
 import { CurrentUserService } from './helpers/index'
 
 @NgModule({

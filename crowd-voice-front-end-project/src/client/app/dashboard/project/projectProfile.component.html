@@ -1,8 +1,15 @@
-<h1>CrowdVoice Project Profile Page</h1>
-<div class="panel panel-default">
-	<div class="panel-heading"></div>
-	<div class="panel-body" *ngIf="project">
-		<h3>{{project.Title}}</h3>
-		<h5>{{project.Description}}</h5>
+<h1>Project Profile Page</h1>
+<div class="container-fluid">
+	<div class="row">
+		<div class="jumbotron" *ngIf="project">
+			<h1>{{project.Title}}</h1>
+			<p>{{project.Description}}</p>
+			<p>Created on: {{project.CreatedDate | amDateFormat:'LL'}}</p>
+			<p>Updated on: {{project.UpdatedDate | amDateFormat:'LL'}}</p>
+			<p>Funding Goal: {{project.FundingGoal}}</p>
+			<p>Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
+			<p>Project Owner: <a [routerLink]="['/dashboard/user/viewProfile', project.OwnerId]">{{project.OwnerName}}</a></p>
+			<p>Project Category: {{project.ProjectCategoryDesc}}</p>
+		</div>
 	</div>
 </div>	
