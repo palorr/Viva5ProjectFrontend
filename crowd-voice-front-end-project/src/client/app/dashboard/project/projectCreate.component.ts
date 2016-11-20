@@ -59,7 +59,7 @@ export class ProjectCreateComponent implements OnInit {
                     
                     this.loading = false;
                     
-                    this.router.navigate(['/dashboard/projects/edit']);
+                    this.router.navigate(['/dashboard/projects/edit/'+data]);
                 },
                 (err) => {
                     let errorString = "";

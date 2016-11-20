@@ -96,7 +96,7 @@ export class ProjectService {
         let putRequestBody = JSON.stringify(project);
         
         return this.http.put(editProjectURL, putRequestBody, options)
-            .map((response: Response) => response.json())
+            .map((response: Response) => response)
             .catch(res => {
                 console.log('CATCH: ', res.json());
                 throw(res.json());

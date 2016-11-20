@@ -78,10 +78,13 @@ export class ProjectEditComponent implements OnInit {
         this.projectService.editProject(this.project)
             .subscribe(
                 (data) => {
-                    // set success message and pass true paramater to persist the message
-                    this.alertService.success('Project edited successfully!', true);
-                },
+					console.log('SUCCESS IN EDIT: ', data);
+                    // set success message
+                    this.alertService.success('Project edited successfully!');
+                	this.loading = false;
+				},
                 (err) => {
+					console.log('ERROR IN EDIT: ', err);
                     let errorString = "";
                     
                     for(let element in err.modelState) {
