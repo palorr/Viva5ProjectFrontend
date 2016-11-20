@@ -28,15 +28,25 @@ export class ProjectService {
         
     }
  
-    getProjectById(projectId: number) {
+    getProjectById(projectId: number, isLoggedIn: boolean) {
+        let projectURL;
+        let headers;
+        let options;
         
-        let projectURL = 'http://localhost:56378/api/projects/'+projectId;
+        if(isLoggedIn) {
+            projectURL = 'http://localhost:56378/api/projects/'+projectId;
         
-        let headers = new Headers({
-            'Accept': 'application/json', 
-        });
-        
-        let options = new RequestOptions({ headers: headers });
+            options = this.jwt();
+        }
+        else {
+            projectURL = 'http://localhost:56378/api/projects/'+projectId+'/allowAll';
+            
+            headers = new Headers({
+                'Accept': 'application/json', 
+            });
+            
+            options = new RequestOptions({ headers: headers })
+        }
         
         return this.http.get(projectURL, options)
             .map((response: Response) => response.json())
@@ -71,6 +81,21 @@ export class ProjectService {
         let postRequestBody = JSON.stringify(newProject);
         
         return this.http.post(createProjectURL, postRequestBody, options)
+            .map((response: Response) => response.json())
+            .catch(res => {
+                console.log('CATCH: ', res.json());
+                throw(res.json());
+            });
+    }
+    
+    editProject(project: Project) {
+        let editProjectURL = 'http://localhost:56378/api/projects/'+project.Id;
+        
+        let options = this.jwt();
+        
+        let putRequestBody = JSON.stringify(project);
+        
+        return this.http.put(editProjectURL, putRequestBody, options)
             .map((response: Response) => response.json())
             .catch(res => {
                 console.log('CATCH: ', res.json());

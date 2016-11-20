@@ -20,9 +20,9 @@
     <div class="row">
         <div class="col-lg-12">
 
-            <form name="form" (ngSubmit)="createProject()" role="form" #createProjectForm="ngForm" novalidate>
+            <form name="form" (ngSubmit)="editProject()" role="form" #editProjectForm="ngForm" novalidate>
 
-                <fieldset class="form-group" [ngClass]="{ 'has-error': createProjectForm.submitted && !title.valid }">
+                <fieldset class="form-group" [ngClass]="{ 'has-error': editProjectForm.submitted && !title.valid }">
                     <label for="title">Title (*)</label>
                     <input type="text" class="form-control input-underline input-lg" 
                         name="title" id="title" placeholder="Enter Project Title..."
@@ -33,7 +33,7 @@
                     </div>
                 </fieldset>
                 
-                <fieldset class="form-group" [ngClass]="{ 'has-error': createProjectForm.submitted && !description.valid }">
+                <fieldset class="form-group" [ngClass]="{ 'has-error': editProjectForm.submitted && !description.valid }">
                     <label for="description">Description (*)</label>
                     <textarea class="form-control input-underline input-lg" 
                         name="description" id="description" placeholder="Enter Project Description..."
@@ -44,7 +44,7 @@
                     </div>
                 </fieldset>
 
-                <div class="form-group" [ngClass]="{ 'has-error': createProjectForm.submitted && !projectCategoryId.valid }">
+                <div class="form-group" [ngClass]="{ 'has-error': editProjectForm.submitted && !projectCategoryId.valid }">
                     <label for="projectCategoryId">Project Category (*)</label>
                     <select class="form-control input-underline input-lg"
                         name="projectCategoryId" id="projectCategoryId"
@@ -58,37 +58,7 @@
                     </div>
                 </div>
 				
-				<fieldset class="form-group" [ngClass]="{ 'has-error': createProjectForm.submitted && !fundingGoal.valid }">
-                    <label for="fundingGoal">Funding Goal (*) <i class="fa fa-eur"></i></label>
-                    <input type="text" class="form-control input-underline input-lg" 
-                        name="fundingGoal" id="fundingGoal" placeholder="Enter Funding Goal..."
-                        required [(ngModel)]="project.FundingGoal"
-                        #fundingGoal="ngModel">
-                    <div [hidden]="fundingGoal.valid || fundingGoal.pristine" class="error">
-                        Funding goal is required!
-                    </div>
-                </fieldset>
-				
-				 <div class="form-group" [ngClass]="{ 'has-error': createProjectForm.submitted && !fundingEndDate.valid }">
-                    <label for="fundingEndDate">Select Funding Period (in months)</label>
-                    <select class="form-control input-underline input-lg"
-                        name="fundingEndDate" id="fundingEndDate"
-                        required [(ngModel)]="project.FundingEndDate"
-                        #fundingEndDate="ngModel">
-                        <option [value]="" selected>- Select number of months -</option>
-                        <option [value]="1">1</option>
-                        <option [value]="2">2</option>
-                        <option [value]="3">3</option>
-                        <option [value]="4">4</option>
-                        <option [value]="5">5</option>
-						<option [value]="6">6</option>
-                    </select>
-                    <div [hidden]="fundingEndDate.valid || fundingEndDate.pristine" class="error">
-                        Project Funding Period is required!
-                    </div>
-                </div>
-
-                <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!createProjectForm.form.valid">Create Project</button>
+                <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!editProjectForm.form.valid">Edit Project</button>
 				<span *ngIf="loading">
 					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
 					<span class="sr-only">Loading...</span>

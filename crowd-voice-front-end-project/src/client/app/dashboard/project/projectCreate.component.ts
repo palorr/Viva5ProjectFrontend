@@ -53,9 +53,13 @@ export class ProjectCreateComponent implements OnInit {
         this.projectService.createNewProject(this.project)
             .subscribe(
                 (data) => {
-                    // set success message and pass true paramater to persist the message after redirecting to the login page
+                    console.log('NEW PROJECT CREATED: ', data);
+                    // set success message and pass true paramater to persist the message after redirecting
                     this.alertService.success('Project created successfully!', true);
-                    //this.router.navigate(['/login']);
+                    
+                    this.loading = false;
+                    
+                    this.router.navigate(['/dashboard/projects/edit']);
                 },
                 (err) => {
                     let errorString = "";
