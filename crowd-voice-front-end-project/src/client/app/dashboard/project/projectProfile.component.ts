@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { Project, ProjectFromServer } from '../../models/index';
+import { Project, ProjectFromServer, ProjectUpdateFromServer } from '../../models/index';
 
 import { AlertService, ProjectService } from '../../services/index';
 
@@ -19,6 +19,8 @@ import { AuthGuard } from '../../guards/index';
 export class ProjectProfileComponent implements OnInit {
 	
 	project: ProjectFromServer;
+	
+	projectUpdates: ProjectUpdateFromServer[];
 	
 	isRequestorProjectCreator: boolean = false;
 	
@@ -48,6 +50,17 @@ export class ProjectProfileComponent implements OnInit {
 							
 						this.project = data;
 						console.log('Project Profile View Data: ', this.project);
+					},
+					(err) => {
+						this.alertService.error(err.error_description);
+					}
+				);
+				
+			this.projectService.getProjectUpdates(id, this.isRequestorLoggedIn)
+				.subscribe(
+					(data: ProjectUpdateFromServer[]) => {
+						this.projectUpdates = data;
+						console.log('Project Updates Data: ', this.projectUpdates);
 					},
 					(err) => {
 						this.alertService.error(err.error_description);

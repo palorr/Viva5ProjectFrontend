@@ -2,8 +2,11 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="jumbotron" *ngIf="project">
-			<a *ngIf="isRequestorProjectCreator"  [routerLink]="['/dashboard/projects/edit', project.Id]">Edit Project</a>
-			<h1>{{project.Title}}</h1>
+			<div class="project-creator-options" *ngIf="isRequestorProjectCreator">
+				<a [routerLink]="['/dashboard/projects/edit', project.Id]">Edit Project</a>
+				<hr/>
+			</div>
+			<h3>{{project.Title}}</h3>
 			<p>{{project.Description}}</p>
 			<p>Created on: {{project.CreatedDate | amDateFormat:'LL'}}</p>
 			<p>Updated on: {{project.UpdatedDate | amDateFormat:'LL'}}</p>
@@ -11,6 +14,20 @@
 			<p>Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
 			<p>Project Owner: <a [routerLink]="['/dashboard/user/viewProfile', project.OwnerId]">{{project.OwnerName}}</a></p>
 			<p>Project Category: {{project.ProjectCategoryDesc}}</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="jumbotron" *ngIf="projectUpdates && projectUpdates.length > 0">
+			<div class="project-creator-options" *ngIf="isRequestorProjectCreator">
+				<a [routerLink]="['/dashboard/projects/', project.Id, 'updates/create']">Create Project Update</a>
+				<hr/> 
+			</div>
+			<span *ngFor="let update of projectUpdates">
+			<a *ngIf="update.IsRequestorProjectCreator" [routerLink]="['/dashboard/projects/', project.Id, 'updates', update.Id, 'edit']">Edit Project Update</a>
+			<h1>{{update.Title}}</h1>
+			<p>{{update.Description}}</p>
+			<p><i class="fa fa-clock-o"></i> {{update.WhenDateTime | amDateFormat:'LL'}}</p>
+			</span>
 		</div>
 	</div>
 </div>	

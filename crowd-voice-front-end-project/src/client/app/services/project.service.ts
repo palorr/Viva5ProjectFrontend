@@ -56,6 +56,34 @@ export class ProjectService {
             });
     }
     
+    getProjectUpdates(projectId: number, isLoggedIn: boolean) {
+        let projectURL: string;
+        let headers: Headers;
+        let options: RequestOptions;
+        
+        if(isLoggedIn) {
+            projectURL = 'http://localhost:56378/api/projects/'+projectId+'/updates';
+        
+            options = this.jwt();
+        }
+        else {
+            projectURL = 'http://localhost:56378/api/projects/'+projectId+'/updates/allowAll';
+            
+            headers = new Headers({
+                'Accept': 'application/json', 
+            });
+            
+            options = new RequestOptions({ headers: headers })
+        }
+        
+        return this.http.get(projectURL, options)
+            .map((response: Response) => response.json())
+            .catch(res => {
+                console.log('CATCH: ', res.json());
+                throw(res.json());
+            });
+    }
+    
     getProjectCategories() {
         let projectURL = 'http://localhost:56378/api/projects/projectCategories';
         
