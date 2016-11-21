@@ -13,6 +13,9 @@ import { ProjectListComponent } from './projectList.component';
 import { ProjectUpdateCreateComponent } from './projectUpdateCreate.component';
 import { ProjectUpdateEditComponent } from './projectUpdateEdit.component';
 
+import { FundingPackageCreateComponent } from './fundingPackageCreate.component';
+import { FundingPackageEditComponent } from './fundingPackageEdit.component';
+
 import { ProjectComponent } from './project.component';
 
 @NgModule({
@@ -29,7 +32,9 @@ import { ProjectComponent } from './project.component';
         ProjectEditComponent, 
         ProjectListComponent,
         ProjectUpdateCreateComponent,
-        ProjectUpdateEditComponent
+        ProjectUpdateEditComponent,
+        FundingPackageCreateComponent,
+        FundingPackageEditComponent
     ],
     exports: [
         ProjectComponent, 
@@ -38,7 +43,9 @@ import { ProjectComponent } from './project.component';
         ProjectEditComponent,
         ProjectListComponent,
         ProjectUpdateCreateComponent,
-        ProjectUpdateEditComponent
+        ProjectUpdateEditComponent,
+        FundingPackageCreateComponent,
+        FundingPackageEditComponent
     ]
 })
 

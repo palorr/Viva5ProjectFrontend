@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { ProjectUpdate, ProjectUpdateFromServer } from '../../models/index';
+import { FundingPackage, FundingPackageFromServer } from '../../models/index';
 
-import { AlertService, ProjectUpdateService } from '../../services/index';
+import { AlertService, FundingPackageService } from '../../services/index';
 
 @Component({
 	moduleId: module.id,
-	selector: 'project-update-edit-cmp',
-	templateUrl: 'projectUpdateEdit.component.html'
+	selector: 'funding-package-edit-cmp',
+	templateUrl: 'fundingPackageEdit.component.html'
 })
-export class ProjectUpdateEditComponent implements OnInit {
+export class FundingPackageEditComponent implements OnInit {
 	
-	projectUpdateFromServer: ProjectUpdateFromServer = new ProjectUpdateFromServer();
+	fundingPackageFromServer: FundingPackageFromServer = new FundingPackageFromServer();
 	
 	projectId: number;
 	
-	updateId: number;
+	fundingPackageId: number;
 	
 	loading = false;
 	
@@ -24,13 +24,13 @@ export class ProjectUpdateEditComponent implements OnInit {
 		private route: ActivatedRoute,
         private router: Router,
         private alertService: AlertService,
-		private projectUpdateService: ProjectUpdateService
+		private fundingPackageService: FundingPackageService
 	) { }
 	
     ngOnInit() {
 		this.route.params.forEach((params: Params) => {
 			this.projectId = +params['projectId'];
-			this.updateId = +params['updateId'];
+			this.fundingPackageId = +params['fundingPackageId'];
 			
 			let isLoggedIn = false;
 			
@@ -40,18 +40,18 @@ export class ProjectUpdateEditComponent implements OnInit {
 				isLoggedIn = true;
 			}
 			
-			this.projectUpdateService.getProjectUpdateById(this.projectId, this.updateId, isLoggedIn)
+			this.fundingPackageService.getFundingPackageById(this.projectId, this.fundingPackageId, isLoggedIn)
 					.subscribe(
-						(data: ProjectUpdateFromServer) => {
-							console.log('EDIT UPDATE VIEW DATA: ', data);
+						(data: FundingPackageFromServer) => {
+							console.log('EDIT FUNDING PACKAGE VIEW DATA: ', data);
 							
 							if(!data.IsRequestorProjectCreator) {
-								this.alertService.error("You are not authorized to edit this project update. You are not the project creator!", true);
+								this.alertService.error("You are not authorized to edit this funding package. You are not the project creator!", true);
 								this.router.navigate(['/dashboard/projects/view/', this.projectId]);
 								return;
 							}
-							this.projectUpdateFromServer = data;
-							console.log('Project Update Data: ', this.projectUpdateFromServer);
+							this.fundingPackageFromServer = data;
+							console.log('Funding Package Data: ', this.fundingPackageFromServer);
 						},
 						(err) => {
 							this.alertService.error(err.Message);
@@ -61,16 +61,16 @@ export class ProjectUpdateEditComponent implements OnInit {
 		});
 	}
 	
-	editProjectUpdate() {
+	editFundingPackage() {
 		
 		this.loading = true;
 		
-		this.projectUpdateService.editProjectUpdate(this.projectId, this.updateId, this.projectUpdateFromServer)
+		this.fundingPackageService.editFundingPackage(this.projectId, this.fundingPackageId, this.fundingPackageFromServer)
 			.subscribe(
 				(data) => {
 					console.log('SUCCESS IN EDIT: ', data);
 					// set success message
-					this.alertService.success('Project update edited successfully!');
+					this.alertService.success('Funding Package edited successfully!');
 					this.loading = false;
 				},
 				(err) => {
@@ -82,9 +82,9 @@ export class ProjectUpdateEditComponent implements OnInit {
 		
 	}
 	
-	deleteProjectUpdate() {
+	deleteFundingPackage() {
 		
-		var r = confirm("Are you sure you want to delete this project update?");
+		var r = confirm("Are you sure you want to delete this funding package?");
 		if (!r) {
 			return false;
 		}
@@ -92,12 +92,12 @@ export class ProjectUpdateEditComponent implements OnInit {
 		else {
 			this.loading = true;
 			
-			this.projectUpdateService.deleteProjectUpdate(this.projectId, this.updateId)
+			this.fundingPackageService.deleteFundingPackage(this.projectId, this.fundingPackageId)
 					.subscribe(
 						(data) => {
 							console.log('SUCCESS IN DELETE: ', data);
 							// set success message
-							this.alertService.success('Project update deleted successfully!', true);
+							this.alertService.success('Funding package deleted successfully!', true);
 							this.loading = false;
 							
 							this.router.navigate(['/dashboard/projects/view/'+this.projectId]);

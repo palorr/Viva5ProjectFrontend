@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { Project, ProjectFromServer, ProjectUpdateFromServer } from '../../models/index';
+import { Project, ProjectFromServer, ProjectUpdateFromServer, FundingPackageFromServer } from '../../models/index';
 
-import { AlertService, ProjectService } from '../../services/index';
+import { AlertService, ProjectService, ProjectUpdateService, FundingPackageService } from '../../services/index';
 
 import { AuthGuard } from '../../guards/index';
 
@@ -17,10 +17,13 @@ import { AuthGuard } from '../../guards/index';
 	templateUrl: 'projectProfile.component.html'
 })
 export class ProjectProfileComponent implements OnInit {
+	id: number;
 	
 	project: ProjectFromServer;
 	
 	projectUpdates: ProjectUpdateFromServer[];
+	
+	fundingPackages: FundingPackageFromServer[];
 	
 	isRequestorProjectCreator: boolean = false;
 	
@@ -31,18 +34,20 @@ export class ProjectProfileComponent implements OnInit {
         private router: Router,
         private alertService: AlertService,
 		private projectService: ProjectService,
+		private projectUpdateService: ProjectUpdateService,
+		private fundingPackageService: FundingPackageService,
 		private authGuard: AuthGuard
 	) { }
  
     ngOnInit() {
 		console.log("THIS>ROUTES>PARAMS: ", this.route.params);
     	this.route.params.forEach((params: Params) => {
-			let id = +params['id']; // (+) converts string 'id' to a number
+			this.id = +params['id']; // (+) converts string 'id' to a number
 			
 			if(this.authGuard.isUserLoggedIn())
 				this.isRequestorLoggedIn = true;
 			
-			this.projectService.getProjectById(id, this.isRequestorLoggedIn)
+			this.projectService.getProjectById(this.id, this.isRequestorLoggedIn)
 				.subscribe(
 					(data: ProjectFromServer) => {
 						if(data.IsRequestorProjectCreator)
@@ -52,18 +57,29 @@ export class ProjectProfileComponent implements OnInit {
 						console.log('Project Profile View Data: ', this.project);
 					},
 					(err) => {
-						this.alertService.error(err.error_description);
+						this.alertService.error(err);
 					}
 				);
 				
-			this.projectService.getProjectUpdates(id, this.isRequestorLoggedIn)
+			this.projectUpdateService.getProjectUpdates(this.id, this.isRequestorLoggedIn)
 				.subscribe(
 					(data: ProjectUpdateFromServer[]) => {
 						this.projectUpdates = data;
 						console.log('Project Updates Data: ', this.projectUpdates);
 					},
 					(err) => {
-						this.alertService.error(err.error_description);
+						this.alertService.error(err);
+					}
+				);
+				
+			this.fundingPackageService.getFundingPackages(this.id, this.isRequestorLoggedIn)
+				.subscribe(
+					(data: FundingPackageFromServer[]) => {
+						this.fundingPackages = data;
+						console.log('Project Funding Packages Data: ', this.fundingPackages);
+					},
+					(err) => {
+						this.alertService.error(err);
 					}
 				);
 			

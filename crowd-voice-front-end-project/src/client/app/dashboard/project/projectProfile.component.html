@@ -38,14 +38,14 @@
 				<hr/> 
 			</div>
 			<span *ngFor="let fundingPackage of fundingPackages">
-				<a *ngIf="update.IsRequestorProjectCreator" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'edit']">Edit Funding Package</a>
+				<a *ngIf="fundingPackage.IsRequestorProjectCreator && fundingPackage.PledgeAmount" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'edit']">Edit Funding Package</a>
 				<h1>{{fundingPackage.Title}}</h1>
 				<p>Reward: {{fundingPackage.Description}}</p>
-				<p *ngIf="fundingPackage.PledgeAmount">Pledge Amount: {{fundingPackage.PledgeAmount}}</p>
+				<p *ngIf="fundingPackage.PledgeAmount">Pledge Amount: {{fundingPackage.PledgeAmount}} <i class="fa fa-euro"></i></p>
 				<p><i class="fa fa-clock-o"></i> {{fundingPackage.WhenDateTime | amDateFormat:'LL'}}</p>
-				<p><i class="fa fa-clock-o"></i> Estimated Delivery Date: {{fundingPackage.EstimatedDeliveryDate | amDateFormat:'LL'}}</p>
+				<!--<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-clock-o"></i> Estimated Delivery Date: {{fundingPackage.EstimatedDeliveryDate | amDateFormat:'LL'}}</p>-->
 				<hr/>
 			</span>
 		</div>
 	</div>
-</div>	
+</div>

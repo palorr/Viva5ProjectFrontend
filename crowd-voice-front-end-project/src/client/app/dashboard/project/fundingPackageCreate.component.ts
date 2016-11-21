@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { ProjectUpdate, AuthorizationModel } from '../../models/index';
+import { FundingPackage, AuthorizationModel } from '../../models/index';
 
-import { AlertService, ProjectUpdateService } from '../../services/index';
+import { AlertService, FundingPackageService } from '../../services/index';
 
 import { AuthorizationGuard } from '../../guards/index';
 @Component({
 	moduleId: module.id,
-	selector: 'project-update-create-cmp',
-	templateUrl: 'projectUpdateCreate.component.html'
+	selector: 'funding-package-create-cmp',
+	templateUrl: 'fundingPackageCreate.component.html'
 })
-export class ProjectUpdateCreateComponent implements OnInit {
+export class FundingPackageCreateComponent implements OnInit {
 	projectId: number;
 	
-	projectUpdate: ProjectUpdate = new ProjectUpdate();
+	fundingPackage: FundingPackage = new FundingPackage();
 	
 	authModel: AuthorizationModel = new AuthorizationModel();
 	
@@ -24,7 +24,7 @@ export class ProjectUpdateCreateComponent implements OnInit {
 		private route: ActivatedRoute,
         private router: Router,
         private alertService: AlertService,
-		private projectUpdateService: ProjectUpdateService,
+		private fundingPackageService: FundingPackageService,
 		private authorizationGuard: AuthorizationGuard
 	) { }
 	
@@ -37,7 +37,7 @@ export class ProjectUpdateCreateComponent implements OnInit {
 						console.log('DATA FROM AUTHMODEL: ', data);
 						
 						if(!data.IsAllowed) {
-							this.alertService.error("You are not authorized to create an update for this project. You are not the project creator!", true);
+							this.alertService.error("You are not authorized to create a funding package for this project. You are not the project creator!", true);
 							this.router.navigate(['/dashboard/home']);
 							return;	
 						}
@@ -49,15 +49,15 @@ export class ProjectUpdateCreateComponent implements OnInit {
 		});
 	}
 	
-	createProjectUpdate() {
+	createFundingPackge() {
 		this.loading = true;
 		
-		this.projectUpdateService.createNewProjectUpdate(this.projectId, this.projectUpdate)
+		this.fundingPackageService.createNewFundingPackage(this.projectId, this.fundingPackage)
 			.subscribe(
 				(data) => {
-					console.log('NEW PROJECT UPDATE CREATED: ', data);
+					console.log('NEW FUNDING PACKAGE CREATED: ', data);
 					// set success message and pass true paramater to persist the message after redirecting
-					this.alertService.success('Project update created successfully!');
+					this.alertService.success('Funding Package created successfully!');
 					
 					this.loading = false;
 					

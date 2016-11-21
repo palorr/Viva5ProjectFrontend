@@ -19,12 +19,12 @@ import {
 	AuthenticationService, 
 	RegistrationService, 
 	ProjectService,
-	UserService
+	UserService,
+	ProjectUpdateService,
+	FundingPackageService
 } from './services/index';
 
-import { AuthGuard } from './guards/index';
-
-import { AuthorizationGuard } from './guards/index';
+import { AuthGuard, AuthorizationGuard } from './guards/index';
 
 import { CurrentUserService } from './helpers/index'
 
@@ -52,6 +52,8 @@ import { CurrentUserService } from './helpers/index'
         AuthenticationService,
 		RegistrationService,
 		ProjectService,
+		ProjectUpdateService,
+		FundingPackageService,
 		UserService,
 		AuthGuard,
 		AuthorizationGuard,
