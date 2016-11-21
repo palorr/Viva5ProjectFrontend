@@ -49,7 +49,7 @@ export class FundingPackageCreateComponent implements OnInit {
 		});
 	}
 	
-	createFundingPackge() {
+	createFundingPackage() {
 		this.loading = true;
 		
 		this.fundingPackageService.createNewFundingPackage(this.projectId, this.fundingPackage)

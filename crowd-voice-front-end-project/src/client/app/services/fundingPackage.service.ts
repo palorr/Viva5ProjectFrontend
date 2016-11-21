@@ -77,7 +77,7 @@ export class FundingPackageService {
         
         let postRequestBody = JSON.stringify(editedFundingPackage);
         
-        return this.http.post(editFundingPackageURL, postRequestBody, options)
+        return this.http.put(editFundingPackageURL, postRequestBody, options)
             .map((response: Response) => response)
             .catch(res => {
                 console.log('CATCH: ', res.json());
