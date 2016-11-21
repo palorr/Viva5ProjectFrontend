@@ -44,18 +44,21 @@ export class SignupComponent {
         
 		//alert(`registered!!! ${JSON.stringify(this.user)}`);
 		
-        this.registrationService.registerUser(this.user.username, this.user.password, this.user.repeatPassword)
+        this.registrationService.registerUser(this.user.username, this.user.name, this.user.password, this.user.repeatPassword)
             .subscribe(
                 (data) => {
                     // set success message and pass true paramater to persist the message after redirecting to the login page
-                    this.alertService.success('Registration successful', true);
+                    this.alertService.success('Registration successful! Please login now.', true);
                     this.router.navigate(['/login']);
                 },
                 (err) => {
+                    
                     let errorString = "";
                     
-                    for(let element in err.modelState) {
-                        err.modelState[element].forEach((errorMsg: string) => {
+                    for(let element in err.ModelState) {
+                        console.log(element);
+                        err.ModelState[element].forEach((errorMsg: string) => {
+                            console.log('ELEM: ', errorMsg);
                             errorString += errorMsg + "\n\n"; 
                         });
                     }

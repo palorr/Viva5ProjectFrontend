@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map'
 export class RegistrationService {
     constructor(private http: Http) { }
  
-    registerUser(username: string, password: string, confirmPassword: string) {
+    registerUser(username: string, name: string, password: string, confirmPassword: string) {
         
         let registerURL = 'http://localhost:56478/api/account/register';
         
@@ -18,6 +18,7 @@ export class RegistrationService {
         
         let postRequestBody = JSON.stringify({ 
 			username: username, 
+            name: name,
             password: password,
 			confirmPassword: confirmPassword
 		});
