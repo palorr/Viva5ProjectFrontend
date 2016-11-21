@@ -62,16 +62,8 @@ export class ProjectCreateComponent implements OnInit {
                     this.router.navigate(['/dashboard/projects/edit/'+data]);
                 },
                 (err) => {
-                    let errorString = "";
-                    
-                    for(let element in err.modelState) {
-                        err.modelState[element].forEach((errorMsg: string) => {
-                            errorString += errorMsg + "\n\n"; 
-                        });
-                    }
-                    
-                    this.alertService.error(errorString);
-                    this.loading = false;
+                    this.alertService.error(err);
+					this.loading = false;
                 });
 	}
    

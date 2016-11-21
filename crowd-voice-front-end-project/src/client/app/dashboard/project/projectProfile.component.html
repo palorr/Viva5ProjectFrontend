@@ -19,14 +19,15 @@
 	<div class="row">
 		<div class="jumbotron" *ngIf="projectUpdates && projectUpdates.length > 0">
 			<div class="project-creator-options" *ngIf="isRequestorProjectCreator">
-				<a [routerLink]="['/dashboard/projects/', project.Id, 'updates/create']">Create Project Update</a>
+				<a [routerLink]="['/dashboard/projects/', project.Id, 'updates', 'create']">Create Project Update</a>
 				<hr/> 
 			</div>
 			<span *ngFor="let update of projectUpdates">
-			<a *ngIf="update.IsRequestorProjectCreator" [routerLink]="['/dashboard/projects/', project.Id, 'updates', update.Id, 'edit']">Edit Project Update</a>
-			<h1>{{update.Title}}</h1>
-			<p>{{update.Description}}</p>
-			<p><i class="fa fa-clock-o"></i> {{update.WhenDateTime | amDateFormat:'LL'}}</p>
+				<a *ngIf="update.IsRequestorProjectCreator" [routerLink]="['/dashboard/projects/', project.Id, 'updates', update.Id, 'edit']">Edit Project Update</a>
+				<h1>{{update.Title}}</h1>
+				<p>{{update.Description}}</p>
+				<p><i class="fa fa-clock-o"></i> {{update.WhenDateTime | amDateFormat:'LL'}}</p>
+				<hr/>
 			</span>
 		</div>
 	</div>

@@ -3,7 +3,7 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { Project } from '../models/index';
+import { Project, ProjectUpdate } from '../models/index';
  
 @Injectable()
 export class ProjectService {
@@ -84,6 +84,23 @@ export class ProjectService {
             });
     }
     
+    getProjectUpdateById(projectId: number, updateId: number, isLoggedIn: boolean) {
+        let projectURL: string;
+        let headers: Headers;
+        let options: RequestOptions;
+        
+        projectURL = 'http://localhost:56378/api/projects/'+projectId+'/updates/'+updateId;
+        
+        options = this.jwt();
+        
+        return this.http.get(projectURL, options)
+            .map((response: Response) => response.json())
+            .catch(res => {
+                console.log('CATCH: ', res.json());
+                throw(res.json());
+            });
+    }
+    
     getProjectCategories() {
         let projectURL = 'http://localhost:56378/api/projects/projectCategories';
         
@@ -124,6 +141,49 @@ export class ProjectService {
         let putRequestBody = JSON.stringify(project);
         
         return this.http.put(editProjectURL, putRequestBody, options)
+            .map((response: Response) => response)
+            .catch(res => {
+                console.log('CATCH: ', res.json());
+                throw(res.json());
+            });
+    }
+    
+    createNewProjectUpdate(projectId: number, newProjectUpdate: ProjectUpdate) {
+        let createProjectUpdateURL = 'http://localhost:56378/api/projects/'+projectId+'/updates';
+        
+        let options = this.jwt();
+        
+        let postRequestBody = JSON.stringify(newProjectUpdate);
+        
+        return this.http.post(createProjectUpdateURL, postRequestBody, options)
+            .map((response: Response) => response)
+            .catch(res => {
+                console.log('CATCH: ', res);
+                throw(res);
+            });
+    }
+    
+    editProjectUpdate(projectId: number, updateId: number, editedProjectUpdate: ProjectUpdate) {
+        let editProjectUpdateURL = 'http://localhost:56378/api/projects/'+projectId+'/updates/'+updateId;
+        
+        let options = this.jwt();
+        
+        let postRequestBody = JSON.stringify(editedProjectUpdate);
+        
+        return this.http.post(editProjectUpdateURL, postRequestBody, options)
+            .map((response: Response) => response)
+            .catch(res => {
+                console.log('CATCH: ', res.json());
+                throw(res.json());
+            });
+    }
+    
+    deleteProjectUpdate(projectId: number, updateId: number) {
+        let deleteProjectUpdateURL = 'http://localhost:56378/api/projects/'+projectId+'/updates/'+updateId;
+        
+        let options = this.jwt();
+        
+        return this.http.delete(deleteProjectUpdateURL, options)
             .map((response: Response) => response)
             .catch(res => {
                 console.log('CATCH: ', res.json());

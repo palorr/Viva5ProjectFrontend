@@ -4,6 +4,7 @@ import { ProjectProfileRoutes } from './projectProfile.routes';
 import { ProjectCreateRoutes } from './projectCreate.routes';
 import { ProjectEditRoutes } from './projectEdit.routes';
 import { ProjectListRoutes } from './projectList.routes';
+import { ProjectUpdateRoutes } from './projectUpdate.routes';
 
 import { ProjectComponent } from './index';
 
@@ -15,7 +16,8 @@ export const ProjectRoutes: Route[] = [
         ...ProjectProfileRoutes,
         ...ProjectCreateRoutes,
         ...ProjectEditRoutes,
-	    	...ProjectListRoutes
+	    	...ProjectListRoutes,
+        ...ProjectUpdateRoutes
     	]
   	}
 ];

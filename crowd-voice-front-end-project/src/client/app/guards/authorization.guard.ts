@@ -3,10 +3,12 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Router, ActivatedRoute, CanActivate, Params } from '@angular/router';
+import { Router, CanActivate } from '@angular/router';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+
+import { AlertService } from '../services/index';
  
 @Injectable()
 export class AuthorizationGuard {
@@ -14,29 +16,22 @@ export class AuthorizationGuard {
     constructor(
 		private router: Router,
 		private http: Http,
-        private activatedRoute: ActivatedRoute
+        private alertService: AlertService
 	) { }
     
-    isRequestorProjectCreator(projectId: number): boolean {
-		
-		if(!localStorage.getItem('currentUser'))
-			return false;
+    isRequestorProjectCreator(projectId: number) {
         
-		let url = 'http://localhost:56378/api/projects/'+projectId+'/isCurrentUserProjectCreator';
+        let url = 'http://localhost:56378/api/projects/'+projectId+'/isCurrentUserProjectCreator';
         
         let options = this.jwt();
         
         return this.http.get(url, options)
-            .map((response: Response) => {
-				console.log('ISREQUESTORCREATOR: ', response);
-				return response.json();
-			})
-            .catch(res => {
-                console.log('CATCH: ', res.json());
-                throw(res.json());
-            });
-		
-	}
+                .map((response: Response) => response.json())
+                .catch(err => {
+                    console.log('CATCH: ', err.json());
+                    throw(err.json());
+                });
+    }
 	
 	// private helper methods
  
