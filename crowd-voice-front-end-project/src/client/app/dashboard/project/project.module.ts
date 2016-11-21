@@ -18,12 +18,17 @@ import { FundingPackageEditComponent } from './fundingPackageEdit.component';
 
 import { ProjectComponent } from './project.component';
 
+import {
+		TabsModule,
+	} from 'ng2-bootstrap/ng2-bootstrap';
+
 @NgModule({
     imports: [
         CommonModule, 
         RouterModule, 
         FormsModule,
-        MomentModule
+        MomentModule,
+        TabsModule
     ],
     declarations: [
         ProjectComponent, 

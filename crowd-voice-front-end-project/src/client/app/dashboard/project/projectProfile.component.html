@@ -1,11 +1,42 @@
-<h1>Project Profile Page</h1>
 <div class="container-fluid">
-	<div class="row">
-		<div class="jumbotron" *ngIf="project">
-			<div class="project-creator-options" *ngIf="isRequestorProjectCreator">
-				<a [routerLink]="['/dashboard/projects/edit', project.Id]">Edit Project</a>
-				<hr/>
-			</div>
+	<!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Project Profile Page
+            </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="Javascript:void(0)" routerLink="/dashboard/home">Home</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-profile"></i> Project Profile Page
+                </li>
+            </ol>
+        </div>
+    </div>
+	
+	<div class="row" *ngIf="isRequestorProjectCreator">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-edit"></i> <a [routerLink]="['/dashboard/projects/edit', project.Id]">Edit Project</a>
+                </li>
+				<li>
+					<a [routerLink]="['/dashboard/projects/', project.Id, 'updates', 'create']">Create Project Update</a>
+				</li>
+                <li>
+                    <a [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', 'create']">Create Funding Package</a>
+                </li>
+				
+            </ol>
+        </div>
+		<hr/>
+    </div>
+	
+    <!-- /.row -->
+	<div class="col-lg-12 card card-block" *ngIf="project">
+		<div class="col-lg-9">
 			<h3>{{project.Title}}</h3>
 			<p>{{project.Description}}</p>
 			<p>Created on: {{project.CreatedDate | amDateFormat:'LL'}}</p>
@@ -15,37 +46,43 @@
 			<p>Project Owner: <a [routerLink]="['/dashboard/user/viewProfile', project.OwnerId]">{{project.OwnerName}}</a></p>
 			<p>Project Category: {{project.ProjectCategoryDesc}}</p>
 		</div>
-	</div>
-	<div class="row">
-		<div class="jumbotron" *ngIf="projectUpdates && projectUpdates.length > 0">
-			<div class="project-creator-options" *ngIf="isRequestorProjectCreator">
-				<a [routerLink]="['/dashboard/projects/', project.Id, 'updates', 'create']">Create Project Update</a>
-				<hr/> 
-			</div>
-			<span *ngFor="let update of projectUpdates">
-				<a *ngIf="update.IsRequestorProjectCreator" [routerLink]="['/dashboard/projects/', project.Id, 'updates', update.Id, 'edit']">Edit Project Update</a>
-				<h1>{{update.Title}}</h1>
-				<p>{{update.Description}}</p>
-				<p><i class="fa fa-clock-o"></i> {{update.WhenDateTime | amDateFormat:'LL'}}</p>
-				<hr/>
-			</span>
+		<div *ngIf="projectStat" class="col-lg-3 project-stats">
+			<p>Money Pledged: {{projectStat.MoneyPledged}} / {{project.FundingGoal}}</p>
+			<p>Backed by {{projectStat.BackersNo}} people</p>
 		</div>
 	</div>
-	<div class="row">
-		<div class="jumbotron" *ngIf="fundingPackages && fundingPackages.length > 0">
-			<div class="project-creator-options" *ngIf="isRequestorProjectCreator">
-				<a [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', 'create']">Create Funding Package</a>
-				<hr/> 
+	
+	<div class="row" *ngIf="(projectUpdates && projectUpdates.length > 0) || (fundingPackages && fundingPackages.length > 0)">
+		<div class="col-lg-12">
+			<div class="card card-block" (click)="$event.preventDefault()">
+				<tabset>
+					<br/>
+					<tab heading="Project Updates" *ngIf="fundingPackages && fundingPackages.length > 0">
+						<div class="jumbotron">
+							<span *ngFor="let update of projectUpdates">
+								<a *ngIf="update.IsRequestorProjectCreator" [routerLink]="['/dashboard/projects/', project.Id, 'updates', update.Id, 'edit']">Edit Project Update</a>
+								<h1>{{update.Title}}</h1>
+								<p>{{update.Description}}</p>
+								<p><i class="fa fa-clock-o"></i> {{update.WhenDateTime | amDateFormat:'LL'}}</p>
+								<hr/>
+							</span>
+						</div>
+					</tab>
+					<tab heading="Funding Packages" *ngIf="fundingPackages && fundingPackages.length > 0">
+						<div class="jumbotron">
+							<span *ngFor="let fundingPackage of fundingPackages">
+								<a *ngIf="fundingPackage.IsRequestorProjectCreator && fundingPackage.PledgeAmount" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'edit']">Edit Funding Package</a>
+								<h1>{{fundingPackage.Title}}</h1>
+								<p>Reward: {{fundingPackage.Description}}</p>
+								<p *ngIf="fundingPackage.PledgeAmount">Pledge Amount: {{fundingPackage.PledgeAmount}} <i class="fa fa-euro"></i></p>
+								<p><i class="fa fa-clock-o"></i> {{fundingPackage.WhenDateTime | amDateFormat:'LL'}}</p>
+								<!--<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-clock-o"></i> Estimated Delivery Date: {{fundingPackage.EstimatedDeliveryDate | amDateFormat:'LL'}}</p>-->
+								<hr/>
+							</span>
+						</div>
+					</tab>
+				</tabset>
 			</div>
-			<span *ngFor="let fundingPackage of fundingPackages">
-				<a *ngIf="fundingPackage.IsRequestorProjectCreator && fundingPackage.PledgeAmount" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'edit']">Edit Funding Package</a>
-				<h1>{{fundingPackage.Title}}</h1>
-				<p>Reward: {{fundingPackage.Description}}</p>
-				<p *ngIf="fundingPackage.PledgeAmount">Pledge Amount: {{fundingPackage.PledgeAmount}} <i class="fa fa-euro"></i></p>
-				<p><i class="fa fa-clock-o"></i> {{fundingPackage.WhenDateTime | amDateFormat:'LL'}}</p>
-				<!--<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-clock-o"></i> Estimated Delivery Date: {{fundingPackage.EstimatedDeliveryDate | amDateFormat:'LL'}}</p>-->
-				<hr/>
-			</span>
 		</div>
 	</div>
 </div>

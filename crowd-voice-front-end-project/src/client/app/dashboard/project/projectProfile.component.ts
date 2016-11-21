@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { Project, ProjectFromServer, ProjectUpdateFromServer, FundingPackageFromServer } from '../../models/index';
+import { Project, ProjectFromServer, ProjectUpdateFromServer, FundingPackageFromServer, ProjectStat, ProjectStatFromServer } from '../../models/index';
 
-import { AlertService, ProjectService, ProjectUpdateService, FundingPackageService } from '../../services/index';
+import { AlertService, ProjectService, ProjectUpdateService, FundingPackageService, ProjectStatService } from '../../services/index';
 
 import { AuthGuard } from '../../guards/index';
 
@@ -25,6 +25,8 @@ export class ProjectProfileComponent implements OnInit {
 	
 	fundingPackages: FundingPackageFromServer[];
 	
+	projectStat: ProjectStatFromServer;
+	
 	isRequestorProjectCreator: boolean = false;
 	
 	isRequestorLoggedIn: boolean = false;
@@ -36,6 +38,7 @@ export class ProjectProfileComponent implements OnInit {
 		private projectService: ProjectService,
 		private projectUpdateService: ProjectUpdateService,
 		private fundingPackageService: FundingPackageService,
+		private projectStatService: ProjectStatService,
 		private authGuard: AuthGuard
 	) { }
  
@@ -77,6 +80,17 @@ export class ProjectProfileComponent implements OnInit {
 					(data: FundingPackageFromServer[]) => {
 						this.fundingPackages = data;
 						console.log('Project Funding Packages Data: ', this.fundingPackages);
+					},
+					(err) => {
+						this.alertService.error(err);
+					}
+				);
+				
+			this.projectStatService.getProjectStatById(this.id, this.isRequestorLoggedIn)
+				.subscribe(
+					(data: ProjectStatFromServer) => {
+						this.projectStat = data;
+						console.log('Project Stats Data: ', this.projectStat);
 					},
 					(err) => {
 						this.alertService.error(err);

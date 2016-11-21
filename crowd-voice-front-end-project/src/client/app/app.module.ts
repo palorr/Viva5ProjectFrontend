@@ -21,7 +21,8 @@ import {
 	ProjectService,
 	UserService,
 	ProjectUpdateService,
-	FundingPackageService
+	FundingPackageService,
+	ProjectStatService
 } from './services/index';
 
 import { AuthGuard, AuthorizationGuard } from './guards/index';
@@ -54,6 +55,7 @@ import { CurrentUserService } from './helpers/index'
 		ProjectService,
 		ProjectUpdateService,
 		FundingPackageService,
+		ProjectStatService,
 		UserService,
 		AuthGuard,
 		AuthorizationGuard,
