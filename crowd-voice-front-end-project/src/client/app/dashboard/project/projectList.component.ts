@@ -46,6 +46,18 @@ export class ProjectListComponent implements OnInit {
                                 alert(err);
                             });
                     break;
+                case 'getTrendingProjects':
+                    this.title = "Top 10 Trending Projects";
+                    this.projectService
+                        .getTrendingProjects()
+                        .subscribe(
+                            (data: Project[]) => {
+                                this.projects = data;
+                            },
+                            (err) => {
+                                alert(err);
+                            });
+                    break;
                 case 'getMyProjects':
                     //TODO 
                     break;

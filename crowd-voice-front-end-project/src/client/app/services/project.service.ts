@@ -22,9 +22,26 @@ export class ProjectService {
         return this.http.get(allProjectsURL, options)
             .map((response: Response) => response.json())
             .catch(res => {
-                console.log('CATCH: ', res.json());
                 throw(res.json());
             });
+        
+    }
+    
+    getTrendingProjects() {
+        let URL = 'http://localhost:56378/api/projects/trending';
+        
+        let headers = new Headers({
+            'Accept': 'application/json'
+        });
+        
+        let options = new RequestOptions({ headers: headers });
+        
+        return this.http
+                   .get(URL, options)
+                   .map((response: Response) => response.json())
+                   .catch(err => {
+                       throw(err.json());
+                   });
         
     }
     

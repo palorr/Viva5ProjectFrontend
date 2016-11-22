@@ -12,6 +12,13 @@ export const ProjectListRoutes: Route[] = [
 		}
   	},
 	{
+		path: 'trending',
+		component: ProjectListComponent,
+		data: {
+			action: 'getTrendingProjects'
+		}	
+	},
+	{
 		path: 'myProjects',
 		component: ProjectListComponent,
 		canActivate: [AuthGuard],

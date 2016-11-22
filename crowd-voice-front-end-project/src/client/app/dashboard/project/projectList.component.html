@@ -16,13 +16,15 @@
 <div *ngFor="let project of projects">
 	<div class="col-lg-12 jumbotron card card-block">
 		<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
+		<hr/>
 		<p>{{project.Description}}</p>
-		<p>Created on: {{project.CreatedDate | amDateFormat:'LL'}}</p>
-		<p>Updated on: {{project.UpdatedDate | amDateFormat:'LL'}}</p>
-		<p>Funding Goal: {{project.FundingGoal}}</p>
-		<p>Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
-		<p>Project Owner: <a [routerLink]="['/dashboard/user/viewProfile', project.OwnerId]">{{project.OwnerName}}</a></p>
-		<p>Project Category: {{project.ProjectCategoryDesc}}</p>
+		<hr/>
+		<p><i class="fa fa-calendar"></i> Created on: {{project.CreatedDate | amDateFormat:'LL'}}</p>
+		<p><i class="fa fa-calendar"></i> Updated on: {{project.UpdatedDate | amDateFormat:'LL'}}</p>
+		<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}}</p>
+		<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
+		<p><i class="fa fa-user"></i> Project Owner: <a [routerLink]="['/dashboard/user/viewProfile', project.OwnerId]">{{project.OwnerName}}</a></p>
+		<p><i class="fa fa-list"></i> Project Category: {{project.ProjectCategoryDesc}}</p>
 	</div>
 	<hr/>
 </div>
