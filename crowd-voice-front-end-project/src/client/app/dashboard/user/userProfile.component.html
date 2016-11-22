@@ -32,7 +32,7 @@
 	<!-- /.row -->
 	<div class="col-lg-12 card card-block" *ngIf="user">
 		<div class="col-lg-9">
-			<img [src]="user.AvatarImage" alt="AvatarImage">
+			<img [src]="user.AvatarImage" alt="AvatarImage" style="width:250px;height:250px;">
 			<h3>{{user.Name}}</h3>
 			<p>Registered on: {{user.CreatedDateTime | amDateFormat:'LL'}}</p>
 			<p>{{user.ShortBio}}</p>

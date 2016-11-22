@@ -22,17 +22,17 @@
             <form name="form" (ngSubmit)="editUser()" role="form" #editUserForm="ngForm" novalidate>
                 
                 <!--avatar image preview-->
-                <img [src]="user.AvatarImage" alt="AvatarImage">
+                <img [src]="user.AvatarImage" alt="AvatarImage" style="width:250px;height:250px;">
                 <!--avatar image url input-->
-                <fieldset class="form-group" [ngClass]="{ 'has-error': editProjectForm.submitted && !description.valid }">
-                    <label for="avatar">Your Avatar Image</label>
+                <fieldset class="form-group" [ngClass]="{ 'has-error': editUserForm.submitted && !avatar.valid }">
+                    <label for="avatar">Avatar Image</label>
                     <input type="text" class="form-control input-underline input-lg" 
-                        name="name" id="name" placeholder="Enter your Avatar Image URL..."
+                        name="avatar" id="avatar" placeholder="Enter your Avatar Image URL..."
                         required [(ngModel)]="user.AvatarImage"
-                        #name="ngModel">
+                        #avatar="ngModel">
                 </fieldset>
                 <!--name input-->
-                <fieldset class="form-group" [ngClass]="{ 'has-error': editProjectForm.submitted && !title.valid }">
+                <fieldset class="form-group" [ngClass]="{ 'has-error': editUserForm.submitted && !name.valid }">
                     <label for="name">Name (*)</label>
                     <input type="text" class="form-control input-underline input-lg" 
                         name="name" id="name" placeholder="Enter your real name..."
@@ -43,7 +43,7 @@
                     </div>
                 </fieldset>
                 <!--short bio input -->
-                <fieldset class="form-group" [ngClass]="{ 'has-error': editProjectForm.submitted && !description.valid }">
+                <fieldset class="form-group" [ngClass]="{ 'has-error': editUserForm.submitted && !shortBio.valid }">
                     <label for="shortBio">Description</label>
                     <textarea class="form-control input-underline input-lg" 
                         name="shortBio" id="shortBio" placeholder="Enter your Short Bio..."
@@ -51,7 +51,7 @@
                         #description="ngModel"></textarea>               
                 </fieldset>
                 <!--loading-->
-                <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!editProjectForm.form.valid">Edit Project</button>
+                <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!editUserForm.form.valid">Edit Profile</button>
 				<span *ngIf="loading">
 					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
 					<span class="sr-only">Loading...</span>
