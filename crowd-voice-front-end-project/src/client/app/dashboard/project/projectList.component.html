@@ -25,6 +25,18 @@
 		<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
 		<p><i class="fa fa-user"></i> Project Owner: <a [routerLink]="['/dashboard/user/viewProfile', project.OwnerId]">{{project.OwnerName}}</a></p>
 		<p><i class="fa fa-list"></i> Project Category: {{project.ProjectCategoryDesc}}</p>
+		<p>
+			<i class="fa fa-code-fork"></i> Status: 
+			<span *ngIf="project.Status == 'CRE'">
+				 Under Funding
+			</span>
+			<span *ngIf="project.Status == 'COM'">
+				 Completed
+			</span>
+			<span *ngIf="project.Status == 'FAI'">
+				 Failed
+			</span>
+		</p>
 	</div>
 	<hr/>
 </div>
