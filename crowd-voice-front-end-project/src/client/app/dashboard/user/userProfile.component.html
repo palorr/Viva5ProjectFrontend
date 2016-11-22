@@ -19,7 +19,7 @@
         <div class="col-lg-12">
             <ol class="breadcrumb">
                 <li>
-                    <i class="fa fa-edit"></i> <a [routerLink]="['/dashboard/users/edit', user.Id]">Edit Project</a>
+                    <i class="fa fa-edit"></i> <a [routerLink]="['/dashboard/users/edit', user.Id]">Edit Profile</a>
                 </li>
                 <li>
                     <a [routerLink]="['/dashboard/projects/create']">Create New Project</a>
@@ -58,7 +58,7 @@
 					</div>
 				</tab>
 
-				<tab heading="Backed Projects from this user">
+				<tab heading="Backed Projects">
 					<div *ngFor="let project of backedProjects">
 						<div class="col-lg-12 jumbotron card card-block">
 							<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
