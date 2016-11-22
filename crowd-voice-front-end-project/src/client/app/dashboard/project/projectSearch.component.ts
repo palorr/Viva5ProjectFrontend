@@ -38,15 +38,35 @@ export class ProjectSearchComponent implements OnInit {
     onChange(projectCategoryId: number): any {
         if(projectCategoryId == 0) return false;
         
-        return this.projectService.getAllProjectsByCategory(projectCategoryId)
-                    .subscribe(
-                        (data: Project[]) => {
-                            this.projects = data;
-                            console.log('Projects Data: ', this.projects);
-                        },
-                        (err) => {
-                            this.alertService.error(err);
-                        }
-                    );
+        return this.projectService
+                   .getAllProjectsByCategory(projectCategoryId)
+                   .subscribe(
+                       (data: Project[]) => {
+                           this.projects = data;
+                           console.log('Projects Data: ', this.projects);
+                       },
+                       (err) => {
+                           this.alertService.error(err);
+                       }
+                   );
+    }
+    
+    searchByName(searchTerm: string): any {
+        if(searchTerm.length > 2) {
+            return this.projectService
+                       .getAllProjectsByName(searchTerm)
+                       .subscribe(
+                           (data: Project[]) => {
+                               this.projects = data;
+                               console.log('Projects Data: ', this.projects);
+                           },
+                           (err) => {
+                               this.alertService.error(err);
+                           }
+                       );
+        }
+        
+        this.projects = [];
+        return;
     }
 }
