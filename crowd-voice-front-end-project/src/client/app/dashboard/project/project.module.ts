@@ -16,6 +16,8 @@ import { ProjectUpdateEditComponent } from './projectUpdateEdit.component';
 import { FundingPackageCreateComponent } from './fundingPackageCreate.component';
 import { FundingPackageEditComponent } from './fundingPackageEdit.component';
 
+import { ProjectSearchComponent } from './projectSearch.component';
+
 import { ProjectComponent } from './project.component';
 
 import {
@@ -39,7 +41,8 @@ import {
         ProjectUpdateCreateComponent,
         ProjectUpdateEditComponent,
         FundingPackageCreateComponent,
-        FundingPackageEditComponent
+        FundingPackageEditComponent,
+        ProjectSearchComponent
     ],
     exports: [
         ProjectComponent, 
@@ -50,7 +53,8 @@ import {
         ProjectUpdateCreateComponent,
         ProjectUpdateEditComponent,
         FundingPackageCreateComponent,
-        FundingPackageEditComponent
+        FundingPackageEditComponent,
+        ProjectSearchComponent
     ]
 })
 

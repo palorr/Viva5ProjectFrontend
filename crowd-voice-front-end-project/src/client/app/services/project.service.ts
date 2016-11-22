@@ -27,6 +27,24 @@ export class ProjectService {
             });
         
     }
+    
+    getAllProjectsByCategory(projectCategoryId: number) {
+        let URL = 'http://localhost:56378/api/projects/getAllProjectsByCategory/'+projectCategoryId;
+        
+        let headers = new Headers({
+            'Accept': 'application/json', 
+        });
+        
+        let options = new RequestOptions({ headers: headers });
+        
+        return this.http.get(URL, options)
+            .map((response: Response) => response.json())
+            .catch(res => {
+                console.log('CATCH: ', res.json());
+                throw(res.json());
+            });
+        
+    }
  
     getProjectById(projectId: number, isLoggedIn: boolean) {
         let projectURL: string;
