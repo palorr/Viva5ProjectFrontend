@@ -10,3 +10,4 @@ export * from './fundingPackage';
 export * from './fundingPackageFromServer';
 export * from './projectStat';
 export * from './projectStatFromServer';
+export * from './genericUser';
