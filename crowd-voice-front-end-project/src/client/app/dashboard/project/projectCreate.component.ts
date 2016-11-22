@@ -35,7 +35,7 @@ export class ProjectCreateComponent implements OnInit {
                     console.log('Project Categories Data: ', this.projectCategoryOptions);
                 },
                 (err) => {
-                    this.alertService.error(err.error_description);
+                    this.alertService.error(err);
                 }
 			);
 	}
