@@ -1,0 +1,69 @@
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Edit User Profile
+            </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="Javascript:void(0)" routerLink="/dashboard/home">Home</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> Edit User Profile
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+    <div class="row" *ngIf="isRequestorThisUser">
+        <div class="col-lg-12">
+
+            <form name="form" (ngSubmit)="editUser()" role="form" #editUserForm="ngForm" novalidate>
+                
+                <!--avatar image preview-->
+                <img [src]="user.AvatarImage" alt="AvatarImage">
+                <!--avatar image url input-->
+                <fieldset class="form-group" [ngClass]="{ 'has-error': editProjectForm.submitted && !description.valid }">
+                    <label for="avatar">Your Avatar Image</label>
+                    <input type="text" class="form-control input-underline input-lg" 
+                        name="name" id="name" placeholder="Enter your Avatar Image URL..."
+                        required [(ngModel)]="user.AvatarImage"
+                        #name="ngModel">
+                </fieldset>
+                <!--name input-->
+                <fieldset class="form-group" [ngClass]="{ 'has-error': editProjectForm.submitted && !title.valid }">
+                    <label for="name">Name (*)</label>
+                    <input type="text" class="form-control input-underline input-lg" 
+                        name="name" id="name" placeholder="Enter your real name..."
+                        required [(ngModel)]="user.Name"
+                        #name="ngModel">
+                    <div [hidden]="name.valid || name.pristine" class="error">
+                        Name is required!
+                    </div>
+                </fieldset>
+                <!--short bio input -->
+                <fieldset class="form-group" [ngClass]="{ 'has-error': editProjectForm.submitted && !description.valid }">
+                    <label for="shortBio">Description</label>
+                    <textarea class="form-control input-underline input-lg" 
+                        name="shortBio" id="shortBio" placeholder="Enter your Short Bio..."
+                        required [(ngModel)]="user.ShortBio" rows="6"
+                        #description="ngModel"></textarea>               
+                </fieldset>
+                <!--loading-->
+                <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!editProjectForm.form.valid">Edit Project</button>
+				<span *ngIf="loading">
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+					<span class="sr-only">Loading...</span>
+				</span>
+                <!--
+                    <button type="reset" class="btn btn-secondary" (click)="form.reset();">Reset</button>
+                -->
+            </form>
+
+        </div>
+    </div>
+    <br/><br/>
+    <a [routerLink]="['/dashboard/users/view', user.Id]">Back to my profile</a>
+    <!-- /.row -->
+</div>

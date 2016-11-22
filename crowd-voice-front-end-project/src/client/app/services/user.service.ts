@@ -102,6 +102,21 @@ export class UserService {
 		 }
          return false ;
     }
+    
+    updateUser(user: GenericUser) {
+        let editUserURL = 'http://localhost:56378/api/users/'+user.Id;
+        
+        let options = this.jwt();
+        
+        let putRequestBody = JSON.stringify(user);
+        
+        return this.http.put(editUserURL, putRequestBody, options)
+            .map((response: Response) => response)
+            .catch(res => {
+                console.log('CATCH: ', res.json());
+                throw(res.json());
+            });
+    }
 
    private jwt() {
         // create authorization header with jwt token

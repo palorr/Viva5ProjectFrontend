@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { UserProfileComponent } from './userProfile.component';
-//import { UserEditComponent } from './userEdit.component';
+import { UserEditComponent } from './userEdit.component';
 
 
 import { UserComponent } from './user.component';
@@ -25,12 +25,14 @@ import {
     ],
     declarations: [
         UserComponent,
-        UserProfileComponent
+        UserProfileComponent,
+        UserEditComponent
 
     ],
     exports: [
         UserComponent,
-        UserProfileComponent
+        UserProfileComponent,
+        UserEditComponent
     ]
 })
 
