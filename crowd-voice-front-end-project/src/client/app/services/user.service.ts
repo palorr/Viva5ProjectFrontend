@@ -104,7 +104,7 @@ export class UserService {
     }
     
     updateUser(user: GenericUser) {
-        let editUserURL = 'http://localhost:56378/api/users/'+user.Id;
+        let editUserURL = 'http://localhost:56378/api/users/';
         
         let options = this.jwt();
         
