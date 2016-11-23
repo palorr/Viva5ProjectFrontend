@@ -1,4 +1,4 @@
-import {MomentModule} from 'angular2-moment';
+import { MomentModule } from 'angular2-moment';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

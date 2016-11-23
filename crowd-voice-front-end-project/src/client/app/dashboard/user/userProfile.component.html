@@ -40,40 +40,41 @@
 	</div>
 
 
-	<div class="col-lg-12">
-		<div class="card card-block" (click)="$event.preventDefault()">
-			<tabset>
-				<br/>
-				
-				<tab heading="Owned Projects">
-					<div *ngFor="let project of createdProjects">
-						<div class="col-lg-12 jumbotron card card-block">
-							<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
-							<p>{{project.Description}}</p>
-							<p>Funding Goal: {{project.FundingGoal}}</p>
-							<p>Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
-							<p>Project Category: {{project.ProjectCategoryDesc}}</p>
+	<div class="row" *ngIf="(createdProjects && createdProjects.length > 0) || (backedProjects && backedProjects.length > 0)">
+		<div class="col-lg-12">
+			<div class="card card-block" (click)="$event.preventDefault()">
+				<tabset>
+					<br/>
+					
+					<tab heading="Owned Projects" *ngIf="createdProjects && createdProjects.length > 0">
+						<div *ngFor="let project of createdProjects">
+							<div class="jumbotron">
+								<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
+								<p>{{project.Description}}</p>
+								<p>Funding Goal: {{project.FundingGoal}}</p>
+								<p>Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
+								<p>Project Category: {{project.ProjectCategoryDesc}}</p>
+							</div>
+							<hr/>
 						</div>
-						<hr/>
-					</div>
-				</tab>
-
-				<tab heading="Backed Projects">
-					<div *ngFor="let project of backedProjects">
-						<div class="col-lg-12 jumbotron card card-block">
-							<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
-							<p>{{project.Description}}</p>
-							<p>Created on: {{project.CreatedDate | amDateFormat:'LL'}}</p>
-							<p>Funding Goal: {{project.FundingGoal}}</p>
-							<p>Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
-							<p>Project Category: {{project.ProjectCategoryDesc}}</p>
+					</tab>
+	
+					<tab heading="Backed Projects" *ngIf="backedProjects && backedProjects.length > 0">
+						<div *ngFor="let project of backedProjects">
+							<div class="jumbotron">
+								<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
+								<p>{{project.Description}}</p>
+								<p>Created on: {{project.CreatedDate | amDateFormat:'LL'}}</p>
+								<p>Funding Goal: {{project.FundingGoal}}</p>
+								<p>Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
+								<p>Project Category: {{project.ProjectCategoryDesc}}</p>
+							</div>
+							<hr/>
 						</div>
-						<hr/>
-					</div>
-				</tab>
-				
-			</tabset>
+					</tab>
+					
+				</tabset>
+			</div>
 		</div>
 	</div>
-
 </div>

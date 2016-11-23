@@ -75,28 +75,30 @@
 			<div class="card card-block" (click)="$event.preventDefault()">
 				<tabset>
 					<br/>
+					
 					<tab heading="Project Updates" *ngIf="fundingPackages && fundingPackages.length > 0">
-						<div class="jumbotron">
-							<span *ngFor="let update of projectUpdates">
+						<div *ngFor="let update of projectUpdates">
+							<div class="jumbotron">
 								<a *ngIf="update.IsRequestorProjectCreator" [routerLink]="['/dashboard/projects/', project.Id, 'updates', update.Id, 'edit']">Edit Project Update</a>
 								<h1>{{update.Title}}</h1>
 								<p>{{update.Description}}</p>
 								<p><i class="fa fa-clock-o"></i> {{update.WhenDateTime | amDateFormat:'LL'}}</p>
-								<hr/>
-							</span>
+							</div>
+							<hr/>
 						</div>
 					</tab>
+					
 					<tab heading="Funding Packages" *ngIf="fundingPackages && fundingPackages.length > 0">
-						<div class="jumbotron">
-							<span *ngFor="let fundingPackage of fundingPackages">
+						<div *ngFor="let fundingPackage of fundingPackages">
+							<div class="jumbotron">
 								<a *ngIf="fundingPackage.IsRequestorProjectCreator && fundingPackage.PledgeAmount" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'edit']">Edit Funding Package</a>
 								<h1>{{fundingPackage.Title}}</h1>
 								<p><i class="fa fa-trophy"></i> Reward: {{fundingPackage.Description}}</p>
 								<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-money"></i> Pledge Amount: {{fundingPackage.PledgeAmount}} <i class="fa fa-euro"></i></p>
 								<p><i class="fa fa-clock-o"></i> {{fundingPackage.WhenDateTime | amDateFormat:'LL'}}</p>
 								<!--<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-clock-o"></i> Estimated Delivery Date: {{fundingPackage.EstimatedDeliveryDate | amDateFormat:'LL'}}</p>-->
-								<hr/>
-							</span>
+							</div>
+							<hr/>
 						</div>
 					</tab>
 				</tabset>
