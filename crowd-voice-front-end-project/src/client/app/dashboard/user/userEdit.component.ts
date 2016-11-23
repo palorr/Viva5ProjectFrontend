@@ -44,8 +44,9 @@ export class UserEditComponent implements OnInit {
 					console.log('User Profile View Data: ', this.user);
 					if(isLoggedIn)
 						this.isRequestorThisUser = this.userService.isRequestorThisUser(this.user.Username);
-					else
-                        this.alertService.success("You are not authorized to edit this profile!")
+					if(!isLoggedIn || !this.isRequestorThisUser)
+                        this.alertService.error("You are not authorized to edit this profile!");
+                    
 				},
 				(err) => {
 					this.alertService.error(err);
