@@ -36,7 +36,7 @@
 		<hr/>
     </div>
 	
-	<div class="row">
+	<div class="row" *ngIf="isRequestorLoggedIn">
 		<div class="col-lg-12">
 			<i class="fa fa-twitter"></i> 
 			<a (click)="createExternalShare('TWI')" target="blank" href="https://twitter.com/share">
