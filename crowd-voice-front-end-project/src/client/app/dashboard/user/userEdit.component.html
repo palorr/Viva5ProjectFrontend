@@ -48,7 +48,7 @@
                     <textarea class="form-control input-underline input-lg" 
                         name="shortBio" id="shortBio" placeholder="Enter your Short Bio..."
                         required [(ngModel)]="user.ShortBio" rows="6"
-                        #description="ngModel"></textarea>               
+                        #shortBio="ngModel"></textarea>               
                 </fieldset>
                 <!--loading-->
                 <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!editUserForm.form.valid">Save</button>

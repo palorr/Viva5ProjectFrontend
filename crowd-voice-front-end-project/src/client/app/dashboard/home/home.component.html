@@ -103,10 +103,10 @@
         </div>
     </div>
     
-    <div class="row">
+    <div class="row" *ngIf="currentUser">
         <div class="col-lg-8">
-        <div class="card card-default">
-        <div class="card-header">
+            <div class="card card-default">
+                <div class="card-header">
                     <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
                 </div>
                 <!-- /.card-header -->
@@ -117,12 +117,12 @@
         </div>
         <!-- /.col-lg-8 -->
         <div class="col-lg-4">
-        <div class="card card-default">
-        <div class="card-header">
-        <i class="fa fa-bell fa-fw"></i> Notifications card
+            <div class="card card-default">
+                <div class="card-header">
+                    <i class="fa fa-bell fa-fw"></i> My Completed Backed Projects
                 </div>
                 <!-- /.card-header -->
-                <notifications-cmp></notifications-cmp>
+                <notifications-cmp [projects]="projectsToNotify"></notifications-cmp>
                 <!-- /.card-body -->
             </div>
             <!-- /.card -->

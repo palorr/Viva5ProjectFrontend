@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { ProjectService, AlertService } from '../../services/index';
+import { ProjectService, AlertService, UserService } from '../../services/index';
 
 import { Project } from '../../models/index';
 
@@ -33,7 +33,9 @@ export class ChatComponent {}
 	selector: 'notifications-cmp',
 	templateUrl: 'notifications.html'
 })
-export class NotificationComponent { }
+export class NotificationComponent {
+	@Input() projects: Project[] = [];	
+}
 
 @Component({
 	moduleId: module.id,
@@ -45,6 +47,8 @@ export class HomeComponent implements OnInit {
 	isRequestorLoggedIn: boolean = false;
 	
 	currentUser: any = null;
+	
+	projectsToNotify: Project[] = [];
 	
 	/* Carousel Variable */
 	
@@ -67,7 +71,8 @@ export class HomeComponent implements OnInit {
 		private projectService: ProjectService,
 		private alertService: AlertService,
 		private authGuard: AuthGuard,
-		private currentUserService: CurrentUserService
+		private currentUserService: CurrentUserService,
+		private userService: UserService
 	) {}
 	
 	ngOnInit() {
@@ -96,6 +101,16 @@ export class HomeComponent implements OnInit {
 					(err) => {
 						console.log('ERROR: ', err);
 					});	
+					
+			this.userService
+				.getUserFundedCompletedProjects()
+				.subscribe(
+					(data: Project[]) => {
+						this.projectsToNotify = data;
+					},
+					(err) => {
+						console.log('ERROR: ', err);
+					});
 		}
     }
 

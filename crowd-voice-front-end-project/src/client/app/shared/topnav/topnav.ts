@@ -17,7 +17,7 @@ import { AuthenticationService, UserService } from '../../services/index';
 
 export class TopNavComponent implements OnInit {
 	
-	completedProjects: Project[];
+	projectsToNotify: Project[];
 	
 	isLoggedIn: boolean = false;
 	
@@ -68,8 +68,8 @@ export class TopNavComponent implements OnInit {
 					self.userService.getUserFundedCompletedProjects()
 						.subscribe(
 							(data: Project[]) => {
-								self.completedProjects = data;
-								console.log('Completed Projects: ', self.completedProjects);
+								self.projectsToNotify = data;
+								console.log('Completed Projects: ', self.projectsToNotify);
 							},
 							(err) => {
 								console.log('ERROR: ', err);

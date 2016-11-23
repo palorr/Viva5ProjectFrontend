@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MomentModule } from 'angular2-moment';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
@@ -7,7 +8,7 @@ import { CarouselModule, DropdownModule, AlertModule } from 'ng2-bootstrap/ng2-b
 import { TimelineComponent, ChatComponent, NotificationComponent } from './home.component';
 
 @NgModule({
-    imports: [RouterModule, CommonModule, CarouselModule, DropdownModule, AlertModule],
+    imports: [MomentModule, RouterModule, CommonModule, CarouselModule, DropdownModule, AlertModule],
     declarations: [HomeComponent, TimelineComponent, ChatComponent, NotificationComponent],
     exports: [HomeComponent, TimelineComponent, ChatComponent, NotificationComponent]
 })
