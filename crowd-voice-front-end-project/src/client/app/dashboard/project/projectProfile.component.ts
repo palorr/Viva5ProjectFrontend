@@ -109,12 +109,20 @@ export class ProjectProfileComponent implements OnInit {
 		});
 	}
 	
-	createExternalShare() {
+	createExternalShare(targetClicked: string) {
+		
+		if(targetClicked === "FAC") {
+			FB.ui({
+				method: 'share',
+				display: 'popup',
+				href: window.location.href,
+			}, function(response: any){});
+		}
+		
 		this.projectExternalShare = new ProjectExternalShare();
 		this.projectExternalShare.ProjectId = this.id;
 		
-		//TODO - CHANGE THIS TO TAKE THE TARGET OF THE SHARE FROM THE BUTTON CLICKED
-		this.projectExternalShare.Target = "FAC";
+		this.projectExternalShare.Target = targetClicked;
 		
 		if(this.isRequestorProjectCreator)
 			this.projectExternalShare.Source = "CRE";
