@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { AuthGuard } from '../../guards/index';
 
@@ -25,7 +25,8 @@ export class TopNavComponent implements OnInit {
 		private authGuard: AuthGuard,
 		private currentUserService: CurrentUserService,
 		private authenticationService: AuthenticationService,
-		private router: Router
+		private route: ActivatedRoute,
+        private router: Router
 	){}
 	
 	ngOnInit() {

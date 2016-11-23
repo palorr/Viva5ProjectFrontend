@@ -21,9 +21,9 @@
 		<hr/>
 		<p><i class="fa fa-calendar"></i> Created on: {{project.CreatedDate | amDateFormat:'LL'}}</p>
 		<p><i class="fa fa-calendar"></i> Updated on: {{project.UpdatedDate | amDateFormat:'LL'}}</p>
-		<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}}</p>
+		<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}} <i class="fa fa-euro"></i></p>
 		<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
-		<p><i class="fa fa-user"></i> Project Owner: <a [routerLink]="['/dashboard/user/viewProfile', project.OwnerId]">{{project.OwnerName}}</a></p>
+		<p><i class="fa fa-user"></i> Project Owner: <a [routerLink]="['/dashboard/users/view', project.OwnerId]">{{project.OwnerName}}</a></p>
 		<p><i class="fa fa-list"></i> Project Category: {{project.ProjectCategoryDesc}}</p>
 		<p>
 			<i class="fa fa-code-fork"></i> Status: 

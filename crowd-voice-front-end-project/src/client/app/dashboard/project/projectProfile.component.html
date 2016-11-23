@@ -38,31 +38,35 @@
 	
     <!-- /.row -->
 	<div class="col-lg-12 card card-block" *ngIf="project">
-		<div class="col-lg-9">
-			<h3>{{project.Title}}</h3>
-			<p>{{project.Description}}</p>
-			<p>Created on: {{project.CreatedDate | amDateFormat:'LL'}}</p>
-			<p>Updated on: {{project.UpdatedDate | amDateFormat:'LL'}}</p>
-			<p>Funding Goal: {{project.FundingGoal}}</p>
-			<p>Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
-			<p>Project Owner: <a [routerLink]="['/dashboard/user/viewProfile', project.OwnerId]">{{project.OwnerName}}</a></p>
-			<p>Project Category: {{project.ProjectCategoryDesc}}</p>
-			<p>
-				<i class="fa fa-code-fork"></i> Status: 
-				<span *ngIf="project.Status == 'CRE'">
-					Under Funding
-				</span>
-				<span *ngIf="project.Status == 'COM'">
-					Completed
-				</span>
-				<span *ngIf="project.Status == 'FAI'">
-					Failed
-				</span>
-			</p>
-		</div>
-		<div *ngIf="projectStat" class="col-lg-3 project-stats">
-			<p>Money Pledged: {{projectStat.MoneyPledged}} / {{project.FundingGoal}}</p>
-			<p>Backed by {{projectStat.BackersNo}} people</p>
+		<h3>{{project.Title}}</h3>
+		<hr/>
+		<p>{{project.Description}}</p>
+		<hr/>
+		<p><i class="fa fa-calendar"></i> Created on: {{project.CreatedDate | amDateFormat:'LL'}}</p>
+		<p><i class="fa fa-calendar"></i> Updated on: {{project.UpdatedDate | amDateFormat:'LL'}}</p>
+		<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}} <i class="fa fa-euro"></i></p>
+		<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
+		<p><i class="fa fa-user"></i> Project Owner: <a [routerLink]="['/dashboard/users/view', project.OwnerId]">{{project.OwnerName}}</a></p>
+		<p><i class="fa fa-list"></i> Project Category: {{project.ProjectCategoryDesc}}</p>
+		<p>
+			<i class="fa fa-code-fork"></i> Status: 
+			<span *ngIf="project.Status == 'CRE'">
+				Under Funding
+			</span>
+			<span *ngIf="project.Status == 'COM'">
+				Completed
+			</span>
+			<span *ngIf="project.Status == 'FAI'">
+				Failed
+			</span>
+		</p>
+		<div class="row">
+			<div class="col-lg-9"></div>
+			<strong *ngIf="projectStat" class="col-lg-3 project-stats">
+				<p>Money Pledged (in <i class="fa fa-euro"></i>): {{projectStat.MoneyPledged}} / {{project.FundingGoal}}</p> 
+				<p>{{(projectStat.MoneyPledged / project.FundingGoal) * 100}}% complete</p>
+				<p>Backed by {{projectStat.BackersNo}} people</p>
+			</strong>	
 		</div>
 	</div>
 	
@@ -87,8 +91,8 @@
 							<span *ngFor="let fundingPackage of fundingPackages">
 								<a *ngIf="fundingPackage.IsRequestorProjectCreator && fundingPackage.PledgeAmount" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'edit']">Edit Funding Package</a>
 								<h1>{{fundingPackage.Title}}</h1>
-								<p>Reward: {{fundingPackage.Description}}</p>
-								<p *ngIf="fundingPackage.PledgeAmount">Pledge Amount: {{fundingPackage.PledgeAmount}} <i class="fa fa-euro"></i></p>
+								<p><i class="fa fa-trophy"></i> Reward: {{fundingPackage.Description}}</p>
+								<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-money"></i> Pledge Amount: {{fundingPackage.PledgeAmount}} <i class="fa fa-euro"></i></p>
 								<p><i class="fa fa-clock-o"></i> {{fundingPackage.WhenDateTime | amDateFormat:'LL'}}</p>
 								<!--<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-clock-o"></i> Estimated Delivery Date: {{fundingPackage.EstimatedDeliveryDate | amDateFormat:'LL'}}</p>-->
 								<hr/>
