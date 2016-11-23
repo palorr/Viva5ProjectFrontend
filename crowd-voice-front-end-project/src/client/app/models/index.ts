@@ -11,3 +11,4 @@ export * from './fundingPackageFromServer';
 export * from './projectStat';
 export * from './projectStatFromServer';
 export * from './genericUser';
+export * from './projectExternalShare';

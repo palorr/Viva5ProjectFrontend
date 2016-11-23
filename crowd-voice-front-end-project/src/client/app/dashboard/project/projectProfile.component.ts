@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { Project, ProjectFromServer, ProjectUpdateFromServer, FundingPackageFromServer, ProjectStat, ProjectStatFromServer } from '../../models/index';
+import { 
+	Project, ProjectFromServer, ProjectUpdateFromServer, 
+	FundingPackageFromServer, ProjectStat, ProjectStatFromServer,
+	ProjectExternalShare
+} from '../../models/index';
 
-import { AlertService, ProjectService, ProjectUpdateService, FundingPackageService, ProjectStatService } from '../../services/index';
+import { 
+	AlertService, ProjectService, ProjectUpdateService, 
+	FundingPackageService, ProjectStatService, ProjectExternalShareService 
+} from '../../services/index';
 
 import { AuthGuard } from '../../guards/index';
 
@@ -18,6 +25,8 @@ import { AuthGuard } from '../../guards/index';
 })
 export class ProjectProfileComponent implements OnInit {
 	id: number;
+	
+	projectExternalShare: ProjectExternalShare;
 	
 	project: ProjectFromServer;
 	
@@ -39,11 +48,12 @@ export class ProjectProfileComponent implements OnInit {
 		private projectUpdateService: ProjectUpdateService,
 		private fundingPackageService: FundingPackageService,
 		private projectStatService: ProjectStatService,
+		private projectExternalShareService: ProjectExternalShareService,
 		private authGuard: AuthGuard
 	) { }
  
     ngOnInit() {
-		console.log("THIS>ROUTES>PARAMS: ", this.route.params);
+		console.log("THIS.ROUTES: ", this.route);
     	this.route.params.forEach((params: Params) => {
 			this.id = +params['id']; // (+) converts string 'id' to a number
 			
@@ -96,8 +106,32 @@ export class ProjectProfileComponent implements OnInit {
 						this.alertService.error(err);
 					}
 				);
-			
 		});
+	}
+	
+	createExternalShare() {
+		this.projectExternalShare = new ProjectExternalShare();
+		this.projectExternalShare.ProjectId = this.id;
+		
+		//TODO - CHANGE THIS TO TAKE THE TARGET OF THE SHARE FROM THE BUTTON CLICKED
+		this.projectExternalShare.Target = "FAC";
+		
+		if(this.isRequestorProjectCreator)
+			this.projectExternalShare.Source = "CRE";
+		else 
+			this.projectExternalShare.Source = "BAC";
+		
+		this.projectExternalShareService
+			.createExternalShare(this.id, this.projectExternalShare)
+			.subscribe(
+				(data) => {
+					console.log('NEW PROJECT EXTERNAL SHARE CREATED: ', data);
+					this.alertService.success('Project external share created successfully!');
+				},
+				(err) => {
+					this.alertService.error(err);
+				}
+			);
 	}
 
 }

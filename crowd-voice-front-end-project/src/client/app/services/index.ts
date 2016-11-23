@@ -6,3 +6,4 @@ export * from './user.service';
 export * from './fundingPackage.service';
 export * from './projectUpdate.service';
 export * from './projectStat.service';
+export * from './projectExternalShare.service';

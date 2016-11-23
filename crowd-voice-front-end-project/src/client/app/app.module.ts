@@ -22,7 +22,8 @@ import {
 	UserService,
 	ProjectUpdateService,
 	FundingPackageService,
-	ProjectStatService
+	ProjectStatService,
+	ProjectExternalShareService
 } from './services/index';
 
 import { AuthGuard, AuthorizationGuard } from './guards/index';
@@ -59,7 +60,8 @@ import { CurrentUserService } from './helpers/index'
 		UserService,
 		AuthGuard,
 		AuthorizationGuard,
-		CurrentUserService
+		CurrentUserService,
+		ProjectExternalShareService
 	],
 	bootstrap: [AppComponent]
 
