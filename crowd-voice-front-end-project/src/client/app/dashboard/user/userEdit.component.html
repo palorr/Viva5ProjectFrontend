@@ -22,7 +22,7 @@
             <form name="form" (ngSubmit)="editUser()" role="form" #editUserForm="ngForm" novalidate>
                 
                 <!--avatar image preview-->
-                <img [src]="user.AvatarImage" alt="AvatarImage" style="width:250px;height:250px;">
+                <img [src]="user.AvatarImage" alt="AvatarImage" style="max-width: 500px; max-height: 500px; display: block; margin-left: auto; margin-right: auto;">
                 <!--avatar image url input-->
                 <fieldset class="form-group" [ngClass]="{ 'has-error': editUserForm.submitted && !avatar.valid }">
                     <label for="avatar">Avatar Image</label>
