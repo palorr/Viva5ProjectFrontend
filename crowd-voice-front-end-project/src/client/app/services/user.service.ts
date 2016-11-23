@@ -118,8 +118,12 @@ export class UserService {
             });
     }
     
-    getUserFundedCompletedProjects() {
+    getUserFundedCompletedProjects(showAll: boolean) {
         let URL = 'http://localhost:56378/api/users/getUserFundedCompletedProjects';
+        
+        if(showAll) {
+            URL = 'http://localhost:56378/api/users/getUserFundedCompletedProjects/showAll';
+        }
         
         let options = this.jwt();
         

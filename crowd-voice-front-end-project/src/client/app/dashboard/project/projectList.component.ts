@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ProjectService } from '../../services/index';
+import { ProjectService, UserService } from '../../services/index';
 import { Project } from '../../models/index';
 
 @Component({
@@ -21,7 +21,8 @@ export class ProjectListComponent implements OnInit {
     
 	constructor(
         private route: ActivatedRoute,
-        private projectService: ProjectService
+        private projectService: ProjectService,
+        private userService: UserService
 	) {}
 	
 	ngOnInit() {
@@ -44,7 +45,8 @@ export class ProjectListComponent implements OnInit {
                             },
                             (err) => {
                                 alert(err);
-                            });
+                            }
+                        );
                     break;
                 case 'getTrendingProjects':
                     this.title = "Top 10 Trending Projects";
@@ -56,12 +58,22 @@ export class ProjectListComponent implements OnInit {
                             },
                             (err) => {
                                 alert(err);
-                            });
+                            }
+                        );
                     break;
-                case 'getMyProjects':
-                    //TODO 
+                case 'getMyCompletedProjects':
+                    this.title = "My Completed Backed Projects";
+                    this.userService
+                        .getUserFundedCompletedProjects(true)
+                        .subscribe(
+                            (data: Project[]) => {
+                                this.projects = data;
+                            },
+                            (err) => {
+                                alert(err);
+                            }
+                        );
                     break;
-                //TODO - ADD MORE ACTIONS FOR PROJECT LISTS
             }
         }
         

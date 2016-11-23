@@ -102,35 +102,32 @@
             </div>
         </div>
     </div>
-    
+    <hr/>
     <div class="row" *ngIf="currentUser">
-        <div class="col-lg-8">
-            <div class="card card-default">
-                <div class="card-header">
-                    <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
-                </div>
-                <!-- /.card-header -->
-                <timeline-cmp></timeline-cmp>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-        </div>
-        <!-- /.col-lg-8 -->
-        <div class="col-lg-4">
+        <div class="col-lg-12">
             <div class="card card-default">
                 <div class="card-header">
                     <i class="fa fa-bell fa-fw"></i> My Completed Backed Projects
                 </div>
-                <!-- /.card-header -->
                 <notifications-cmp [projects]="projectsToNotify"></notifications-cmp>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
-
-            <chat-cmp></chat-cmp>
-            <!-- /.card .chat-card -->
         </div>
-        <!-- /.col-lg-4 -->
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-lg-12">
+            <span class="col-lg-7">
+                <div class="card card-default">
+                <div class="card-header">
+                    <i class="fa fa-clock-o fa-fw"></i> My Funded Projects Updates
+                </div>
+                <timeline-cmp></timeline-cmp>
+            </div>
+            </span>
+            <span class="col-lg-5">
+                <chat-cmp></chat-cmp>
+            </span>
+        </div>
     </div>
 
 </div>

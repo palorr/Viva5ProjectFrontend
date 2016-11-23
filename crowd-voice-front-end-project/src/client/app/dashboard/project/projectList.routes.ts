@@ -19,11 +19,11 @@ export const ProjectListRoutes: Route[] = [
 		}	
 	},
 	{
-		path: 'myProjects',
+		path: 'myCompletedProjects',
 		component: ProjectListComponent,
 		canActivate: [AuthGuard],
 		data: {
-			action: 'getMyProjects'
+			action: 'getMyCompletedProjects'
 		}
 	}
 ];

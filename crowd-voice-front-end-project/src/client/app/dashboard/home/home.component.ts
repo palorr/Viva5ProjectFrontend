@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { ProjectService, AlertService, UserService } from '../../services/index';
@@ -43,7 +43,7 @@ export class NotificationComponent {
 	templateUrl: 'home.component.html'
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 	isRequestorLoggedIn: boolean = false;
 	
 	currentUser: any = null;
@@ -101,18 +101,30 @@ export class HomeComponent implements OnInit {
 					(err) => {
 						console.log('ERROR: ', err);
 					});	
-					
-			this.userService
-				.getUserFundedCompletedProjects()
-				.subscribe(
-					(data: Project[]) => {
-						this.projectsToNotify = data;
-					},
-					(err) => {
-						console.log('ERROR: ', err);
-					});
+			
+			let self = this;
+			window.setInterval(function() {
+				self.userService
+					.getUserFundedCompletedProjects(false)
+					.subscribe(
+						(data: Project[]) => {
+							console.log('Projects Com in home...');
+							self.projectsToNotify = data;
+						},
+						(err: any) => {
+							console.log('ERROR: ', err);
+						});
+			}, 5000);
 		}
     }
+
+	ngOnDestroy() {
+		let interval_id = window.setInterval("", 9999); // Get a reference to the last
+														// interval +1
+		//for clearing all intervals
+		for (var i = 1; i < interval_id; i++)
+				window.clearInterval(i);
+	}
 
 	/* Carousel */
 	

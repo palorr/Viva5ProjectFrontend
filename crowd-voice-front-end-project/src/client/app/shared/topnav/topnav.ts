@@ -51,7 +51,7 @@ export class TopNavComponent implements OnInit {
                     console.log('ERROR: ', err);
                 });	
 		
-			this.checkForNotifications();
+			//this.checkForNotifications();
 			
 		}
 	}
@@ -65,7 +65,8 @@ export class TopNavComponent implements OnInit {
 		let self = this;
 		this.intervals.push(
 				window.setInterval(function() {
-					self.userService.getUserFundedCompletedProjects()
+					self.userService
+						.getUserFundedCompletedProjects(false)
 						.subscribe(
 							(data: Project[]) => {
 								self.projectsToNotify = data;
@@ -73,7 +74,8 @@ export class TopNavComponent implements OnInit {
 							},
 							(err) => {
 								console.log('ERROR: ', err);
-							});
+							}
+						);
 				}, 10000)
 			);
 	}

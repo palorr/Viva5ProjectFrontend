@@ -4,13 +4,13 @@
       <a href="#" class="list-group-item" *ngFor="let project of projects">
         <i class="fa fa-comment fa-fw"></i> {{project.Title}}
               <span class="pull-right text-muted small">
-                <em>{{project.UpdatedDate | amDateFormat:'LL'}}</em>
+                <em><i class="fa fa-clock-o"></i> {{project.UpdatedDate | amDateFormat:'LL'}}</em>
               </span>
       </a>
     </span>
   </div>
   <!-- /.list-group -->
-  <a href="#" class="btn btn-default btn-block">
-    <i class="fa fa-list-alt"></i> All Completed Backed Projects
+  <a href="#" class="btn btn-default btn-block" [routerLink]="['/dashboard/projects/myCompletedProjects']">
+    <i class="fa fa-list-alt"></i> See All your Completed Backed Projects
   </a>
 </div>
