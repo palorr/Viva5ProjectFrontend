@@ -117,6 +117,19 @@ export class UserService {
                 throw(res.json());
             });
     }
+    
+    getUserFundedCompletedProjects() {
+        let URL = 'http://localhost:56378/api/users/getUserFundedCompletedProjects';
+        
+        let options = this.jwt();
+        
+        return this.http.get(URL, options)
+            .map((response: Response) => response.json())
+            .catch(res => {
+                console.log('CATCH: ', res.json());
+                throw(res.json());
+            });
+    }
 
    private jwt() {
         // create authorization header with jwt token

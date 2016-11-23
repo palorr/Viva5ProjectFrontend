@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../../services/index';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
+import { ProjectService, AlertService } from '../../services/index';
+
 import { Project } from '../../models/index';
+
+import { CurrentUserService } from '../../helpers/index';
+
+import { AuthGuard } from '../../guards/index';
 
 /**
 *	This class represents the lazy loaded HomeComponent.
@@ -35,7 +42,12 @@ export class NotificationComponent { }
 })
 
 export class HomeComponent implements OnInit {
+	isRequestorLoggedIn: boolean = false;
+	
+	currentUser: any = null;
+	
 	/* Carousel Variable */
+	
 	projects: Array<Project> = [];
 	
 	myInterval: number = 5000;
@@ -48,35 +60,21 @@ export class HomeComponent implements OnInit {
 		`assets/img/slider3.jpg`,
 		`assets/img/slider0.jpg`
 	];
+	
 	/* END */
-	/* Alert component */
-	public alerts:Array<Object> = [
-	   {
-	     type: 'danger',
-	     msg: 'Oh snap! Change a few things up and try submitting again.'
-	   },
-	   {
-	     type: 'success',
-	     msg: 'Well done! You successfully read this important alert message.',
-	     closable: true
-	   }
-	 ];
-
-	 public closeAlert(i:number):void {
-	   this.alerts.splice(i, 1);
-	 }
-	/* END*/
 
 	constructor(
-		private projectService: ProjectService
-	) {
-		//for (let i = 0; i < 4; i++) {
-			//this.addSlide();
-		//}
-	}
+		private projectService: ProjectService,
+		private alertService: AlertService,
+		private authGuard: AuthGuard,
+		private currentUserService: CurrentUserService
+	) {}
 	
 	ngOnInit() {
-        this.projectService.getAllProjects()
+		if (this.authGuard.isUserLoggedIn())
+				this.isRequestorLoggedIn = true;
+		
+        this.projectService.getTrendingProjects()
             .subscribe(
                 (data: Array<Project>) => {
 					this.projects = data;
@@ -86,14 +84,26 @@ export class HomeComponent implements OnInit {
 					}
                 },
                 (err) => {
-                    alert(err);
+                    this.alertService.error(err);
                 });
+				
+		if(localStorage.getItem('currentUser')) {
+			this.currentUserService.getUserMainInfo()
+				.subscribe(
+					(data) => {
+						this.currentUser = data;
+					},
+					(err) => {
+						console.log('ERROR: ', err);
+					});	
+		}
     }
 
 	/* Carousel */
+	
 	addSlide() {
 		let i = this.slides.length;
-		console.log("Slide " + i + ": " + this.projects[i].Title + " | " +  this.projects[i].Description);
+		
 		this.slides.push({
 			image: this.imgUrl[i],
 			title: this.projects[i].Title,

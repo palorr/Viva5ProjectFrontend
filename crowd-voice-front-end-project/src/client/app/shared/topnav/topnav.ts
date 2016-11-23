@@ -5,9 +5,9 @@ import { AuthGuard } from '../../guards/index';
 
 import { CurrentUserService } from '../../helpers/index';
 
-import { CurrentUser } from '../../models/index';
+import { CurrentUser, Project } from '../../models/index';
 
-import { AuthenticationService } from '../../services/index';
+import { AuthenticationService, UserService } from '../../services/index';
 
 @Component({
     moduleId: module.id,
@@ -17,19 +17,25 @@ import { AuthenticationService } from '../../services/index';
 
 export class TopNavComponent implements OnInit {
 	
+	completedProjects: Project[];
+	
 	isLoggedIn: boolean = false;
 	
 	currentUser = {}; 
 	
+	intervals: any[] = [];
+	
 	constructor(
 		private authGuard: AuthGuard,
 		private currentUserService: CurrentUserService,
+		private userService: UserService,
 		private authenticationService: AuthenticationService,
 		private route: ActivatedRoute,
         private router: Router
 	){}
 	
 	ngOnInit() {
+		
 		if(this.authGuard.isUserLoggedIn()) {
 			this.isLoggedIn = true;
 		}
@@ -44,12 +50,32 @@ export class TopNavComponent implements OnInit {
                 (err) => {
                     console.log('ERROR: ', err);
                 });	
+		
+			this.checkForNotifications();
+			
 		}
 	}
 	
 	logOut() {
 		this.authenticationService.logout();
 		this.router.navigate(['/login']);
+	}
+	
+	checkForNotifications() {
+		let self = this;
+		this.intervals.push(
+				window.setInterval(function() {
+					self.userService.getUserFundedCompletedProjects()
+						.subscribe(
+							(data: Project[]) => {
+								self.completedProjects = data;
+								console.log('Completed Projects: ', self.completedProjects);
+							},
+							(err) => {
+								console.log('ERROR: ', err);
+							});
+				}, 10000)
+			);
 	}
 	
 	changeTheme(color: string): void {

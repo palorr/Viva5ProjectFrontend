@@ -36,22 +36,24 @@ export class UserProfileComponent implements OnInit {
 
 			if (this.authGuard.isUserLoggedIn())
 				this.isRequestorLoggedIn = true;
+				
 			//////////////////////////////
 			this.userService.getUserMainInfo(this.id)
 				.subscribe(
-				(data: GenericUser) => {
-
-					this.user = data;
-					console.log('User Profile View Data: ', this.user);
-					if(this.isRequestorLoggedIn)
-						this.isRequestorThisUser = this.userService.isRequestorThisUser(this.user.Username);
-					
-				},
-				(err) => {
-					this.alertService.error(err);
-				}
+					(data: GenericUser) => {
+	
+						this.user = data;
+						console.log('User Profile View Data: ', this.user);
+						if(this.isRequestorLoggedIn)
+							this.isRequestorThisUser = this.userService.isRequestorThisUser(this.user.Username);
+						
+					},
+					(err) => {
+						this.alertService.error(err);
+					}
 				);
 			//////////////////////////////
+			
 			this.userService.getUserBackedProjects(this.id)
 				.subscribe(
 				(data: ProjectFromServer[]) => {
@@ -65,6 +67,7 @@ export class UserProfileComponent implements OnInit {
 					this.alertService.error(err);
 				}
 				);
+				
 			//////////////////////////////
 			this.userService.getUserCreatedProjects(this.id)
 				.subscribe(
