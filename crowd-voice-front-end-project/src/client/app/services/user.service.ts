@@ -93,7 +93,23 @@ export class UserService {
 
 
     }
-
+    getAllUsersByName(searchTerm: string) {
+        let URL = 'http://localhost:56378/api/users/getAllUsersByName/'+searchTerm;
+        
+        let headers = new Headers({
+            'Accept': 'application/json', 
+        });
+        
+        let options = new RequestOptions({ headers: headers });
+        
+        return this.http.get(URL, options)
+            .map((response: Response) => response.json())
+            .catch(res => {
+                console.log('CATCH: ', res.json());
+                throw(res.json());
+            });
+        
+    }
     isRequestorThisUser(Username: string){
         
 	    if (localStorage.getItem('currentUser').includes(Username)){
