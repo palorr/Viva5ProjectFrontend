@@ -1,4 +1,4 @@
-<div class="panel-body">
+<div *ngIf="projects" class="panel-body">
   <div class="list-group">
     <span *ngIf="projects">
       <a href="#" class="list-group-item" *ngFor="let project of projects">

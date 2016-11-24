@@ -16,6 +16,8 @@ import { ProjectUpdateEditComponent } from './projectUpdateEdit.component';
 import { FundingPackageCreateComponent } from './fundingPackageCreate.component';
 import { FundingPackageEditComponent } from './fundingPackageEdit.component';
 
+import { FundingPackagePayComponent } from './fundingPackagePay.component';
+
 import { ProjectSearchComponent } from './projectSearch.component';
 
 import { ProjectStatScreenComponent } from './projectStatScreen.component';
@@ -44,6 +46,7 @@ import {
         ProjectUpdateEditComponent,
         FundingPackageCreateComponent,
         FundingPackageEditComponent,
+        FundingPackagePayComponent,
         ProjectSearchComponent,
         ProjectStatScreenComponent
     ],
@@ -57,6 +60,7 @@ import {
         ProjectUpdateEditComponent,
         FundingPackageCreateComponent,
         FundingPackageEditComponent,
+        FundingPackagePayComponent,
         ProjectSearchComponent,
         ProjectStatScreenComponent
     ]
