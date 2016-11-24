@@ -16,15 +16,39 @@
 	</div>
 	<div *ngIf="fundingPackage">
 		<div class="col-lg-12 jumbotron card card-block">
-			<strong><u>You chose to fund project with</u></strong>
+			<h3>Project Title: {{fundingPackage.ProjectTitle}}</h3>
+			
 			<br/>
-			<strong>Project Title: {{fundingPackage.ProjectTitle}}</strong>
-			<br/>
-			<strong>Project Description: {{fundingPackage.ProjectDescription}}</strong>
+			
+			<h4>Project Description: {{fundingPackage.ProjectDescription}}</h4>
+			
 			<hr/>
+			
 			<strong>Funding Package Chosen: {{fundingPackage.Title}}</strong>
-			<br/>
-			<strong *ngIf="!isDonationPackage">Funding Package Reward: {{fundingPackage.ProjectDescription}}</strong>
+			
+			<hr/>
+			
+			<strong *ngIf="!isDonationPackage">Funding Package Reward: {{fundingPackage.ProjectDescription}}<br/><br/></strong>
+			
+			<fieldset *ngIf="isDonationPackage" class="form-group" [ngClass]="{ 'has-error': !amountbox.valid }">
+			
+				<label for="amountbox">Amount to donate in <i class="fa fa-euro"></i> (*)</label>
+			
+				<input 
+					type="text" class="form-control input-underline input-lg" 
+					name="amountbox" id="amountbox" placeholder="Enter Amount to donate..."
+					#amountbox type="text" [(ngModel)]="donationAmount" required>
+				
+			</fieldset>
+			<hr/>
+			
+			<span *ngIf="isDonationPackage && donationAmount">
+				You are going to pay {{donationAmount}} <i class="fa fa-euro"></i>
+			</span>
+			
+			<span *ngIf="!isDonationPackage">
+				You are going to pay {{fundingPackage.PledgeAmount}} <i class="fa fa-euro"></i>
+			</span>
 			
 		</div>
 	</div>

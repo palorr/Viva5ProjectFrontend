@@ -24,6 +24,8 @@ export class FundingPackagePayComponent implements OnInit {
 	
 	isDonationPackage: boolean = false;
 	
+	donationAmount: number;
+	
 	constructor(
 		private route: ActivatedRoute,
         private router: Router,
@@ -71,7 +73,7 @@ export class FundingPackagePayComponent implements OnInit {
 						
 						break;
 					case 'fundingPackagePay':
-						this.title = "Pay for a specific project Funding Package";
+						this.title = "Pay specific Funding Package";
 						
 						break;
 				}
@@ -79,6 +81,10 @@ export class FundingPackagePayComponent implements OnInit {
 			
 		});
 		
+	}
+	
+	updateAmount(newValue: number) {
+		this.donationAmount = newValue;
 	}
 	
 	createFundingPackage() {
