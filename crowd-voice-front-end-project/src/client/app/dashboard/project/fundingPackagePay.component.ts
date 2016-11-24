@@ -5,6 +5,8 @@ import { FundingPackageForPaymentView } from '../../models/index';
 
 import { AlertService, FundingPackageService } from '../../services/index';
 
+const jqueryUrl = 'https://code.jquery.com/jquery-1.11.2.min.js';
+const vivaUrl = 'https://demo.vivapayments.com/web/checkout/js';
 
 @Component({
 	moduleId: module.id,
@@ -12,6 +14,8 @@ import { AlertService, FundingPackageService } from '../../services/index';
 	templateUrl: 'fundingPackagePay.component.html'
 })
 export class FundingPackagePayComponent implements OnInit {
+	loadAPI: Promise<any>;
+	
 	projectId: number;
 	
 	loading = false;
@@ -34,6 +38,12 @@ export class FundingPackagePayComponent implements OnInit {
 	) { }
 	
     ngOnInit() {
+		
+		this.loadAPI = new Promise((resolve) => {
+            console.log('resolving promise...');
+            this.loadScript(jqueryUrl);
+			this.loadScript(vivaUrl);
+        });
 		
 		this.route.params.forEach((params: Params) => {
 			let projectId = +params['projectId'];
@@ -83,10 +93,17 @@ export class FundingPackagePayComponent implements OnInit {
 		
 	}
 	
-	updateAmount(newValue: number) {
-		this.donationAmount = newValue;
+	loadScript(scriptUrl: string) {
+		console.log('preparing to load...')
+		let node = document.createElement('script');
+		node.src = scriptUrl;
+		node.type = 'text/javascript';
+		node.async = true;
+		node.charset = 'utf-8';
+		document.getElementsByTagName('head')[0].appendChild(node);
 	}
 	
+	/*
 	createFundingPackage() {
 		this.loading = true;
 		
@@ -107,5 +124,5 @@ export class FundingPackagePayComponent implements OnInit {
 				});
 			
 	}
-   
+    */
 }
