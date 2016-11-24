@@ -8,6 +8,7 @@ export * from './projectUpdateFromServer';
 export * from './authorizationModel';
 export * from './fundingPackage';
 export * from './fundingPackageFromServer';
+export * from './fundingPackageForPaymentView';
 export * from './projectStat';
 export * from './projectStatFromServer';
 export * from './genericUser';

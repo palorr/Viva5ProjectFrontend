@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { FundingPackage } from '../../models/index';
+import { FundingPackageForPaymentView } from '../../models/index';
 
 import { AlertService, FundingPackageService } from '../../services/index';
 
@@ -16,11 +16,13 @@ export class FundingPackagePayComponent implements OnInit {
 	
 	loading = false;
 	
-	@Input() fundingPackage: FundingPackage = null;
+	fundingPackage: FundingPackageForPaymentView = new FundingPackageForPaymentView();
     
     actionPassed: string;
     
     title: string;
+	
+	isDonationPackage: boolean = false;
 	
 	constructor(
 		private route: ActivatedRoute,
@@ -30,25 +32,53 @@ export class FundingPackagePayComponent implements OnInit {
 	) { }
 	
     ngOnInit() {
-		if(this.route.data && this.fundingPackage == null) {
-            this.route.data
-                .subscribe(
-                    value => { 
-                        this.actionPassed = value['action'];
-                    }
-                );    
+		
+		this.route.params.forEach((params: Params) => {
+			let projectId = +params['projectId'];
+			let fundingPackageId = +params['fundingPackageId'];
+			let isLoggedIn = false;
+			
+			let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         
-            switch(this.actionPassed) {
-                case 'donate':
-                    this.title = "Make a donation";
-                    
-                    break;
-                case 'fundingPackagePay':
-                    this.title = "Pay for a specific project Funding Package";
-                    
-                    break;
-            }
-        }
+			if (currentUser && currentUser.user.access_token) {
+				isLoggedIn = true;
+			}
+			
+			this.fundingPackageService.getFundingPackageByIdForPaymentView(projectId, fundingPackageId, isLoggedIn)
+				.subscribe(
+					(data: FundingPackageForPaymentView) => {
+						if(!data.PledgeAmount) this.isDonationPackage = true;
+						
+						this.fundingPackage = data;
+					}, 
+					err => {
+						this.alertService.error(err);
+					}
+				);
+			
+			if(this.route.data) {
+			
+				this.route.data
+					.subscribe(
+						value => { 
+							this.actionPassed = value['action'];
+						}
+					);    
+			
+				switch(this.actionPassed) {
+					case 'donate':
+						this.title = "Make a donation";
+						
+						break;
+					case 'fundingPackagePay':
+						this.title = "Pay for a specific project Funding Package";
+						
+						break;
+				}
+			}
+			
+		});
+		
 	}
 	
 	createFundingPackage() {

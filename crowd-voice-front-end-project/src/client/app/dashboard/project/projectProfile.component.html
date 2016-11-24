@@ -90,6 +90,22 @@
 				<tabset>
 					<br/>
 					
+					<tab heading="Funding Packages" *ngIf="fundingPackages && fundingPackages.length > 0">
+						<div *ngFor="let fundingPackage of fundingPackages">
+							<div class="jumbotron">
+								<a href="javascript:void(0)" *ngIf="fundingPackage.IsRequestorProjectCreator && fundingPackage.PledgeAmount" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'edit']">Edit Funding Package</a>
+								<h1>{{fundingPackage.Title}}</h1>
+								<p><i class="fa fa-trophy"></i> Reward: {{fundingPackage.Description}}</p>
+								<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-money"></i> Pledge Amount: {{fundingPackage.PledgeAmount}} <i class="fa fa-euro"></i></p>
+								<p><i class="fa fa-clock-o"></i> {{fundingPackage.WhenDateTime | amDateFormat:'LL'}}</p>
+								<!--<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-clock-o"></i> Estimated Delivery Date: {{fundingPackage.EstimatedDeliveryDate | amDateFormat:'LL'}}</p>-->
+								<a *ngIf="!fundingPackage.PledgeAmount && project.Status != 'FAI'"href="javascript:void(0)" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'donate']"><i class="fa fa-credit-card"></i> Donate</a>
+								<a *ngIf="fundingPackage.PledgeAmount && project.Status != 'FAI'" href="javascript:void(0)" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'pay']"><i class="fa fa-credit-card"></i> Choose this Funding Package</a>
+							</div>
+							<hr/>
+						</div>
+					</tab>
+					
 					<tab heading="Project Updates" *ngIf="fundingPackages && fundingPackages.length > 0">
 						<div *ngFor="let update of projectUpdates">
 							<div class="jumbotron">
@@ -102,21 +118,6 @@
 						</div>
 					</tab>
 					
-					<tab heading="Funding Packages" *ngIf="fundingPackages && fundingPackages.length > 0">
-						<div *ngFor="let fundingPackage of fundingPackages">
-							<div class="jumbotron">
-								<a href="javascript:void(0)" *ngIf="fundingPackage.IsRequestorProjectCreator && fundingPackage.PledgeAmount" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'edit']">Edit Funding Package</a>
-								<h1>{{fundingPackage.Title}}</h1>
-								<p><i class="fa fa-trophy"></i> Reward: {{fundingPackage.Description}}</p>
-								<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-money"></i> Pledge Amount: {{fundingPackage.PledgeAmount}} <i class="fa fa-euro"></i></p>
-								<p><i class="fa fa-clock-o"></i> {{fundingPackage.WhenDateTime | amDateFormat:'LL'}}</p>
-								<!--<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-clock-o"></i> Estimated Delivery Date: {{fundingPackage.EstimatedDeliveryDate | amDateFormat:'LL'}}</p>-->
-								<a *ngIf="!fundingPackage.PledgeAmount"href="javascript:void(0)" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'donate']"><i class="fa fa-credit-card"></i> Donate</a>
-								<a *ngIf="fundingPackage.PledgeAmount" href="javascript:void(0)" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'pay']"><i class="fa fa-credit-card"></i> Choose this Funding Package</a>
-							</div>
-							<hr/>
-						</div>
-					</tab>
 				</tabset>
 			</div>
 		</div>
