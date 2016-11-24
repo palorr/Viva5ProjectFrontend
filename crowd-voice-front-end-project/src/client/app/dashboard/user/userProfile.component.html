@@ -52,9 +52,9 @@
 							<div class="jumbotron">
 								<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
 								<p>{{project.Description}}</p>
-								<p>Funding Goal: {{project.FundingGoal}}</p>
-								<p>Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
-								<p>Project Category: {{project.ProjectCategoryDesc}}</p>
+								<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}}<i class="fa fa-euro"></i></p>
+								<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
+								<p><i class="fa fa-list"></i> Project Category: {{project.ProjectCategoryDesc}}</p>
 							</div>
 							<hr/>
 						</div>
@@ -65,10 +65,11 @@
 							<div class="jumbotron">
 								<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
 								<p>{{project.Description}}</p>
-								<p>Created on: {{project.CreatedDate | amDateFormat:'LL'}}</p>
-								<p>Funding Goal: {{project.FundingGoal}}</p>
-								<p>Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
-								<p>Project Category: {{project.ProjectCategoryDesc}}</p>
+								<p><i class="fa fa-user"></i> Project Owner: <a [routerLink]="['/dashboard/users/view', project.OwnerId]">{{project.OwnerName}}</a></p>
+								<p><i class="fa fa-clock-o"></i> Created on: {{project.CreatedDate | amDateFormat:'LL'}}</p>
+								<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}}<i class="fa fa-euro"></i></p>
+								<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
+								<p><i class="fa fa-list"></i> Project Category: {{project.ProjectCategoryDesc}}</p>
 							</div>
 							<hr/>
 						</div>
