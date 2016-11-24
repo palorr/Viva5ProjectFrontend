@@ -106,7 +106,7 @@
 						</div>
 					</tab>
 					
-					<tab heading="Project Updates" *ngIf="fundingPackages && fundingPackages.length > 0">
+					<tab heading="Project Updates" *ngIf="projectUpdates && projectUpdates.length > 0">
 						<div *ngFor="let update of projectUpdates">
 							<div class="jumbotron">
 								<a *ngIf="update.IsRequestorProjectCreator" [routerLink]="['/dashboard/projects/', project.Id, 'updates', update.Id, 'edit']">Edit Project Update</a>
