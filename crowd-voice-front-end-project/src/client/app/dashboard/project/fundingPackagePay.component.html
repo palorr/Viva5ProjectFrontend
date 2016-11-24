@@ -28,7 +28,7 @@
 			
 			<hr/>
 			
-			<strong *ngIf="!isDonationPackage">Funding Package Reward: {{fundingPackage.ProjectDescription}}<br/><br/></strong>
+			<strong *ngIf="!isDonationPackage">Funding Package Reward: {{fundingPackage.Description}}<br/></strong>
 			
 			<fieldset *ngIf="isDonationPackage" class="form-group" [ngClass]="{ 'has-error': !amountbox.valid }">
 			
