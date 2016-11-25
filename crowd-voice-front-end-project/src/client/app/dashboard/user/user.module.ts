@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { UserProfileComponent } from './userProfile.component';
 import { UserEditComponent } from './userEdit.component';
 import { UserSearchComponent } from './userSearch.component';
+import { UserListComponent } from './userList.component'
 import { UserComponent } from './user.component';
 
 import {
@@ -26,14 +27,16 @@ import {
         UserComponent,
         UserProfileComponent,
         UserEditComponent,
-        UserSearchComponent
+        UserSearchComponent,
+        UserListComponent
 
     ],
     exports: [
         UserComponent,
         UserProfileComponent,
         UserEditComponent,
-        UserSearchComponent
+        UserSearchComponent,
+        UserListComponent
     ]
 })
 
