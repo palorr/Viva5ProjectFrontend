@@ -7,7 +7,7 @@
                 <span *ngSwitchCase="true">
                     <li  class="dropdown nav-item" dropdown>
                         <a href="javascript:;" id="single-button" class="nav-link dropdown-toggle" dropdownToggle >
-                            <i class="fa fa-user"></i> {{currentUser.Name}} ({{currentUser.Username}}) <b class="caret"></b>
+                            <i class="fa fa-user"></i> <span *ngIf="currentUser.Name">{{currentUser.Name}} - </span>{{currentUser.Username}} <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="single-button">
                             <li>
