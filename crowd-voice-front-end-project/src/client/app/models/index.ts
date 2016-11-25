@@ -13,3 +13,6 @@ export * from './projectStat';
 export * from './projectStatFromServer';
 export * from './genericUser';
 export * from './projectExternalShare';
+export * from './vivaWalletToken';
+export * from './userFunding';
+export * from './transactionResult';

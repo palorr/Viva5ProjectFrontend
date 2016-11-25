@@ -3,7 +3,7 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { Project, ProjectUpdate } from '../models/index';
+import { Project, ProjectUpdate, VivaWalletToken, UserFunding } from '../models/index';
  
 @Injectable()
 export class ProjectService {
@@ -150,6 +150,36 @@ export class ProjectService {
         
         return this.http.put(editProjectURL, putRequestBody, options)
             .map((response: Response) => response)
+            .catch(res => {
+                console.log('CATCH: ', res.json());
+                throw(res.json());
+            });
+    }
+    
+    completeVivaPayment(fundingPackageId: number, vivaToken: VivaWalletToken) {
+        let URL = 'http://localhost:56378/api/projects/fundingPackages/'+fundingPackageId+'/checkout';
+        
+        let options = this.jwt();
+        
+        let postRequestBody = JSON.stringify(vivaToken);
+        
+        return this.http.post(URL, postRequestBody, options)
+                    .map((response: Response) => response.json())
+                    .catch(res => {
+                        console.log('CATCH: ', res.json());
+                        throw(res.json());
+                    });
+    }
+    
+    saveTransaction(newFunding: UserFunding, projectId: number) {
+        let URL = 'http://localhost:56378/api/projects/'+projectId+'/fundings';
+        
+        let options = this.jwt();
+        
+        let postRequestBody = JSON.stringify(newFunding);
+        
+        return this.http.post(URL, postRequestBody, options)
+            .map((response: Response) => response.json())
             .catch(res => {
                 console.log('CATCH: ', res.json());
                 throw(res.json());
