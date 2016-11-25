@@ -13,19 +13,14 @@ export class UserService {
     getAllUsers() {
         let allUsersURL = 'http://localhost:56378/api/users';
 
-        let headers: Headers;
-        let options: RequestOptions;
-
-        headers = new Headers({
-                'Accept': 'application/json', 
-            });
+        let headers = new Headers({
+            'Accept': 'application/json', 
+        });
             
-        options = new RequestOptions({ headers: headers })
+        let options = new RequestOptions({ headers: headers })
 
         return this.http.get(allUsersURL, options)
-            .map((response: Response) => {
-                console.log('All Users Server Response: ', response);
-            })
+            .map((response: Response) => response.json())
             .catch(res => {
                 console.log('CATCH: ', res.json());
                 throw (res.json());

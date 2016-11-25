@@ -24,13 +24,13 @@ export class UserListComponent implements OnInit {
             this.userService
                 .getAllUsers()
                 .subscribe(
-                (data: GenericUser[]) => {
-                    this.users = data;
-                    console.log('All Users Data: ', this.users);
-                },
-                (err) => {
-                    alert(err);
-                }
+                    (data: GenericUser[]) => {
+                        this.users = data;
+                        console.log('All Users Data: ', this.users);
+                    },
+                    (err) => {
+                        alert(err);
+                    }
                 );
         }
     }
