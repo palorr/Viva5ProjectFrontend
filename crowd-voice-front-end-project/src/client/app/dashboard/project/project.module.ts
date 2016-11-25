@@ -26,6 +26,7 @@ import { ProjectComponent } from './project.component';
 
 import {
 		TabsModule,
+        ModalModule
 	} from 'ng2-bootstrap/ng2-bootstrap';
 
 @NgModule({
@@ -34,7 +35,8 @@ import {
         RouterModule, 
         FormsModule,
         MomentModule,
-        TabsModule
+        TabsModule,
+        ModalModule
     ],
     declarations: [
         ProjectComponent, 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { FundingPackageForPaymentView } from '../../models/index';
@@ -14,6 +14,9 @@ const vivaUrl = 'https://demo.vivapayments.com/web/checkout/js';
 	templateUrl: 'fundingPackagePay.component.html'
 })
 export class FundingPackagePayComponent implements OnInit {
+	
+	vivaWalletFrameSrc: string;
+	
 	loadAPI: Promise<any>;
 	
 	projectId: number;
@@ -38,12 +41,6 @@ export class FundingPackagePayComponent implements OnInit {
 	) { }
 	
     ngOnInit() {
-		
-		this.loadAPI = new Promise((resolve) => {
-            console.log('resolving promise...');
-            this.loadScript(jqueryUrl);
-			this.loadScript(vivaUrl);
-        });
 		
 		this.route.params.forEach((params: Params) => {
 			let projectId = +params['projectId'];
@@ -93,6 +90,37 @@ export class FundingPackagePayComponent implements OnInit {
 		
 	}
 	
+	_keyPress(event: any) {
+		const pattern = /[0-9\+\-\ ]/;
+		let inputChar = String.fromCharCode(event.charCode);
+		
+		if (!pattern.test(inputChar)) {
+			// invalid character, prevent input
+			event.preventDefault();
+		}
+	}
+	
+	initVivaButton(isDonation: boolean) {
+		let amountPaid: any;
+		
+		if(isDonation) {
+			amountPaid = this.donationAmount * 100;	
+		} else {
+			amountPaid = this.fundingPackage.PledgeAmount * 100;
+		}
+		
+		let vivaButton = '<form id="myform" action="/checkout" method="post"><button type="button" data-vp-publickey="ez9tdzoqqoWdLz/3nWXiUXgoq+Wrc3cpblqwBTXg43E=" data-vp-baseurl="https://demo.vivapayments.com" data-vp-lang="el" data-vp-amount="'+amountPaid+'" data-vp-description="A CrowdVoice Project Funding"></button></form>';
+		
+		window.document.getElementById("viva-wallet-button").innerHTML = vivaButton;
+		
+		this.loadAPI = new Promise((resolve) => {
+            console.log('resolving promise...');
+            this.loadScript(jqueryUrl);
+			this.loadScript(vivaUrl);
+        });
+		
+	}
+	
 	loadScript(scriptUrl: string) {
 		console.log('preparing to load...')
 		let node = document.createElement('script');
@@ -103,26 +131,27 @@ export class FundingPackagePayComponent implements OnInit {
 		document.getElementsByTagName('head')[0].appendChild(node);
 	}
 	
-	/*
-	createFundingPackage() {
-		this.loading = true;
+	openViva(isDonation: boolean) {
+		let amountPaid: any;
 		
-		this.fundingPackageService.createNewFundingPackage(this.projectId, this.fundingPackage)
-			.subscribe(
-				(data) => {
-					console.log('NEW FUNDING PACKAGE CREATED: ', data);
-					// set success message and pass true paramater to persist the message after redirecting
-					this.alertService.success('Funding Package created successfully!');
-					
-					this.loading = false;
-					
-					//this.router.navigate(['/dashboard/projects/view/'+this.projectId]);
-				},
-				(err) => {
-					this.alertService.error(err);
-					this.loading = false;
-				});
-			
+		if(isDonation) {
+			amountPaid = this.donationAmount * 100;	
+		} else {
+			amountPaid = this.fundingPackage.PledgeAmount * 100;
+		}
+		
+		this.vivaWalletFrameSrc = "https://demo.vivapayments.com/web/checkout/simplecheckout?publickey=ez9tdzoqqoWdLz%2F3nWXiUXgoq%2BWrc3cpblqwBTXg43E%3D&amp;amount="+amountPaid+"&amp;lang=el&amp;baseurl=https%3A%2F%2Fdemo.vivapayments.com&amp;description=A+CrowdVoice+Project+Funding";
+		
+		function appendHtml(el: any, str: string) {
+			var div = document.createElement('div');
+			div.innerHTML = str;
+			while (div.children.length > 0) {
+				el.appendChild(div.children[0]);
+			}
+		}
+		
+		let iFrameVivaElem = '<iframe name="vp_sc_iframe" class="vp_sc_iframe" width="560" height="315" src="'+this.vivaWalletFrameSrc+'" style="position: fixed; overflow-x: hidden; overflow-y: auto; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 9999; border: 0px none;"></iframe>';
+		appendHtml(document.body, iFrameVivaElem);
+		
 	}
-    */
 }
