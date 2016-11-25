@@ -115,7 +115,7 @@ export class FundingPackagePayComponent implements OnInit {
 			amountPaid = this.fundingPackage.PledgeAmount * 100;
 		}
 		
-		let vivaButton = '<form id="myform"><button type="button" data-vp-publickey="ez9tdzoqqoWdLz/3nWXiUXgoq+Wrc3cpblqwBTXg43E=" data-vp-baseurl="https://demo.vivapayments.com" data-vp-lang="el" data-vp-amount="'+amountPaid+'" data-vp-description="A CrowdVoice Project Funding"></button></form>';
+		let vivaButton = '<form id="myform"><button type="button" data-vp-publickey="P9davVVAOYBWF/AT+oxDUoM6jukHD1r7DGkiHxD47fM=" data-vp-baseurl="https://demo.vivapayments.com" data-vp-lang="el" data-vp-amount="'+amountPaid+'" data-vp-description="A CrowdVoice Project Funding"></button></form>';
 		
 		window.document.getElementById("viva-wallet-button").innerHTML = vivaButton;
 		
