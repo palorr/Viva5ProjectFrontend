@@ -166,8 +166,8 @@ export class FundingPackagePayComponent implements OnInit {
 					console.log('SUCCESS IN SAVING BACKING: ', data);
 					// set success message
 					alert('Successfully backed project!');
-					this.alertService.success('Payment done successfully!');
-					
+					this.alertService.success('Payment done successfully!', true);
+					window.location.href = "http://localhost:5555/dashboard/projects/view/"+this.projectId;
 					this.loading = false;
 				},
 				(err) => {

@@ -77,8 +77,8 @@
 		<div class="row">
 			<div class="col-lg-9"></div>
 			<strong *ngIf="projectStat" class="col-lg-3 project-stats">
-				<p>Money Pledged (in <i class="fa fa-euro"></i>): {{projectStat.MoneyPledged}} / {{project.FundingGoal}}</p> 
-				<p>{{(projectStat.MoneyPledged / project.FundingGoal) * 100}}% complete</p>
+				<p>Money Pledged / Funding Goal (in <i class="fa fa-euro"></i>): {{projectStat.MoneyPledged}} / {{project.FundingGoal}}</p> 
+				<p>{{completedPercentage}}% complete</p>
 				<p>Backed {{projectStat.BackersNo}} time(s).</p>
 			</strong>	
 		</div>

@@ -39,6 +39,8 @@ export class ProjectProfileComponent implements OnInit {
 	isRequestorProjectCreator: boolean = false;
 	
 	isRequestorLoggedIn: boolean = false;
+	
+	completedPercentage: number;
 
     constructor(
 		private route: ActivatedRoute,
@@ -100,6 +102,16 @@ export class ProjectProfileComponent implements OnInit {
 				.subscribe(
 					(data: ProjectStatFromServer) => {
 						this.projectStat = data;
+						
+						if((this.projectStat.MoneyPledged / this.projectStat.FundingGoal) >= 1)
+						{
+							this.completedPercentage = 100;	
+						}
+						
+						else 
+						{
+							this.completedPercentage = (this.projectStat.MoneyPledged / this.projectStat.FundingGoal) * 100;
+						}
 						console.log('Project Stats Data: ', this.projectStat);
 					},
 					(err) => {
