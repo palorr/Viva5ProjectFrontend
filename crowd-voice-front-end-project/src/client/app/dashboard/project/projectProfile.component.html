@@ -1,0 +1,125 @@
+<div *ngIf="project" class="container-fluid">
+	<!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Project Profile Page
+            </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="Javascript:void(0)" routerLink="/dashboard/home">Home</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-profile"></i> Project Profile Page
+                </li>
+            </ol>
+        </div>
+    </div>
+
+	<div class="row" *ngIf="isRequestorProjectCreator">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-edit"></i> <a [routerLink]="['/dashboard/projects/edit', project.Id]">Edit Project</a>
+                </li>
+				<li>
+					<a [routerLink]="['/dashboard/projects/', project.Id, 'updates', 'create']">Create Project Update</a>
+				</li>
+                <li>
+                    <a [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', 'create']">Create Funding Package</a>
+                </li>
+				<li>
+                    <a [routerLink]="['/dashboard/projects/', project.Id, 'projectStatScreen']">Observe Project Stats</a>
+                </li>
+            </ol>
+        </div>
+		<hr/>
+    </div>
+	
+	<div class="row" *ngIf="isRequestorLoggedIn">
+		<div class="col-lg-12">
+			<i class="fa fa-twitter"></i> 
+			<a (click)="createExternalShare('TWI')" target="blank" href="https://twitter.com/share">
+				Share to Twitter
+			</a>
+			&nbsp;|&nbsp;
+			<i class="fa fa-facebook"></i> 
+			<a (click)="createExternalShare('FAC')" href="javascript:void(0)">
+				Share to Facebook
+			</a>
+		</div>
+	</div>
+	<br/>
+    <!-- /.row -->
+	<div class="col-lg-12 card card-block" *ngIf="project">
+		<h3>{{project.Title}}</h3>
+		<hr/>
+		<p>{{project.Description}}</p>
+		<hr/>
+		<p><i class="fa fa-calendar"></i> Created on: {{project.CreatedDate | amDateFormat:'LL'}}</p>
+		<p><i class="fa fa-calendar"></i> Updated on: {{project.UpdatedDate | amDateFormat:'LL'}}</p>
+		<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}} <i class="fa fa-euro"></i></p>
+		<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
+		<p><i class="fa fa-user"></i> Project Owner: <a [routerLink]="['/dashboard/users/view', project.OwnerId]">{{project.OwnerName}}</a></p>
+		<p><i class="fa fa-list"></i> Project Category: {{project.ProjectCategoryDesc}}</p>
+		<p>
+			<i class="fa fa-code-fork"></i> Status: 
+			<span *ngIf="project.Status == 'CRE'">
+				Under Funding
+			</span>
+			<span *ngIf="project.Status == 'COM'">
+				Completed
+			</span>
+			<span *ngIf="project.Status == 'FAI'">
+				Failed
+			</span>
+		</p>
+		<div class="row">
+			<div class="col-lg-9"></div>
+			<strong *ngIf="projectStat" class="col-lg-3 project-stats">
+				<p>Money Pledged (in <i class="fa fa-euro"></i>): {{projectStat.MoneyPledged}} / {{project.FundingGoal}}</p> 
+				<p>{{(projectStat.MoneyPledged / project.FundingGoal) * 100}}% complete</p>
+				<p>Backed {{projectStat.BackersNo}} time(s).</p>
+			</strong>	
+		</div>
+	</div>
+	
+	<div class="row" *ngIf="(projectUpdates && projectUpdates.length > 0) || (fundingPackages && fundingPackages.length > 0)">
+		<div class="col-lg-12">
+			<div class="card card-block" (click)="$event.preventDefault()">
+				<tabset>
+					<br/>
+					
+					<tab heading="Funding Packages" *ngIf="fundingPackages && fundingPackages.length > 0">
+						<div *ngFor="let fundingPackage of fundingPackages">
+							<div class="jumbotron">
+								<a href="javascript:void(0)" *ngIf="fundingPackage.IsRequestorProjectCreator && fundingPackage.PledgeAmount" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'edit']">Edit Funding Package</a>
+								<h1>{{fundingPackage.Title}}</h1>
+								<p><i class="fa fa-trophy"></i> Reward: {{fundingPackage.Description}}</p>
+								<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-money"></i> Pledge Amount: {{fundingPackage.PledgeAmount}} <i class="fa fa-euro"></i></p>
+								<p><i class="fa fa-clock-o"></i> {{fundingPackage.WhenDateTime | amDateFormat:'LL'}}</p>
+								<!--<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-clock-o"></i> Estimated Delivery Date: {{fundingPackage.EstimatedDeliveryDate | amDateFormat:'LL'}}</p>-->
+								<a *ngIf="!fundingPackage.PledgeAmount && project.Status != 'FAI'"href="javascript:void(0)" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'donate']"><i class="fa fa-credit-card"></i> Donate</a>
+								<a *ngIf="fundingPackage.PledgeAmount && project.Status != 'FAI'" href="javascript:void(0)" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'pay']"><i class="fa fa-credit-card"></i> Choose this Funding Package</a>
+							</div>
+							<hr/>
+						</div>
+					</tab>
+					
+					<tab heading="Project Updates" *ngIf="projectUpdates && projectUpdates.length > 0">
+						<div *ngFor="let update of projectUpdates">
+							<div class="jumbotron">
+								<a *ngIf="update.IsRequestorProjectCreator" [routerLink]="['/dashboard/projects/', project.Id, 'updates', update.Id, 'edit']">Edit Project Update</a>
+								<h1>{{update.Title}}</h1>
+								<p>{{update.Description}}</p>
+								<p><i class="fa fa-clock-o"></i> {{update.WhenDateTime | amDateFormat:'LL'}}</p>
+							</div>
+							<hr/>
+						</div>
+					</tab>
+					
+				</tabset>
+			</div>
+		</div>
+	</div>
+</div>

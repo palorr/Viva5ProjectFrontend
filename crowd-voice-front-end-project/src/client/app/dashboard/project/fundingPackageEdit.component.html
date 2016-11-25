@@ -1,0 +1,76 @@
+<div *ngIf="fundingPackageFromServer" class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Edit Funding Package
+            </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="Javascript:void(0)" routerLink="/dashboard/home">Home</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> Edit Funding Package
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <form name="form" (ngSubmit)="editFundingPackage()" role="form" #editFundingPackageForm="ngForm" novalidate>
+
+                <fieldset class="form-group" [ngClass]="{ 'has-error': editFundingPackageForm.submitted && !title.valid }">
+                    <label for="title">Title (*)</label>
+                    <input type="text" class="form-control input-underline input-lg" 
+                        name="title" id="title" placeholder="Enter Funding Package Title..."
+                        required [(ngModel)]="fundingPackageFromServer.Title"
+                        #title="ngModel">
+                    <div [hidden]="title.valid || title.pristine" class="error">
+                        Funding Package Title is required!
+                    </div>
+                </fieldset>
+                
+                <fieldset class="form-group" [ngClass]="{ 'has-error': editFundingPackageForm.submitted && !description.valid }">
+                    <label for="description">Description (*)</label>
+                    <textarea class="form-control input-underline input-lg" 
+                        name="description" id="description" placeholder="Enter Funding Package Description..."
+                        required [(ngModel)]="fundingPackageFromServer.Description" rows="6"
+                        #description="ngModel"></textarea>
+                    <div [hidden]="description.valid || description.pristine" class="error">
+                        Funding Package Description is required!
+                    </div>
+                </fieldset>
+				
+				<fieldset class="form-group" [ngClass]="{ 'has-error': editFundingPackageForm.submitted && !pledgeAmount.valid }">
+                    <label for="pledgeAmount">Plege Amount in <i class="fa fa-euro"></i> (*)</label>
+                    <input type="text" class="form-control input-underline input-lg" 
+                        name="pledgeAmount" id="pledgeAmount" placeholder="Enter Funding Package Pledge Amount..."
+                        required [(ngModel)]="fundingPackageFromServer.PledgeAmount"
+                        #pledgeAmount="ngModel">
+                    <div [hidden]="pledgeAmount.valid || pledgeAmount.pristine" class="error">
+                        Funding Package Pledge Amount is required!
+                    </div>
+                </fieldset>
+				
+                <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!editFundingPackageForm.form.valid">Edit Funding Package</button>
+				<button *ngIf="!loading" class="btn btn-secondary" (click)="deleteFundingPackage()">Delete Funding Package</button>
+                
+                <span *ngIf="loading">
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+					<span class="sr-only">Loading...</span>
+				</span>
+                
+                <!--
+                    <button type="reset" class="btn btn-secondary" (click)="form.reset();">Reset</button>
+                -->
+            </form>
+
+        </div>
+    </div>
+    <br/><br/>
+    <a [routerLink]="['/dashboard/projects/view', projectId]">Back to View Project</a>
+    <!-- /.row -->
+</div>

@@ -9,14 +9,14 @@ export class AuthenticationService {
  
     login(username: string, password: string) {
         
-        let loginURL = 'http://localhost:52686/token';
+        let loginURL = 'http://localhost:56478/oauth2/token';
         
         let headers = new Headers({ 
             'Accept': 'application/json',
             'Content-Type': 'application/x-www-form-urlencoded'
         });
         
-        let postRequestBody = 'grant_type=password&username='+username+'&password='+password;
+        let postRequestBody = 'grant_type=password&username='+username+'&password='+password+'&client_id=8737e3f7a7984167b4d09f658a76bf32';
         
         //JSON.stringify({ grant_type: 'password', username: username, password: password })
         

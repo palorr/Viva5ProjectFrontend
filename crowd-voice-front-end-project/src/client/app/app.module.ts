@@ -14,7 +14,21 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AlertComponent } from './directives/index';
-import { AlertService, AuthenticationService, UserService } from './services/index';
+import { 
+	AlertService, 
+	AuthenticationService, 
+	RegistrationService, 
+	ProjectService,
+	UserService,
+	ProjectUpdateService,
+	FundingPackageService,
+	ProjectStatService,
+	ProjectExternalShareService
+} from './services/index';
+
+import { AuthGuard, AuthorizationGuard } from './guards/index';
+
+import { CurrentUserService } from './helpers/index'
 
 @NgModule({
 	imports: [
@@ -38,7 +52,16 @@ import { AlertService, AuthenticationService, UserService } from './services/ind
 		},
 		AlertService,
         AuthenticationService,
-		UserService
+		RegistrationService,
+		ProjectService,
+		ProjectUpdateService,
+		FundingPackageService,
+		ProjectStatService,
+		UserService,
+		AuthGuard,
+		AuthorizationGuard,
+		CurrentUserService,
+		ProjectExternalShareService
 	],
 	bootstrap: [AppComponent]
 

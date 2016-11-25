@@ -8,13 +8,13 @@
 				<div class="form-content">
 					
 					<div class="form-group" [ngClass]="{ 'has-error': loginUserForm.submitted && !username.valid }">
-						<label for="username">USERNAME</label>
+						<label for="username">EMAIL</label>
 						<input type="text" class="form-control input-underline input-lg" 
-							name="username" id="username" placeholder="Enter your username..."
+							name="username" id="username" placeholder="Enter your email address..."
 							required [(ngModel)]="user.username"
 							#username="ngModel">
 						<div [hidden]="username.valid || username.pristine" class="error help-block">
-							Username is required my good sir/lady!
+							Email is required my good sir/lady!
 						</div>
 					</div>
 
@@ -31,7 +31,7 @@
 					
 				</div>
 				
-				<button *ngIf="!loading"  class="btn btn-primary" type="submit" [disabled]= "!loginUserForm.form.valid">Login</button>
+				<button *ngIf="!loading"  class="btn btn-primary" type="submit" [disabled]= "!loginUserForm.form.valid"><i class="fa fa-sign-in"></i> Login</button>
 				<span *ngIf="loading">
 					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
 					<span class="sr-only">Loading...</span>
@@ -39,7 +39,11 @@
 				
 				<br/><br/><br/>
 				
-				<a type="submit" class="btn rounded-btn" routerLink="/signup"> Not a user? Go to register page </a>
+				<a class="btn rounded-btn" routerLink="/signup"><i class="fa fa-user-plus"></i> Not a user? Go to register page </a>
+				
+				<br/><br/><br/>
+				
+				<a routerLink="/dashboard/home"><i class="fa fa-sign-in"></i> Continue as Guest </a>
 			</form>
 		
 		</div>	

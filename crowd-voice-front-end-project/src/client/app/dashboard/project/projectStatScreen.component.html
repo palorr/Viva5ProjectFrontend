@@ -1,0 +1,79 @@
+<div *ngIf="projectStatFromServer" class="container-fluid">
+	<!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Project Stats Page
+            </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="Javascript:void(0)" routerLink="/dashboard/home">Home</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-line-chart"></i> Project Stats Page
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div *ngIf="projectStatFromServer" class="jumbotron">
+    	<div class="card card-block">
+			<div class="table-responsive">
+				<table class="table table-hover table-striped">
+					<thead>
+						<tr>
+							<th>Statistic Type</th>
+							<th>Value</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Number of Backings</td>
+							<td>{{projectStatFromServer.BackersNo}}</td>
+						</tr>
+						<!--
+						<tr>
+							<td>Amount of Money Pledged (<i class="fa fa-euro"></i>)</td>
+							<td>{{projectStatFromServer.MoneyPledged}}</td>
+						</tr>
+						-->
+						<tr>
+							<td>Number of External Shares</td>
+							<td>{{projectStatFromServer.SharesNo}}</td>
+						</tr>
+						<tr>
+							<td>Number of Comments</td>
+							<td>{{projectStatFromServer.CommentsNo}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<hr/>
+		<div class="card card-block">
+			<h5 class="page-header">
+				<span *ngIf="fundingPeriodHasPassed">
+					Funding Period ended {{numberOfFundingDaysLeft}} days ago.
+				</span>
+				<span *ngIf="!fundingPeriodHasPassed">
+					<span *ngIf="numberOfFundingDaysLeft > 0">
+						Funding Period ends in {{numberOfFundingDaysLeft}} days.
+					</span>
+					<span *ngIf="numberOfFundingDaysLeft == 0">
+						Funding Period ends today.
+					</span>
+				</span>
+				<br><br>
+                {{percentageOfFundingGoalCompletion}}% funded
+			</h5>
+			<progress class="progress progress-success" max="100" value={{percentageOfFundingGoalCompletion}}>
+				<div class="progress">
+					<span class="progress-bar" style="width: 50%;">{{percentageOfFundingGoalCompletion}}%</span>
+				</div>
+			</progress>
+			<h5 class="page-header">
+                [MoneyPledged / FundingGoal]: {{projectStatFromServer.MoneyPledged}} <i class="fa fa-euro"></i> / {{projectStatFromServer.FundingGoal}} <i class="fa fa-euro"></i>
+            </h5>
+		</div>
+		<a href="javascript:void(0)" [routerLink]="['/dashboard/projects/view', projectStatFromServer.ProjectId]">Back to Project Profile Page</a>
+	</div>
+</div>

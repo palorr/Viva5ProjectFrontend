@@ -1,0 +1,35 @@
+<div class="container-fluid">
+	<div  class="row">
+		<div class="col-lg-12">
+			<h2 class="page-header">
+				All Users
+			</h2>
+			<ol class="breadcrumb">
+				<li>
+					<i class="fa fa-dashboard"></i>  <a href="Javascript:void(0)" routerLink="/dashboard/home">Home</a>
+				</li>
+				<li class="active">
+					<i class="fa fa-profile"></i> All Users
+				</li>
+			</ol>
+		</div>
+	</div>
+	<div *ngFor="let user of users">
+		<div class="col-lg-12 jumbotron card card-block">
+			<h3><a [routerLink]="['/dashboard/users/view', user.Id]">{{user.Name}}</a></h3>
+			<hr/>
+			
+			<img [src]="user.AvatarImage" alt="AvatarImage" style="max-width: 500px; max-height: 500px; display: block; margin-left: auto; margin-right: auto;">
+			<br/>
+			<h3>{{user.Name}}</h3>
+			<p><i class="fa fa-registered"></i> Registered on: {{user.CreatedDateTime | amDateFormat:'LL'}}</p>
+			
+		</div>
+		<hr/>
+	</div>
+	<span *ngIf="users && users.length == 0">
+		<div class="alert alert-info">
+			I am sorry. No users for you here.
+		</div>
+	</span>
+</div>

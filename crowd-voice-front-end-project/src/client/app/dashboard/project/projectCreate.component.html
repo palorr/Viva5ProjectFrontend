@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Create New Project
+            </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="Javascript:void(0)" routerLink="/dashboard/home">Home</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> Create New Project
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <form name="form" (ngSubmit)="createProject()" role="form" #createProjectForm="ngForm" novalidate>
+
+                <fieldset class="form-group" [ngClass]="{ 'has-error': createProjectForm.submitted && !title.valid }">
+                    <label for="title">Title (*)</label>
+                    <input type="text" class="form-control input-underline input-lg" 
+                        name="title" id="title" placeholder="Enter Project Title..."
+                        required [(ngModel)]="project.Title"
+                        #title="ngModel">
+                    <div [hidden]="title.valid || title.pristine" class="error">
+                        Title is required!
+                    </div>
+                </fieldset>
+                
+                <fieldset class="form-group" [ngClass]="{ 'has-error': createProjectForm.submitted && !description.valid }">
+                    <label for="description">Description (*)</label>
+                    <textarea class="form-control input-underline input-lg" 
+                        name="description" id="description" placeholder="Enter Project Description..."
+                        required [(ngModel)]="project.Description" rows="6"
+                        #description="ngModel"></textarea>
+                    <div [hidden]="description.valid || description.pristine" class="error">
+                        Description is required!
+                    </div>
+                </fieldset>
+
+                <div class="form-group" [ngClass]="{ 'has-error': createProjectForm.submitted && !projectCategoryId.valid }">
+                    <label for="projectCategoryId">Project Category (*)</label>
+                    <select class="form-control input-underline input-lg"
+                        name="projectCategoryId" id="projectCategoryId"
+                        required [(ngModel)]="project.ProjectCategoryId"
+                        #projectCategoryId="ngModel">
+                        <option [value]="" selected> - Select Category - </option>
+                        <option *ngFor="let option of projectCategoryOptions" [value]="option.Id">{{option.Name}}</option>
+                    </select>
+                    <div [hidden]="projectCategoryId.valid || projectCategoryId.pristine" class="error">
+                        Project Category is required!
+                    </div>
+                </div>
+				
+				<fieldset class="form-group" [ngClass]="{ 'has-error': createProjectForm.submitted && !fundingGoal.valid }">
+                    <label for="fundingGoal">Funding Goal (*) <i class="fa fa-eur"></i></label>
+                    <input type="text" class="form-control input-underline input-lg" 
+                        name="fundingGoal" id="fundingGoal" placeholder="Enter Funding Goal..."
+                        required [(ngModel)]="project.FundingGoal"
+                        #fundingGoal="ngModel">
+                    <div [hidden]="fundingGoal.valid || fundingGoal.pristine" class="error">
+                        Funding goal is required!
+                    </div>
+                </fieldset>
+				
+				 <div class="form-group" [ngClass]="{ 'has-error': createProjectForm.submitted && !fundingEndDate.valid }">
+                    <label for="fundingEndDate">Select Funding Period (in months)</label>
+                    <select class="form-control input-underline input-lg"
+                        name="fundingEndDate" id="fundingEndDate"
+                        required [(ngModel)]="project.FundingEndDate"
+                        #fundingEndDate="ngModel">
+                        <option [value]="" selected>- Select number of months -</option>
+                        <option [value]="1">1</option>
+                        <option [value]="2">2</option>
+                        <option [value]="3">3</option>
+                        <option [value]="4">4</option>
+                        <option [value]="5">5</option>
+						<option [value]="6">6</option>
+                    </select>
+                    <div [hidden]="fundingEndDate.valid || fundingEndDate.pristine" class="error">
+                        Project Funding Period is required!
+                    </div>
+                </div>
+
+                <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!createProjectForm.form.valid">Create Project</button>
+				<span *ngIf="loading">
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+					<span class="sr-only">Loading...</span>
+				</span>
+                
+                <!--
+                    <button type="reset" class="btn btn-secondary" (click)="form.reset();">Reset</button>
+                -->
+
+            </form>
+
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
