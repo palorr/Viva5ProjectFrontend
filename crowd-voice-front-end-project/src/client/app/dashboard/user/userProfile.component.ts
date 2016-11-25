@@ -61,12 +61,12 @@ export class UserProfileComponent implements OnInit {
 					//	this.isRequestorLoggedIn = true;
 
 					this.backedProjects = data;
-					console.log('Backed Projects Data: ', this.user);
+					console.log('Backed Projects Data: ', this.backedProjects);
 				},
 				(err) => {
 					this.alertService.error(err);
 				}
-				);
+			);
 				
 			//////////////////////////////
 			this.userService.getUserCreatedProjects(this.id)
@@ -76,12 +76,12 @@ export class UserProfileComponent implements OnInit {
 					//	this.isRequestorLoggedIn = true;
 
 					this.createdProjects = data;
-					console.log('Backed Projects Data: ', this.user);
+					console.log('Created Projects Data: ', this.createdProjects);
 				},
 				(err) => {
 					this.alertService.error(err);
 				}
-				);
+			);
 			///////////////////////////////
 
 
