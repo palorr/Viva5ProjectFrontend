@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { 
-	Project, ProjectFromServer, ProjectUpdateFromServer, 
+	Project, ProjectFromServer, ProjectUpdateFromServer, ProjectCommentFromServer,
 	FundingPackageFromServer, ProjectStat, ProjectStatFromServer,
 	ProjectExternalShare
 } from '../../models/index';
 
 import { 
-	AlertService, ProjectService, ProjectUpdateService, 
+	AlertService, ProjectService, ProjectUpdateService, ProjectCommentService,
 	FundingPackageService, ProjectStatService, ProjectExternalShareService 
 } from '../../services/index';
 
@@ -32,6 +32,8 @@ export class ProjectProfileComponent implements OnInit {
 	
 	projectUpdates: ProjectUpdateFromServer[];
 	
+	projectComments: ProjectCommentFromServer[];
+	
 	fundingPackages: FundingPackageFromServer[];
 	
 	projectStat: ProjectStatFromServer;
@@ -48,6 +50,7 @@ export class ProjectProfileComponent implements OnInit {
         private alertService: AlertService,
 		private projectService: ProjectService,
 		private projectUpdateService: ProjectUpdateService,
+		private projectCommentService: ProjectCommentService,
 		private fundingPackageService: FundingPackageService,
 		private projectStatService: ProjectStatService,
 		private projectExternalShareService: ProjectExternalShareService,
@@ -81,6 +84,17 @@ export class ProjectProfileComponent implements OnInit {
 					(data: ProjectUpdateFromServer[]) => {
 						this.projectUpdates = data;
 						console.log('Project Updates Data: ', this.projectUpdates);
+					},
+					(err) => {
+						this.alertService.error(err);
+					}
+				);
+				
+			this.projectCommentService.getProjectComments(this.id, this.isRequestorLoggedIn)
+				.subscribe(
+					(data: ProjectCommentFromServer[]) => {
+						this.projectComments = data;
+						console.log('Project Comments Data: ', this.projectComments);
 					},
 					(err) => {
 						this.alertService.error(err);

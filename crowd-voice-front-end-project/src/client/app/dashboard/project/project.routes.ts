@@ -5,6 +5,7 @@ import { ProjectCreateRoutes } from './projectCreate.routes';
 import { ProjectEditRoutes } from './projectEdit.routes';
 import { ProjectListRoutes } from './projectList.routes';
 import { ProjectUpdateRoutes } from './projectUpdate.routes';
+import { ProjectCommentRoutes } from './projectComment.routes';
 import { FundingPackageRoutes } from './fundingPackage.routes';
 import { ProjectSearchRoutes } from './projectSearch.routes';
 
@@ -20,6 +21,7 @@ export const ProjectRoutes: Route[] = [
         ...ProjectEditRoutes,
 	    	...ProjectListRoutes,
         ...ProjectUpdateRoutes,
+        ...ProjectCommentRoutes,
         ...FundingPackageRoutes,
         ...ProjectSearchRoutes
     	]

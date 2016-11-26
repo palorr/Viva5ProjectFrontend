@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Create Project Comment
+            </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="Javascript:void(0)" routerLink="/dashboard/home">Home</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-create"></i> Create Project Comment
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <form name="form" (ngSubmit)="createProjectComment()" role="form" #createProjectCommentForm="ngForm" novalidate>
+
+                <fieldset class="form-group" [ngClass]="{ 'has-error': createProjectCommentForm.submitted && !description.valid }">
+                    <label for="description">Comment (*)</label>
+                    <textarea class="form-control input-underline input-lg" 
+                        name="description" id="description" placeholder="Enter your comment..."
+                        required [(ngModel)]="projectComment.Description" rows="6"
+                        #description="ngModel"></textarea>
+                    <div [hidden]="description.valid || description.pristine" class="error">
+                        Comment text is required!
+                    </div>
+                </fieldset>
+				
+                <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!createProjectCommentForm.form.valid">Post Project Comment</button>
+				<span *ngIf="loading">
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+					<span class="sr-only">Loading...</span>
+				</span>
+                
+                <!--
+                    <button type="reset" class="btn btn-secondary" (click)="form.reset();">Reset</button>
+                -->
+            </form>
+
+        </div>
+    </div>
+    <br/><br/>
+    <a [routerLink]="['/dashboard/projects/view', projectId]">Back to View Project</a>
+    <!-- /.row -->
+</div>

@@ -47,6 +47,11 @@
 			<a (click)="createExternalShare('FAC')" href="javascript:void(0)">
 				Share to Facebook
 			</a>
+			&nbsp;|&nbsp;
+			<i class="fa fa-comment"></i> 
+			<a [routerLink]="['/dashboard/projects/', project.Id, 'comments', 'create']" href="javascript:void(0)">
+				Post a Comment
+			</a>
 		</div>
 	</div>
 	<br/>
@@ -84,7 +89,7 @@
 		</div>
 	</div>
 	
-	<div class="row" *ngIf="(projectUpdates && projectUpdates.length > 0) || (fundingPackages && fundingPackages.length > 0)">
+	<div class="row" *ngIf="(projectUpdates && projectUpdates.length > 0) || (fundingPackages && fundingPackages.length > 0) || (projectComments && projectComments.length > 0) ">
 		<div class="col-lg-12">
 			<div class="card card-block" (click)="$event.preventDefault()">
 				<tabset>
@@ -113,6 +118,21 @@
 								<h1>{{update.Title}}</h1>
 								<p>{{update.Description}}</p>
 								<p><i class="fa fa-clock-o"></i> {{update.WhenDateTime | amDateFormat:'LL'}}</p>
+							</div>
+							<hr/>
+						</div>
+					</tab>
+					
+					<tab heading="Project Comments" *ngIf="projectComments && projectComments.length > 0">
+						<div *ngFor="let comment of projectComments">
+							<div class="jumbotron">
+								<span *ngIf="comment.IsRequestorProjectCommentCreator">
+									<a [routerLink]="['/dashboard/projects/', project.Id, 'comments', comment.Id, 'edit']">Edit Project Comment</a>
+									<br/><br/>
+								</span>
+								<i class="fa fa-user"></i> <a [routerLink]="['/dashboard/users/view', comment.UserId]">{{comment.Name}}</a>
+								<p>{{comment.Description}}</p>
+								<p><i class="fa fa-clock-o"></i> {{comment.WhenDateTime | amDateFormat:'LL'}}</p>
 							</div>
 							<hr/>
 						</div>

@@ -21,6 +21,7 @@ import {
 	ProjectService,
 	UserService,
 	ProjectUpdateService,
+	ProjectCommentService,
 	FundingPackageService,
 	ProjectStatService,
 	ProjectExternalShareService
@@ -55,6 +56,7 @@ import { CurrentUserService } from './helpers/index'
 		RegistrationService,
 		ProjectService,
 		ProjectUpdateService,
+		ProjectCommentService,
 		FundingPackageService,
 		ProjectStatService,
 		UserService,

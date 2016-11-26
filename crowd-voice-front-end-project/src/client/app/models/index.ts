@@ -5,6 +5,8 @@ export * from './projectCategory';
 export * from './projectFromServer';
 export * from './projectUpdate';
 export * from './projectUpdateFromServer';
+export * from './projectComment';
+export * from './projectCommentFromServer';
 export * from './authorizationModel';
 export * from './fundingPackage';
 export * from './fundingPackageFromServer';
