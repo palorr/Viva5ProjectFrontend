@@ -36,7 +36,7 @@
 			<br/>
 			<h3>{{user.Name}}</h3>
 			<p><i class="fa fa-registered"></i> Registered on: {{user.CreatedDateTime | amDateFormat:'LL'}}</p>
-			<p><i class="fa fa-comment-o"></i> {{user.ShortBio}}</p>
+			<span *ngIf="user.ShortBio"><p><i class="fa fa-comment-o"></i> {{user.ShortBio}}</p></span>
 		</div>
 	</div>
 

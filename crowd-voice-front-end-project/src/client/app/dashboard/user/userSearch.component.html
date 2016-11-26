@@ -37,11 +37,9 @@
 			<h3><a [routerLink]="['/dashboard/users/view', user.Id]">{{user.Name}}</a></h3>
 			<hr/>
 			
-			<img [src]="user.AvatarImage" alt="AvatarImage" style="max-width: 500px; max-height: 500px; display: block; margin-left: auto; margin-right: auto;">
+			<img [src]="user.AvatarImage" alt="AvatarImage" style="max-width: 150px; max-height: 150px; display: block;">
 			<br/>
-			<h3>{{user.Name}}</h3>
 			<p><i class="fa fa-registered"></i> Registered on: {{user.CreatedDateTime | amDateFormat:'LL'}}</p>
-			
 		</div>
 		<hr/>
 	</div>
