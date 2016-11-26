@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { ProjectService, AlertService, UserService } from '../../services/index';
+import { ProjectService, AlertService, UserService, ProjectCommentService } from '../../services/index';
 
-import { Project } from '../../models/index';
+import { Project, ProjectCommentFromServer } from '../../models/index';
 
 import { CurrentUserService } from '../../helpers/index';
 
@@ -26,7 +26,48 @@ export class TimelineComponent { }
 	selector: 'chat-cmp',
 	templateUrl: 'chat.html'
 })
-export class ChatComponent {}
+export class ChatComponent implements OnInit, OnDestroy{
+	currentUserProjectComments: ProjectCommentFromServer[] = [];
+	
+	isRequestorLoggedIn: boolean;
+	
+	constructor(
+		private alertService: AlertService,
+		private authGuard: AuthGuard,
+		private currentUserService: CurrentUserService,
+		private projectCommentService: ProjectCommentService
+	) {}
+	
+	ngOnInit() {
+		if (this.authGuard.isUserLoggedIn())
+				this.isRequestorLoggedIn = true;
+				
+		if(localStorage.getItem('currentUser')) {
+			let self = this;
+			window.setInterval(function() {
+				self.projectCommentService
+					.getAllCurrentUserCreatedProjectComments()
+					.subscribe(
+						(data: ProjectCommentFromServer[]) => {
+							console.log('Current User Projects Comments in home...');
+							self.currentUserProjectComments = data;
+						},
+						(err: any) => {
+							self.alertService.error(err);
+							console.log('ERROR: ', err);
+						});
+			}, 5000);
+		}
+    }
+
+	ngOnDestroy() {
+		let interval_id = window.setInterval("", 9999); // Get a reference to the last
+														// interval +1
+		//for clearing all intervals
+		for (var i = 1; i < interval_id; i++)
+				window.clearInterval(i);
+	}
+}
 
 @Component({
 	moduleId: module.id,
@@ -99,6 +140,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 						this.currentUser = data;
 					},
 					(err) => {
+						this.alertService.error(err);
 						console.log('ERROR: ', err);
 					});	
 			
@@ -112,6 +154,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 							self.projectsToNotify = data;
 						},
 						(err: any) => {
+							self.alertService.error(err);
 							console.log('ERROR: ', err);
 						});
 			}, 5000);

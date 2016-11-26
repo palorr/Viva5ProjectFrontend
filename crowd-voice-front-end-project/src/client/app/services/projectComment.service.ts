@@ -38,6 +38,23 @@ export class ProjectCommentService {
             });
     }
     
+    getAllCurrentUserCreatedProjectComments() {
+        let URL: string;
+        let headers: Headers;
+        let options: RequestOptions;
+        
+        URL = 'http://localhost:56378/api/projects/getAllCurrentUserCreatedProjectComments';
+        
+        options = this.jwt();
+        
+        return this.http.get(URL, options)
+            .map((response: Response) => response.json())
+            .catch(res => {
+                console.log('CATCH: ', res.json());
+                throw(res.json());
+            });
+    }
+    
     getProjectCommentById(projectId: number, commentId: number) {
         let URL: string;
         let headers: Headers;
