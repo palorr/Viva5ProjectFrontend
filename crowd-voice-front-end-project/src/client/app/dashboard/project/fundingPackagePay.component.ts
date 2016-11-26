@@ -138,8 +138,8 @@ export class FundingPackagePayComponent implements OnInit {
 					(data: TransactionResult) => {
 						console.log('SUCCESS IN BACKING: ', data);
 						
-						if(data.TransactionId && data.ErrorCode === 0)
-							self.saveTransactionToDB(data.TransactionId, self.isDonationPackage);
+						//if(data.TransactionId && data.ErrorCode === 0)
+						self.saveTransactionToDB(data.TransactionId, self.isDonationPackage);
 					},
 					(err) => {
 						self.alertService.error(err);
