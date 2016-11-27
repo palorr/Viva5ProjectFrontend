@@ -31,6 +31,8 @@ export class ChatComponent implements OnInit, OnDestroy{
 	
 	isRequestorLoggedIn: boolean;
 	
+	chatIntervals: Array<any> = [];
+	
 	constructor(
 		private alertService: AlertService,
 		private authGuard: AuthGuard,
@@ -44,28 +46,29 @@ export class ChatComponent implements OnInit, OnDestroy{
 				
 		if(localStorage.getItem('currentUser')) {
 			let self = this;
-			window.setInterval(function() {
-				self.projectCommentService
-					.getAllCurrentUserCreatedProjectComments()
-					.subscribe(
-						(data: ProjectCommentFromServer[]) => {
-							console.log('Current User Projects Comments in home...');
-							self.currentUserProjectComments = data;
-						},
-						(err: any) => {
-							self.alertService.error(err);
-							console.log('ERROR: ', err);
-						});
-			}, 5000);
+			this.chatIntervals.push(
+				window.setInterval(function() {
+					self.projectCommentService
+						.getAllCurrentUserCreatedProjectComments()
+						.subscribe(
+							(data: ProjectCommentFromServer[]) => {
+								console.log('Current User Projects Comments in home...');
+								self.currentUserProjectComments = data;
+							},
+							(err: any) => {
+								self.alertService.error(err);
+								console.log('ERROR: ', err);
+							});
+				}, 5000)
+			);
 		}
     }
 
 	ngOnDestroy() {
-		let interval_id = window.setInterval("", 9999); // Get a reference to the last
-														// interval +1
-		//for clearing all intervals
-		for (var i = 1; i < interval_id; i++)
-				window.clearInterval(i);
+		for (let i = 0; i < this.chatIntervals.length; i++) {
+			console.log('clear chat interval no', i);
+			window.clearInterval(this.chatIntervals[i]);
+		}
 	}
 }
 
@@ -88,6 +91,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 	isRequestorLoggedIn: boolean = false;
 	
 	currentUser: any = null;
+	
+	homeIntervals: Array<any> = [];
 	
 	projectsToNotify: Project[] = [];
 	
@@ -145,28 +150,29 @@ export class HomeComponent implements OnInit, OnDestroy {
 					});	
 			
 			let self = this;
-			window.setInterval(function() {
-				self.userService
-					.getUserFundedCompletedProjects(false)
-					.subscribe(
-						(data: Project[]) => {
-							console.log('Projects Com in home...');
-							self.projectsToNotify = data;
-						},
-						(err: any) => {
-							self.alertService.error(err);
-							console.log('ERROR: ', err);
-						});
-			}, 5000);
+			this.homeIntervals.push(
+				window.setInterval(function() {
+					self.userService
+						.getUserFundedCompletedProjects(false)
+						.subscribe(
+							(data: Project[]) => {
+								console.log('Projects Com in home...');
+								self.projectsToNotify = data;
+							},
+							(err: any) => {
+								self.alertService.error(err);
+								console.log('ERROR: ', err);
+							});
+				}, 5000)
+			);
 		}
     }
 
 	ngOnDestroy() {
-		let interval_id = window.setInterval("", 9999); // Get a reference to the last
-														// interval +1
-		//for clearing all intervals
-		for (var i = 1; i < interval_id; i++)
-				window.clearInterval(i);
+		for (let i = 0; i < this.homeIntervals.length; i++) {
+			console.log('clear home interval no', i);
+			window.clearInterval(this.homeIntervals[i]);
+		}
 	}
 
 	/* Carousel */
