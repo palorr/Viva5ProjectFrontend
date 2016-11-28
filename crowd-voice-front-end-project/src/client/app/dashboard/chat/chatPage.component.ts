@@ -1,6 +1,9 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
 import { SignalRService } from '../../services/index';
-import { ChatMessage } from '../../models/index';
+import { CurrentUserService } from '../../helpers/index';
+import { ChatMessage, CurrentUser } from '../../models/index';
 
 @Component({
     moduleId: module.id,
@@ -8,25 +11,48 @@ import { ChatMessage } from '../../models/index';
     templateUrl: 'chatPage.component.html'
 })
 
-export class ChatPageComponent {
+export class ChatPageComponent implements OnInit {
 
-    public currentMessage: ChatMessage;
+    public messageToSend: ChatMessage;
     public allMessages: ChatMessage[];
     public canSendMessage: Boolean;
     
-    constructor(private _signalRService: SignalRService, private _ngZone: NgZone) {
+    currentUser: CurrentUser;
+    
+    constructor(private _signalRService: SignalRService, private _ngZone: NgZone, private currentUserService: CurrentUserService) {
         this.subscribeToEvents();
         this.canSendMessage = _signalRService.connectionExists;
-        this.currentMessage = new ChatMessage('', '', null);
+        this.messageToSend = new ChatMessage(null, '', '', null);
         this.allMessages = new Array<ChatMessage>();
     }
+    
+    ngOnInit() {
+        if (localStorage.getItem('currentUser')) {
+			this.currentUserService.getUserMainInfo()
+				.subscribe(
+				(data) => {
+					this.currentUser = data;
+					console.log('Current User: ', this.currentUser);
+				},
+				(err) => {
+					console.log('ERROR: ', err);
+				});
 
-    public sendMessage() {
+			//this.checkForNotifications();
+
+		}
+            
+    }
+
+    public sendMessage(textToSend: string) {
         if (this.canSendMessage) {
-            alert('SEND IT!');
-            this.currentMessage.Sent = new Date();
-            console.log('MESSAGE TO SEND: ', this.currentMessage);
-            this._signalRService.sendChatMessage(this.currentMessage);
+            this.messageToSend.FromId = this.currentUser.Id;
+            this.messageToSend.FromName = this.currentUser.Name;
+            this.messageToSend.Sent = new Date();
+            this.messageToSend.Message = textToSend;
+            
+            console.log('MESSAGE TO SEND: ', this.messageToSend);
+            this._signalRService.sendChatMessage(this.messageToSend);
         }
     }
 
@@ -36,10 +62,10 @@ export class ChatPageComponent {
         });
 
         this._signalRService.messageReceived.subscribe((message: ChatMessage) => {
-            alert('GOT MESSAGE');
+            console.log('GOT MESSAGE: ', message);
             this._ngZone.run(() => {
-                this.currentMessage = new ChatMessage('', '', null);
-                this.allMessages.push(new ChatMessage(message.From, message.Message, message.Sent.toString()));
+                this.messageToSend = new ChatMessage(null, '', '', null);
+                this.allMessages.push(new ChatMessage(message.FromId, message.FromName, message.Message, message.Sent.toString()));
             });
         });
     }
