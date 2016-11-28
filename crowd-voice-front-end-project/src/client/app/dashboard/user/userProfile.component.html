@@ -35,7 +35,7 @@
 			<img [src]="user.AvatarImage" alt="AvatarImage" style="max-width: 500px; max-height: 500px; display: block; margin-left: auto; margin-right: auto;">
 			<br/>
 			<h3>{{user.Name}}</h3>
-			<p><i class="fa fa-registered"></i> Registered on: {{user.CreatedDateTime | amDateFormat:'LL'}}</p>
+			<p><i class="fa fa-registered"></i> Registered on: {{user.CreatedDateTime | date:'medium'}}</p>
 			<span *ngIf="user.ShortBio"><p><i class="fa fa-comment-o"></i> {{user.ShortBio}}</p></span>
 		</div>
 	</div>
@@ -53,7 +53,7 @@
 								<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
 								<p>{{project.Description}}</p>
 								<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}}<i class="fa fa-euro"></i></p>
-								<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
+								<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | date:'medium'}}</p>
 								<p><i class="fa fa-list"></i> Project Category: {{project.ProjectCategoryDesc}}</p>
 							</div>
 							<hr/>
@@ -66,9 +66,9 @@
 								<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
 								<p>{{project.Description}}</p>
 								<p><i class="fa fa-user"></i> Project Owner: <a [routerLink]="['/dashboard/users/view', project.OwnerId]">{{project.OwnerName}}</a></p>
-								<p><i class="fa fa-clock-o"></i> Created on: {{project.CreatedDate | amDateFormat:'LL'}}</p>
+								<p><i class="fa fa-clock-o"></i> Created on: {{project.CreatedDate | date:'medium'}}</p>
 								<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}}<i class="fa fa-euro"></i></p>
-								<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
+								<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | date:'medium'}}</p>
 								<p><i class="fa fa-list"></i> Project Category: {{project.ProjectCategoryDesc}}</p>
 							</div>
 							<hr/>
