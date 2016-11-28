@@ -8,7 +8,7 @@ import { UserEditComponent } from './userEdit.component';
 import { UserSearchComponent } from './userSearch.component';
 import { UserListComponent } from './userList.component'
 import { UserComponent } from './user.component';
-
+import { UserCreatedProjectsComponent } from './userCreatedProjects.component'
 import {
 		TabsModule,
 	} from 'ng2-bootstrap/ng2-bootstrap';
@@ -25,7 +25,8 @@ import {
         UserProfileComponent,
         UserEditComponent,
         UserSearchComponent,
-        UserListComponent
+        UserListComponent,
+        UserCreatedProjectsComponent
 
     ],
     exports: [
@@ -33,7 +34,8 @@ import {
         UserProfileComponent,
         UserEditComponent,
         UserSearchComponent,
-        UserListComponent
+        UserListComponent,
+        UserCreatedProjectsComponent
     ]
 })
 
