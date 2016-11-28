@@ -19,7 +19,7 @@ export const ProjectRoutes: Route[] = [
         ...ProjectProfileRoutes,
         ...ProjectCreateRoutes,
         ...ProjectEditRoutes,
-	    	...ProjectListRoutes,
+	    ...ProjectListRoutes,
         ...ProjectUpdateRoutes,
         ...ProjectCommentRoutes,
         ...FundingPackageRoutes,

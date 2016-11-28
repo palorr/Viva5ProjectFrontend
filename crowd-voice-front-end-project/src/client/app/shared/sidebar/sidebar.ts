@@ -19,4 +19,5 @@ export class SidebarComponent {
 			this.showMenu = element;
 		}
 	}
+	
 }
