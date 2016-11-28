@@ -4,7 +4,7 @@
       <a href="#" class="list-group-item" *ngFor="let project of projects">
         <i class="fa fa-comment fa-fw"></i> {{project.Title}}
               <span class="pull-right text-muted small">
-                <em><i class="fa fa-clock-o"></i> {{project.UpdatedDate | amDateFormat:'LL'}}</em>
+                <em><i class="fa fa-clock-o"></i> {{project.UpdatedDate | date:'medium'}}</em>
               </span>
       </a>
     </span>

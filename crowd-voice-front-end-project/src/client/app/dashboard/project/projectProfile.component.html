@@ -61,10 +61,10 @@
 		<hr/>
 		<p>{{project.Description}}</p>
 		<hr/>
-		<p><i class="fa fa-calendar"></i> Created on: {{project.CreatedDate | amDateFormat:'LL'}}</p>
-		<p><i class="fa fa-calendar"></i> Updated on: {{project.UpdatedDate | amDateFormat:'LL'}}</p>
+		<p><i class="fa fa-calendar"></i> Created on: {{project.CreatedDate | date:'medium'}}</p>
+		<p><i class="fa fa-calendar"></i> Updated on: {{project.UpdatedDate | date:'medium'}}</p>
 		<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}} <i class="fa fa-euro"></i></p>
-		<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | amDateFormat:'LL'}}</p>
+		<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | date:'medium'}}</p>
 		<p><i class="fa fa-user"></i> Project Owner: <a [routerLink]="['/dashboard/users/view', project.OwnerId]">{{project.OwnerName}}</a></p>
 		<p><i class="fa fa-list"></i> Project Category: {{project.ProjectCategoryDesc}}</p>
 		<p>
@@ -102,8 +102,8 @@
 								<h1>{{fundingPackage.Title}}</h1>
 								<p><i class="fa fa-trophy"></i> Reward: {{fundingPackage.Description}}</p>
 								<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-money"></i> Pledge Amount: {{fundingPackage.PledgeAmount}} <i class="fa fa-euro"></i></p>
-								<p><i class="fa fa-clock-o"></i> {{fundingPackage.WhenDateTime | amDateFormat:'LL'}}</p>
-								<!--<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-clock-o"></i> Estimated Delivery Date: {{fundingPackage.EstimatedDeliveryDate | amDateFormat:'LL'}}</p>-->
+								<p><i class="fa fa-clock-o"></i> {{fundingPackage.WhenDateTime | date:'medium'}}</p>
+								<!--<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-clock-o"></i> Estimated Delivery Date: {{fundingPackage.EstimatedDeliveryDate | date:'medium'}}</p>-->
 								<a *ngIf="!fundingPackage.PledgeAmount && project.Status != 'FAI'"href="javascript:void(0)" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'donate']"><i class="fa fa-credit-card"></i> Donate</a>
 								<a *ngIf="fundingPackage.PledgeAmount && project.Status != 'FAI'" href="javascript:void(0)" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'pay']"><i class="fa fa-credit-card"></i> Choose this Funding Package</a>
 							</div>
@@ -117,7 +117,7 @@
 								<a *ngIf="update.IsRequestorProjectCreator" [routerLink]="['/dashboard/projects/', project.Id, 'updates', update.Id, 'edit']">Edit Project Update</a>
 								<h1>{{update.Title}}</h1>
 								<p>{{update.Description}}</p>
-								<p><i class="fa fa-clock-o"></i> {{update.WhenDateTime | amDateFormat:'LL'}}</p>
+								<p><i class="fa fa-clock-o"></i> {{update.WhenDateTime | date:'medium'}}</p>
 							</div>
 							<hr/>
 						</div>
@@ -132,7 +132,7 @@
 								</span>
 								<i class="fa fa-user"></i> <a [routerLink]="['/dashboard/users/view', comment.UserId]">{{comment.Name}}</a>
 								<p>{{comment.Description}}</p>
-								<p><i class="fa fa-clock-o"></i> {{comment.WhenDateTime | amDateFormat:'LL'}}</p>
+								<p><i class="fa fa-clock-o"></i> {{comment.WhenDateTime | date:'medium'}}</p>
 							</div>
 							<hr/>
 						</div>

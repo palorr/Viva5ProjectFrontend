@@ -21,7 +21,7 @@
 			
 			<img [src]="user.AvatarImage" alt="AvatarImage" style="max-width: 150px; max-height: 150px; display: block;">
 			<br/>
-			<p><i class="fa fa-registered"></i> Registered on: {{user.CreatedDateTime | amDateFormat:'LL'}}</p>
+			<p><i class="fa fa-registered"></i> Registered on: {{user.CreatedDateTime | date:'medium'}}</p>
 		</div>
 		<hr/>
 	</div>
