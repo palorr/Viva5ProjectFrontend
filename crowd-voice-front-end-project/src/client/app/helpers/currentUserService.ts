@@ -11,7 +11,7 @@ export class CurrentUserService {
    
     getUserMainInfo() {
         
-        let userURL = 'http://localhost:56378/api/users/findByUsername';
+        let userURL = 'http://viva5webapi.azurewebsites.net/api/users/findByUsername';
         
         let options = this.jwt();
         

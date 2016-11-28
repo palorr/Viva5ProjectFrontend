@@ -16,12 +16,12 @@ export class ProjectStatService {
         let options: RequestOptions;
 		
 		if(isLoggedIn) {
-            projectURL = 'http://localhost:56378/api/projects/'+projectId+'/stats';
+            projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/stats';
         
             options = this.jwt();
         }
         else {
-            projectURL = 'http://localhost:56378/api/projects/'+projectId+'/stats/allowAll';
+            projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/stats/allowAll';
             
             headers = new Headers({
                 'Accept': 'application/json', 

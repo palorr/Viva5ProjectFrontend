@@ -12,7 +12,7 @@ export class ProjectExternalShareService {
     
     createExternalShare(projectId: number, newProjectExternalShare: ProjectExternalShare) {
         
-		let URL = 'http://localhost:56378/api/projects/'+projectId+'/externalShares';
+		let URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/externalShares';
         
         let postRequestBody = JSON.stringify(newProjectExternalShare);
         

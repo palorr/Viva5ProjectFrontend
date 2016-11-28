@@ -11,7 +11,7 @@ export class ProjectService {
     constructor(private http: Http) { }
     
     getAllProjects() {
-        let allProjectsURL = 'http://localhost:56378/api/projects';
+        let allProjectsURL = 'http://viva5webapi.azurewebsites.net/api/projects';
         
         let headers = new Headers({
             'Accept': 'application/json', 
@@ -28,7 +28,7 @@ export class ProjectService {
     }
     
     getTrendingProjects() {
-        let URL = 'http://localhost:56378/api/projects/trending';
+        let URL = 'http://viva5webapi.azurewebsites.net/api/projects/trending';
         
         let headers = new Headers({
             'Accept': 'application/json'
@@ -46,7 +46,7 @@ export class ProjectService {
     }
     
     getAllProjectsByCategory(projectCategoryId: number) {
-        let URL = 'http://localhost:56378/api/projects/getAllProjectsByCategory/'+projectCategoryId;
+        let URL = 'http://viva5webapi.azurewebsites.net/api/projects/getAllProjectsByCategory/'+projectCategoryId;
         
         let headers = new Headers({
             'Accept': 'application/json', 
@@ -64,7 +64,7 @@ export class ProjectService {
     }
     
     getAllProjectsByName(searchTerm: string) {
-        let URL = 'http://localhost:56378/api/projects/getAllProjectsByName/'+searchTerm;
+        let URL = 'http://viva5webapi.azurewebsites.net/api/projects/getAllProjectsByName/'+searchTerm;
         
         let headers = new Headers({
             'Accept': 'application/json', 
@@ -87,12 +87,12 @@ export class ProjectService {
         let options: RequestOptions;
         
         if(isLoggedIn) {
-            projectURL = 'http://localhost:56378/api/projects/'+projectId;
+            projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId;
         
             options = this.jwt();
         }
         else {
-            projectURL = 'http://localhost:56378/api/projects/'+projectId+'/allowAll';
+            projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/allowAll';
             
             headers = new Headers({
                 'Accept': 'application/json', 
@@ -110,7 +110,7 @@ export class ProjectService {
     }
     
     getProjectCategories() {
-        let projectURL = 'http://localhost:56378/api/projects/projectCategories';
+        let projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/projectCategories';
         
         let headers = new Headers({
             'Accept': 'application/json', 
@@ -127,7 +127,7 @@ export class ProjectService {
     }
     
     createNewProject(newProject: Project) {
-        let createProjectURL = 'http://localhost:56378/api/projects';
+        let createProjectURL = 'http://viva5webapi.azurewebsites.net/api/projects';
         
         let options = this.jwt();
         
@@ -142,7 +142,7 @@ export class ProjectService {
     }
     
     editProject(project: Project) {
-        let editProjectURL = 'http://localhost:56378/api/projects/'+project.Id;
+        let editProjectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+project.Id;
         
         let options = this.jwt();
         
@@ -157,7 +157,7 @@ export class ProjectService {
     }
     
     completeVivaPayment(fundingPackageId: number, vivaToken: VivaWalletToken) {
-        let URL = 'http://localhost:56378/api/projects/fundingPackages/'+fundingPackageId+'/checkout';
+        let URL = 'http://viva5webapi.azurewebsites.net/api/projects/fundingPackages/'+fundingPackageId+'/checkout';
         
         let options = this.jwt();
         
@@ -172,7 +172,7 @@ export class ProjectService {
     }
     
     saveTransaction(newFunding: UserFunding, projectId: number) {
-        let URL = 'http://localhost:56378/api/projects/'+projectId+'/fundings';
+        let URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/fundings';
         
         let options = this.jwt();
         

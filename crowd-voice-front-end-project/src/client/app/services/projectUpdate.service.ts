@@ -16,12 +16,12 @@ export class ProjectUpdateService {
         let options: RequestOptions;
         
         if(isLoggedIn) {
-            projectURL = 'http://localhost:56378/api/projects/'+projectId+'/updates';
+            projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates';
         
             options = this.jwt();
         }
         else {
-            projectURL = 'http://localhost:56378/api/projects/'+projectId+'/updates/allowAll';
+            projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates/allowAll';
             
             headers = new Headers({
                 'Accept': 'application/json', 
@@ -43,7 +43,7 @@ export class ProjectUpdateService {
         let headers: Headers;
         let options: RequestOptions;
         
-        projectURL = 'http://localhost:56378/api/projects/'+projectId+'/updates/'+updateId;
+        projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates/'+updateId;
         
         options = this.jwt();
         
@@ -56,7 +56,7 @@ export class ProjectUpdateService {
     }
     
     createNewProjectUpdate(projectId: number, newProjectUpdate: ProjectUpdate) {
-        let createProjectUpdateURL = 'http://localhost:56378/api/projects/'+projectId+'/updates';
+        let createProjectUpdateURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates';
         
         let options = this.jwt();
         
@@ -71,7 +71,7 @@ export class ProjectUpdateService {
     }
     
     editProjectUpdate(projectId: number, updateId: number, editedProjectUpdate: ProjectUpdate) {
-        let editProjectUpdateURL = 'http://localhost:56378/api/projects/'+projectId+'/updates/'+updateId;
+        let editProjectUpdateURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates/'+updateId;
         
         let options = this.jwt();
         
@@ -86,7 +86,7 @@ export class ProjectUpdateService {
     }
     
     deleteProjectUpdate(projectId: number, updateId: number) {
-        let deleteProjectUpdateURL = 'http://localhost:56378/api/projects/'+projectId+'/updates/'+updateId;
+        let deleteProjectUpdateURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates/'+updateId;
         
         let options = this.jwt();
         
