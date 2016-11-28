@@ -21,7 +21,7 @@ export class AuthorizationGuard {
     
     isRequestorProjectCreator(projectId: number) {
         
-        let url = 'http://http://viva5webapi.azurewebsites.net/:56378/api/projects/'+projectId+'/isCurrentUserProjectCreator';
+        let url = 'http://http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/isCurrentUserProjectCreator';
         
         let options = this.jwt();
         
