@@ -30,7 +30,7 @@ export class ChatPageComponent implements OnInit {
         if (localStorage.getItem('currentUser')) {
 			this.currentUserService.getUserMainInfo()
 				.subscribe(
-				(data) => {
+				(data: CurrentUser) => {
 					this.currentUser = data;
 					console.log('Current User: ', this.currentUser);
 				},
