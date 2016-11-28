@@ -16,12 +16,12 @@ export class FundingPackageService {
         let options: RequestOptions;
         
         if(isLoggedIn) {
-            URL = 'http://localhost:56378/api/projects/'+projectId+'/fundingPackages';
+            URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/fundingPackages';
         
             options = this.jwt();
         }
         else {
-            URL = 'http://localhost:56378/api/projects/'+projectId+'/fundingPackages/allowAll';
+            URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/fundingPackages/allowAll';
             
             headers = new Headers({
                 'Accept': 'application/json', 
@@ -43,7 +43,7 @@ export class FundingPackageService {
         let headers: Headers;
         let options: RequestOptions;
         
-        URL = 'http://localhost:56378/api/projects/'+projectId+'/fundingPackages/'+fundingPackageId;
+        URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/fundingPackages/'+fundingPackageId;
         
         options = this.jwt();
         
@@ -60,7 +60,7 @@ export class FundingPackageService {
         let headers: Headers;
         let options: RequestOptions;
         
-        URL = 'http://localhost:56378/api/projects/'+projectId+'/fundingPackages/'+fundingPackageId+'/forPaymentsView';
+        URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/fundingPackages/'+fundingPackageId+'/forPaymentsView';
         
         options = this.jwt();
         
@@ -73,7 +73,7 @@ export class FundingPackageService {
     }
     
     createNewFundingPackage(projectId: number, newFundingPackage: FundingPackage) {
-        let createFundingPackageURL = 'http://localhost:56378/api/projects/'+projectId+'/fundingPackages';
+        let createFundingPackageURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/fundingPackages';
         
         let options = this.jwt();
         
@@ -88,7 +88,7 @@ export class FundingPackageService {
     }
     
     editFundingPackage(projectId: number, fundingPackageId: number, editedFundingPackage: FundingPackage) {
-        let editFundingPackageURL = 'http://localhost:56378/api/projects/'+projectId+'/fundingPackages/'+fundingPackageId;
+        let editFundingPackageURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/fundingPackages/'+fundingPackageId;
         
         let options = this.jwt();
         
@@ -103,7 +103,7 @@ export class FundingPackageService {
     }
     
     deleteFundingPackage(projectId: number, fundingPackageId: number) {
-        let deleteFundingPackageURL = 'http://localhost:56378/api/projects/'+projectId+'/fundingPackages/'+fundingPackageId;
+        let deleteFundingPackageURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/fundingPackages/'+fundingPackageId;
         
         let options = this.jwt();
         

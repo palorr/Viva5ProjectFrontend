@@ -16,12 +16,12 @@ export class ProjectCommentService {
         let options: RequestOptions;
         
         if(isLoggedIn) {
-            URL = 'http://localhost:56378/api/projects/'+projectId+'/comments';
+            URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments';
         
             options = this.jwt();
         }
         else {
-            URL = 'http://localhost:56378/api/projects/'+projectId+'/comments/allowAll';
+            URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments/allowAll';
             
             headers = new Headers({
                 'Accept': 'application/json', 
@@ -43,7 +43,7 @@ export class ProjectCommentService {
         let headers: Headers;
         let options: RequestOptions;
         
-        URL = 'http://localhost:56378/api/projects/getAllCurrentUserCreatedProjectComments';
+        URL = 'http://viva5webapi.azurewebsites.net/api/projects/getAllCurrentUserCreatedProjectComments';
         
         options = this.jwt();
         
@@ -60,7 +60,7 @@ export class ProjectCommentService {
         let headers: Headers;
         let options: RequestOptions;
         
-        URL = 'http://localhost:56378/api/projects/'+projectId+'/comments/'+commentId;
+        URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments/'+commentId;
         
         options = this.jwt();
         
@@ -73,7 +73,7 @@ export class ProjectCommentService {
     }
     
     createNewProjectComment(projectId: number, newProjectComment: ProjectComment) {
-        let createProjectCommentURL = 'http://localhost:56378/api/projects/'+projectId+'/comments';
+        let createProjectCommentURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments';
         
         let options = this.jwt();
         
@@ -88,7 +88,7 @@ export class ProjectCommentService {
     }
     
     editProjectComment(projectId: number, commentId: number, editedProjectComment: ProjectComment) {
-        let editProjectCommentURL = 'http://localhost:56378/api/projects/'+projectId+'/comments/'+commentId;
+        let editProjectCommentURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments/'+commentId;
         
         let options = this.jwt();
         
@@ -103,7 +103,7 @@ export class ProjectCommentService {
     }
     
     deleteProjectComment(projectId: number, commentId: number) {
-        let deleteProjectCommentURL = 'http://localhost:56378/api/projects/'+projectId+'/comments/'+commentId;
+        let deleteProjectCommentURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments/'+commentId;
         
         let options = this.jwt();
         

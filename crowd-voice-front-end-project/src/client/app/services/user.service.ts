@@ -11,7 +11,7 @@ export class UserService {
     constructor(private http: Http) { }
 
     getAllUsers() {
-        let allUsersURL = 'http://localhost:56378/api/users';
+        let allUsersURL = 'http://viva5webapi.azurewebsites.net/api/users';
 
         let headers = new Headers({
             'Accept': 'application/json',
@@ -30,7 +30,7 @@ export class UserService {
 
     getUserMainInfo(userId: number) {
 
-        let userURL = 'http://localhost:56378/api/users/' + userId;
+        let userURL = 'http://viva5webapi.azurewebsites.net/api/users/' + userId;
 
         let headers: Headers;
         let options: RequestOptions;
@@ -51,7 +51,7 @@ export class UserService {
 
     getUserBackedProjects(userId: number) {
 
-        let projectsURL = 'http://localhost:56378/api/users/' + userId + '/userBackedProjects'
+        let projectsURL = 'http://viva5webapi.azurewebsites.net/api/users/' + userId + '/userBackedProjects'
 
         let headers: Headers;
         let options: RequestOptions;
@@ -71,7 +71,7 @@ export class UserService {
     }
 
     getUserCreatedProjects(userId: number) {
-        let projectsURL = 'http://localhost:56378/api/users/' + userId + '/userCreatedProjects';
+        let projectsURL = 'http://viva5webapi.azurewebsites.net/api/users/' + userId + '/userCreatedProjects';
 
         let headers: Headers;
         let options: RequestOptions;
@@ -92,7 +92,7 @@ export class UserService {
 
     }
     getAllUsersByName(searchTerm: string) {
-        let URL = 'http://localhost:56378/api/users/getAllUsersByName/' + searchTerm;
+        let URL = 'http://viva5webapi.azurewebsites.net/api/users/getAllUsersByName/' + searchTerm;
 
         let headers = new Headers({
             'Accept': 'application/json',
@@ -118,7 +118,7 @@ export class UserService {
     }
 
     updateUser(user: GenericUser) {
-        let editUserURL = 'http://localhost:56378/api/users/';
+        let editUserURL = 'http://viva5webapi.azurewebsites.net/api/users/';
 
         let options = this.jwt();
 
@@ -133,10 +133,10 @@ export class UserService {
     }
 
     getUserFundedCompletedProjects(showAll: boolean) {
-        let URL = 'http://localhost:56378/api/users/getUserFundedCompletedProjects';
+        let URL = 'http://viva5webapi.azurewebsites.net/api/users/getUserFundedCompletedProjects';
 
         if (showAll) {
-            URL = 'http://localhost:56378/api/users/getUserFundedCompletedProjects/showAll';
+            URL = 'http://viva5webapi.azurewebsites.net/api/users/getUserFundedCompletedProjects/showAll';
         }
 
         let options = this.jwt();
@@ -150,7 +150,7 @@ export class UserService {
     }
 
     getUserFundedProjectsLatestUpdates() {
-        let URL = 'http://localhost:56378/api/users/getAllMyFundedProjectsLatestUpdates';
+        let URL = 'http://viva5webapi.azurewebsites.net/api/users/getAllMyFundedProjectsLatestUpdates';
 
         let options = this.jwt();
         return this.http.get(URL, options)

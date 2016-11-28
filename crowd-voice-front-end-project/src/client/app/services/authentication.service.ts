@@ -9,7 +9,7 @@ export class AuthenticationService {
  
     login(username: string, password: string) {
         
-        let loginURL = 'http://localhost:56478/oauth2/token';
+        let loginURL = 'http://viva5authserver.azurewebsites.net/oauth2/token';
         
         let headers = new Headers({ 
             'Accept': 'application/json',
