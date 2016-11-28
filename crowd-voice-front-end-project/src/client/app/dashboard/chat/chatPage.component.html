@@ -17,7 +17,7 @@
 	
 	<div class="row">
 		<div class="col-lg-12">
-			<ul>
+			<ul class="jumbotron">
 				<li *ngFor="let chatMessage of allMessages" style="list-style: none;">
 					{{chatMessage.Sent | date:"dd.MM.y" }}: {{chatMessage.Message}}
 				</li>

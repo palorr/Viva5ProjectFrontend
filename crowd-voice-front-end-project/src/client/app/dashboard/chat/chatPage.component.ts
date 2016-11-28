@@ -23,7 +23,9 @@ export class ChatPageComponent {
 
     public sendMessage() {
         if (this.canSendMessage) {
+            alert('SEND IT!');
             this.currentMessage.Sent = new Date();
+            console.log('MESSAGE TO SEND: ', this.currentMessage);
             this._signalRService.sendChatMessage(this.currentMessage);
         }
     }
@@ -34,6 +36,7 @@ export class ChatPageComponent {
         });
 
         this._signalRService.messageReceived.subscribe((message: ChatMessage) => {
+            alert('GOT MESSAGE');
             this._ngZone.run(() => {
                 this.currentMessage = new ChatMessage('', '', null);
                 this.allMessages.push(new ChatMessage(message.From, message.Message, message.Sent.toString()));

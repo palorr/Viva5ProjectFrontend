@@ -1,3 +1,4 @@
+/// <reference path="../../../../../tools/manual_typings/seed/fbsdk.d.ts" />
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 

@@ -1,6 +1,5 @@
 export let CONFIGURATION = {
     baseUrls: {
-        server: 'http://localhost:54684/',
-        apiUrl: 'api/',
+        chatServer: 'http://localhost:54684/',
     },
 }

@@ -22,7 +22,8 @@ export class SignalRService {
         this.messageReceived = new EventEmitter<ChatMessage>();
         this.connectionExists = false;
 
-        this.connection = jQuery.hubConnection(CONFIGURATION.baseUrls.server + 'signalr/');
+        this.connection = jQuery.hubConnection('http://localhost:54684');
+        console.log('CONNECTION: ', this.connection);
         this.proxy = this.connection.createHubProxy(this.proxyName);
 
         this.registerOnServerEvents();
@@ -31,6 +32,7 @@ export class SignalRService {
     }
 
     public sendChatMessage(message: ChatMessage) {
+        console.log('sendChatMessage via this.proxy.invoke ...', this.proxy);
         this.proxy.invoke('SendMessage', message);
     }
 
