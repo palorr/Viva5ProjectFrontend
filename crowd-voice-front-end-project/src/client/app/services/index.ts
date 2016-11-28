@@ -8,3 +8,4 @@ export * from './projectUpdate.service';
 export * from './projectComment.service';
 export * from './projectStat.service';
 export * from './projectExternalShare.service';
+export * from './signalR.service';

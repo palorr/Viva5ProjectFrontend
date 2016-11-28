@@ -18,3 +18,4 @@ export * from './projectExternalShare';
 export * from './vivaWalletToken';
 export * from './userFunding';
 export * from './transactionResult';
+export * from './chatMessage';

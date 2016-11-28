@@ -8,7 +8,7 @@ import { AlertService, FundingPackageService, ProjectService } from '../../servi
 const jqueryUrl = 'https://code.jquery.com/jquery-1.11.2.min.js';
 const vivaUrl = 'https://demo.vivapayments.com/web/checkout/js';
 
-var $ = require('jQuery');
+import * as jQuery from 'jquery';
 
 @Component({
 	moduleId: module.id,
@@ -130,8 +130,8 @@ export class FundingPackagePayComponent implements OnInit {
 			e.preventDefault();
 			
 			let vivaToken = new VivaWalletToken();
-			vivaToken.vivaWalletPaymentMethod = $("input[name=vivaWalletPaymentMethod]").val();
-			vivaToken.vivaWalletToken = $("input[name=vivaWalletToken]").val();
+			vivaToken.vivaWalletPaymentMethod = jQuery("input[name=vivaWalletPaymentMethod]").val();
+			vivaToken.vivaWalletToken = jQuery("input[name=vivaWalletToken]").val();
 			
 			self.projectService.completeVivaPayment(self.fundingPackage.Id, vivaToken)
 				.subscribe(

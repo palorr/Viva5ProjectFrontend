@@ -24,7 +24,8 @@ import {
 	ProjectCommentService,
 	FundingPackageService,
 	ProjectStatService,
-	ProjectExternalShareService
+	ProjectExternalShareService,
+	SignalRService
 } from './services/index';
 
 import { AuthGuard, AuthorizationGuard } from './guards/index';
@@ -63,7 +64,8 @@ import { CurrentUserService } from './helpers/index'
 		AuthGuard,
 		AuthorizationGuard,
 		CurrentUserService,
-		ProjectExternalShareService
+		ProjectExternalShareService,
+		SignalRService
 	],
 	bootstrap: [AppComponent]
 

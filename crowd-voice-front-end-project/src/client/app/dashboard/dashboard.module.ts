@@ -12,6 +12,8 @@ import { HomeModule } from './home/home.module';
 
 import { BlankPageModule } from './blank-page/blankPage.module';
 
+import { ChatPageModule } from './chat/chatPage.module';
+
 import { DashboardComponent } from './dashboard.component';
 
 import {TopNavComponent} from '../shared/index';
@@ -26,6 +28,7 @@ import {SidebarComponent} from '../shared/index';
         ModalModule,
         ProjectModule,
     	HomeModule,
+        ChatPageModule,
         BlankPageModule,
         UserModule
     ],
