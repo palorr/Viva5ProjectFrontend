@@ -172,15 +172,21 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 	projects: Array<Project> = [];
 
-	myInterval: number = 5000;
+	myInterval: number = 6000;
 	index: number = 0;
 
 	slides: Array<any> = [];
 	imgUrl: Array<any> = [
-		`assets/img/slider1.jpg`,
-		`assets/img/slider2.jpg`,
-		`assets/img/slider3.jpg`,
-		`assets/img/slider0.jpg`
+		`assets/img/slider.jpg`,
+		`assets/img/slider.jpg`,
+		`assets/img/slider.jpg`,
+		`assets/img/slider.jpg`,
+		`assets/img/slider.jpg`,
+		`assets/img/slider.jpg`,
+		`assets/img/slider.jpg`,
+		`assets/img/slider.jpg`,
+		`assets/img/slider.jpg`,
+		`assets/img/slider.jpg`
 	];
 
 	/* END */
