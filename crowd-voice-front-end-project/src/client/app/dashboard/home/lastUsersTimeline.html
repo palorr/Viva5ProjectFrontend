@@ -1,0 +1,28 @@
+<div *ngIf="lastUsers && lastUsers.length > 0" class="card card-default">
+  <div class="card-header">
+    <i class="fa fa-clock-o fa-fw"></i> Last Registered Users
+  </div>
+
+  <div class="card-block">
+    <ul class="timeline">
+      <li *ngFor="let user of lastUsers; let i = index" [ngClass]="{'': i % 2 == 0, 'timeline-inverted': i % 2 == 1}">
+        <!--<div class="timeline-badge">
+          <i class="fa fa-check"></i>
+        </div>-->
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <h4 class="timeline-title"><a [routerLink]="['/dashboard/users/view/', user.UserId]">
+                  {{user.Name}}
+                </a></h4>
+            <p><small class="text-muted"><i class="fa fa-clock-o"></i>{{user.CreatedDateTime | date:'medium'}}</small>
+            </p>
+          </div>
+          <div class="timeline-body" *ngIf="user.ShortBio">
+            <p>{{user.ShortBio}}</p>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</div>

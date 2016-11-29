@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { ProjectService, AlertService, UserService, ProjectCommentService } from '../../services/index';
 
-import { Project, ProjectCommentFromServer, ProjectUpdate } from '../../models/index';
+import { Project, ProjectCommentFromServer, ProjectUpdate, GenericUser } from '../../models/index';
 
 import { CurrentUserService } from '../../helpers/index';
 
@@ -15,11 +15,11 @@ import { AuthGuard } from '../../guards/index';
 
 @Component({
 	moduleId: module.id,
-	selector: 'timeline-cmp',
-	templateUrl: 'timeline.html',
+	selector: 'updatesTimeline-cmp',
+	templateUrl: 'updatesTimeline.html',
 	styleUrls: ['timeline.css'],
 })
-export class TimelineComponent implements OnInit, OnDestroy {
+export class UpdatesTimelineComponent implements OnInit, OnDestroy {
 
 	currentUserFundedProjectUpdates: ProjectUpdate[] = [];
 
@@ -75,6 +75,70 @@ export class TimelineComponent implements OnInit, OnDestroy {
 		for (let i = 0; i < this.timelineIntervals.length; i++) {
 			console.log('clear chat interval no', i);
 			window.clearInterval(this.timelineIntervals[i]);
+		}
+	}
+
+}
+
+@Component({
+	moduleId: module.id,
+	selector: 'lastUsersTimeline-cmp',
+	templateUrl: 'lastUsersTimeline.html',
+	styleUrls: ['timeline.css'],
+})
+export class LastUsersTimelineComponent implements OnInit, OnDestroy {
+
+	lastUsers: GenericUser[] = [];
+
+	
+	lastUsersIntervals: Array<any> = [];
+
+	constructor(
+		private alertService: AlertService,
+		private authGuard: AuthGuard,
+		private userService: UserService,
+	) { }
+
+	ngOnInit() {
+
+		
+		if (!localStorage.getItem('currentUser')) {
+			let self = this;
+			// first loading
+			self.userService
+				.getLastTenUsers()
+				.subscribe(
+				(data: GenericUser[]) => {
+					console.log('Last Ten Registered Users in home...');
+					self.lastUsers = data;
+				},
+				(err: any) => {
+					self.alertService.error(err);
+					console.log('ERROR: ', err);
+				});
+			// interval loading	
+			this.lastUsersIntervals.push(
+				window.setInterval(function () {
+					self.userService
+						.getLastTenUsers()
+						.subscribe(
+						(data: GenericUser[]) => {
+							console.log('Last Ten Registered Users in home...');
+							self.lastUsers = data;
+						},
+						(err: any) => {
+							self.alertService.error(err);
+							console.log('ERROR: ', err);
+						});
+				}, 10000)
+			);
+		}
+	}
+
+	ngOnDestroy() {
+		for (let i = 0; i < this.lastUsersIntervals.length; i++) {
+			console.log('clear chat interval no', i);
+			window.clearInterval(this.lastUsersIntervals[i]);
 		}
 	}
 
@@ -228,13 +292,26 @@ export class HomeComponent implements OnInit, OnDestroy {
 				});
 
 			let self = this;
+			//first loading
+			self.userService
+						.getUserFundedCompletedProjects(false)
+						.subscribe(
+						(data: Project[]) => {
+							console.log('Projects Completed in home...');
+							self.projectsToNotify = data;
+						},
+						(err: any) => {
+							self.alertService.error(err);
+							console.log('ERROR: ', err);
+						});
+			//intervals
 			this.homeIntervals.push(
 				window.setInterval(function () {
 					self.userService
 						.getUserFundedCompletedProjects(false)
 						.subscribe(
 						(data: Project[]) => {
-							console.log('Projects Com in home...');
+							console.log('Projects Completed in home...');
 							self.projectsToNotify = data;
 						},
 						(err: any) => {
