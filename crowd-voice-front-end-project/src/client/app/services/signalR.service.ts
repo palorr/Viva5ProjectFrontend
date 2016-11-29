@@ -22,7 +22,7 @@ export class SignalRService {
         this.messageReceived = new EventEmitter<ChatMessage>();
         this.connectionExists = false;
 
-        this.connection = jQuery.hubConnection('http://localhost:54684');
+        this.connection = jQuery.hubConnection('http://viva5chat.azurewebsites.net/');
         console.log('CONNECTION: ', this.connection);
         this.proxy = this.connection.createHubProxy(this.proxyName);
 

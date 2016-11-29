@@ -167,7 +167,7 @@ export class FundingPackagePayComponent implements OnInit {
 					// set success message
 					alert('Successfully backed project!');
 					this.alertService.success('Payment done successfully!', true);
-					window.location.href = "http://localhost:5555/dashboard/projects/view/"+this.projectId;
+					window.location.href = "http://viva5webapi.azurewebsites.net/dashboard/projects/view/"+this.projectId;
 					this.loading = false;
 				},
 				(err) => {
