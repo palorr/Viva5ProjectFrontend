@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
-import { CONFIGURATION } from '../shared/app.constants';
+//import { CONFIGURATION } from '../shared/app.constants';
 import { ChatMessage } from '../models/ChatMessage';
 
 import 'signalr';
@@ -38,6 +38,7 @@ export class SignalRService {
 
     private startConnection(): void {
         this.connection.start().done((data: any) => {
+            console.log('DATA FROM START CONNECTION: ', data);
             console.log('Now connected ' + data.transport.name + ', connection ID= ' + data.id);
             this.connectionEstablished.emit(true);
             this.connectionExists = true;
