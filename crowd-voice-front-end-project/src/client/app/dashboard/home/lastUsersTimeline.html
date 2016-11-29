@@ -11,7 +11,7 @@
         </div>-->
         <div class="timeline-panel">
           <div class="timeline-heading">
-            <h4 class="timeline-title"><a [routerLink]="['/dashboard/users/view/', user.UserId]">
+            <h4 class="timeline-title"><a [routerLink]="['/dashboard/users/view/', user.Id]">
                   {{user.Name}}
                 </a></h4>
             <p><small class="text-muted"><i class="fa fa-clock-o"></i>{{user.CreatedDateTime | date:'medium'}}</small>
