@@ -56,6 +56,10 @@ export class ChatPageComponent implements OnInit {
             
     }
     
+    public onLoseFocus() {
+        this.typingMessageToShow = new TypingMessage('', '');
+    }
+    
     public addNewChatUser(newUser: CurrentUser) {
         this.newUserAdded.UserId = this.currentUser.Id;
         this.newUserAdded.UserName = this.currentUser.Name;
