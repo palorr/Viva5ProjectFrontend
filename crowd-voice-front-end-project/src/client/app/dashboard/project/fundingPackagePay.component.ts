@@ -125,6 +125,9 @@ export class FundingPackagePayComponent implements OnInit {
 			this.loadScript(vivaUrl);
         });
 		
+		jQuery("#amountbox").attr('disabled', true)
+		jQuery(".initVivaButtonHref").hide();
+		
 		let self = this;
 		document.getElementById('myform').onsubmit = function(e: Event) {
 			e.preventDefault();
@@ -138,8 +141,10 @@ export class FundingPackagePayComponent implements OnInit {
 					(data: TransactionResult) => {
 						console.log('SUCCESS IN BACKING: ', data);
 						
-						//if(data.TransactionId && data.ErrorCode === 0)
-						self.saveTransactionToDB(data.TransactionId, self.isDonationPackage);
+						window.document.getElementById("viva-wallet-button").innerHTML = '<span id="viva-wallet-button"></span>';
+						
+						if(data.TransactionId && data.ErrorCode === 0)
+							self.saveTransactionToDB(data.TransactionId, self.isDonationPackage);
 					},
 					(err) => {
 						self.alertService.error(err);
@@ -152,10 +157,12 @@ export class FundingPackagePayComponent implements OnInit {
 	
 	saveTransactionToDB (transcationId: string, isDonation: boolean) {
 		let newFunding = new UserFunding();
+		
 		if(isDonation)
 			newFunding.amountPaid = this.donationAmount;
 		else
 			newFunding.amountPaid = this.fundingPackage.PledgeAmount;
+			
 		newFunding.fundingPackageId = this.fundingPackage.Id;
 		newFunding.transactionId = transcationId;
 		
@@ -166,8 +173,11 @@ export class FundingPackagePayComponent implements OnInit {
 					console.log('SUCCESS IN SAVING BACKING: ', data);
 					// set success message
 					alert('Successfully backed project!');
-					this.alertService.success('Payment done successfully!', true);
-					window.location.href = "http://viva5webapi.azurewebsites.net/dashboard/projects/view/"+this.projectId;
+					
+					//this.alertService.success('Payment done successfully!');
+					
+					window.location.href = "http://viva5webapp.azurewebsites.net/";
+					
 					this.loading = false;
 				},
 				(err) => {
