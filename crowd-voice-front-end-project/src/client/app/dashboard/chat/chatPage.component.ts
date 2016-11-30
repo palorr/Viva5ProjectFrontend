@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { SignalRService } from '../../services/index';
 import { CurrentUserService } from '../../helpers/index';
-import { ChatMessage, CurrentUser } from '../../models/index';
+import { ChatMessage, CurrentUser, TypingMessage } from '../../models/index';
 
 @Component({
     moduleId: module.id,
@@ -16,6 +16,8 @@ export class ChatPageComponent implements OnInit {
     public messageToSend: ChatMessage;
     public allMessages: ChatMessage[];
     public canSendMessage: Boolean;
+    public typingToSend: TypingMessage;
+    public typingMessageToShow: TypingMessage;
     
     currentUser: CurrentUser;
     
@@ -23,6 +25,7 @@ export class ChatPageComponent implements OnInit {
         this.subscribeToEvents();
         this.canSendMessage = _signalRService.connectionExists;
         this.messageToSend = new ChatMessage(null, '', '', null);
+        this.typingToSend = new TypingMessage('', '');
         this.allMessages = new Array<ChatMessage>();
     }
     
@@ -57,6 +60,14 @@ export class ChatPageComponent implements OnInit {
             this._signalRService.sendChatMessage(this.messageToSend);
         }
     }
+    
+    public typeMessage(event: any) {
+        this.typingToSend.FromName = this.currentUser.Name;
+        this.typingToSend.Message = this.currentUser.Name + " is typing a message...";
+    
+        console.log('TYPING TO SEND: ', this.typingToSend);
+        this._signalRService.sendTypingMessage(this.typingToSend);
+    }
 
     private subscribeToEvents(): void {
         this._signalRService.connectionEstablished.subscribe(() => {
@@ -69,7 +80,18 @@ export class ChatPageComponent implements OnInit {
                 (<HTMLInputElement>document.getElementById('messageToSend')).value = '';
                 this.messageToSend = new ChatMessage(null, '', '', null);
                 this.allMessages.push(new ChatMessage(message.FromId, message.FromName, message.Message, message.Sent.toString()));
+                this.typingMessageToShow = new TypingMessage('', '');
             });
         });
+        
+        this._signalRService
+            .typingReceived
+            .subscribe((msg: TypingMessage) => {
+                console.log('GOT MESSAGE: ', msg);
+                this._ngZone.run(() => {
+                    this.typingToSend = new TypingMessage('', '');
+                    this.typingMessageToShow = msg;
+                }); 
+            });
     }
 }

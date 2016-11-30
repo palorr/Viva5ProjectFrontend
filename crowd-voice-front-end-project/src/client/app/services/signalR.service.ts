@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
 //import { CONFIGURATION } from '../shared/app.constants';
-import { ChatMessage } from '../models/ChatMessage';
+import { ChatMessage, TypingMessage } from '../models/index';
 
 import 'signalr';
 import * as jQuery from 'jquery';
@@ -14,16 +14,19 @@ export class SignalRService {
     private connection: any;
 
     public messageReceived: EventEmitter<ChatMessage>;
+    public typingReceived: EventEmitter<TypingMessage>;
     public connectionEstablished: EventEmitter<Boolean>;
     public connectionExists: Boolean;
 
     constructor() {
         this.connectionEstablished = new EventEmitter<Boolean>();
         this.messageReceived = new EventEmitter<ChatMessage>();
+        this.typingReceived = new EventEmitter<TypingMessage>();
+        
         this.connectionExists = false;
 
-        this.connection = jQuery.hubConnection('http://viva5chat.azurewebsites.net/');
-        console.log('CONNECTION: ', this.connection);
+        this.connection = jQuery.hubConnection('http://viva5chat.azurewebsites.net');
+  
         this.proxy = this.connection.createHubProxy(this.proxyName);
 
         this.registerOnServerEvents();
@@ -34,6 +37,11 @@ export class SignalRService {
     public sendChatMessage(message: ChatMessage) {
         console.log('sendChatMessage via this.proxy.invoke ...', this.proxy);
         this.proxy.invoke('SendMessage', message);
+    }
+    
+    public sendTypingMessage(message: TypingMessage) {
+        console.log('sendTypingMessage via this.proxy.invoke ...', this.proxy);
+        this.proxy.invoke('TypeMessage', message);
     }
 
     private startConnection(): void {
@@ -50,8 +58,13 @@ export class SignalRService {
 
     private registerOnServerEvents(): void {
         this.proxy.on('SendMessage', (data: ChatMessage) => {
-            console.log('received in SignalRService: ' + JSON.stringify(data));
+            console.log('received message in SignalRService: ' + JSON.stringify(data));
             this.messageReceived.emit(data);
+        });
+        
+        this.proxy.on('TypeMessage', (data: TypingMessage) => {
+            console.log('received typing in SignalRService: ' + JSON.stringify(data));
+            this.typingReceived.emit(data);
         });
     }
 }

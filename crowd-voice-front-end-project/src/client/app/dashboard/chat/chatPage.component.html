@@ -27,13 +27,19 @@
 		</div>
 	</div>
 	
+	<div *ngIf="typingMessageToShow" class="row">
+		<div class="col-lg-12">
+			{{typingMessageToShow.Message}}
+		</div>
+	</div>
+	
 	<br/>
 	
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="form-group">
 				<label for="message">Message</label>
-				<input type="text" class="form-control" id="messageToSend"
+				<input (keyup)="typeMessage($event)" type="text" class="form-control" id="messageToSend"
 					#messageToSendToClients name="messageToSend" placeholder="Enter your message...">
 			</div>
 			<button (click)="sendMessage(messageToSendToClients.value)" class="btn btn-default" [disabled]="!canSendMessage">Send</button>
