@@ -32,7 +32,7 @@ export class SignalRService {
         
         this.connectionExists = false;
 
-        this.connection = jQuery.hubConnection('http://localhost:54684');
+        this.connection = jQuery.hubConnection('http://viva5chat.azurewebsites.net');
   
         this.proxy = this.connection.createHubProxy(this.proxyName);
 
