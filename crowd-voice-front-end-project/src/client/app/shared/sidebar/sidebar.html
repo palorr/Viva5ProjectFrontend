@@ -34,5 +34,8 @@
         <a [routerLink]="['users/all']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-list"></i> All Users
         </a>
+        <a *ngIf="isUserLoggedIn" [routerLink]="['chat']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-comment"></i> Chat Application
+        </a>
     </ul>
 </nav>

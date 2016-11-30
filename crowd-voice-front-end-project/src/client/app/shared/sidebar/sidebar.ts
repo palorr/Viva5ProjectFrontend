@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
 	moduleId: module.id,
@@ -6,12 +6,24 @@ import { Component } from '@angular/core';
 	templateUrl: 'sidebar.html'
 })
 
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
 	isActive = false;
 	showMenu: string = '';
+	
+	isUserLoggedIn: boolean;
+	
+	ngOnInit() {
+		if (localStorage.getItem('currentUser')) {
+			this.isUserLoggedIn = true;
+		} else {
+			this.isUserLoggedIn = false;
+		}
+	}
+	
 	eventCalled() {
 		this.isActive = !this.isActive;
 	}
+	
 	addExpandClass(element: any) {
 		if (element === this.showMenu) {
 			this.showMenu = '0';
