@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { SignalRService } from '../../services/index';
 import { CurrentUserService } from '../../helpers/index';
-import { ChatMessage, CurrentUser, TypingMessage } from '../../models/index';
+import { ChatMessage, CurrentUser, TypingMessage, ChatUser } from '../../models/index';
 
 @Component({
     moduleId: module.id,
@@ -15,7 +15,12 @@ export class ChatPageComponent implements OnInit {
 
     public messageToSend: ChatMessage;
     public allMessages: ChatMessage[];
+    
+    public newUserAdded: ChatUser;
+    public allChatUsers: ChatUser[];
+    
     public canSendMessage: Boolean;
+    
     public typingToSend: TypingMessage;
     public typingMessageToShow: TypingMessage;
     
@@ -24,9 +29,14 @@ export class ChatPageComponent implements OnInit {
     constructor(private _signalRService: SignalRService, private _ngZone: NgZone, private currentUserService: CurrentUserService) {
         this.subscribeToEvents();
         this.canSendMessage = _signalRService.connectionExists;
+        
         this.messageToSend = new ChatMessage(null, '', '', null);
-        this.typingToSend = new TypingMessage('', '');
         this.allMessages = new Array<ChatMessage>();
+        
+        this.typingToSend = new TypingMessage('', '');
+        
+        this.newUserAdded = new ChatUser(null, '');
+        this.allChatUsers = new Array<ChatUser>();
     }
     
     ngOnInit() {
@@ -35,7 +45,8 @@ export class ChatPageComponent implements OnInit {
 				.subscribe(
 				(data: CurrentUser) => {
 					this.currentUser = data;
-					console.log('Current User: ', this.currentUser);
+                    //this.addNewChatUser(this.currentUser);
+                    console.log('Current User: ', this.currentUser);
 				},
 				(err) => {
 					console.log('ERROR: ', err);
@@ -43,6 +54,14 @@ export class ChatPageComponent implements OnInit {
 
 		}
             
+    }
+    
+    public addNewChatUser(newUser: CurrentUser) {
+        this.newUserAdded.UserId = this.currentUser.Id;
+        this.newUserAdded.UserName = this.currentUser.Name;
+           
+        console.log('CHAT USER TO SEND: ', this.newUserAdded);
+        this._signalRService.sendChatUserMessage(this.newUserAdded);
     }
 
     public sendMessage(textToSend: string) {
@@ -70,19 +89,32 @@ export class ChatPageComponent implements OnInit {
     }
 
     private subscribeToEvents(): void {
-        this._signalRService.connectionEstablished.subscribe(() => {
-            this.canSendMessage = true;
-        });
-
-        this._signalRService.messageReceived.subscribe((message: ChatMessage) => {
-            console.log('GOT MESSAGE: ', message);
-            this._ngZone.run(() => {
-                (<HTMLInputElement>document.getElementById('messageToSend')).value = '';
-                this.messageToSend = new ChatMessage(null, '', '', null);
-                this.allMessages.push(new ChatMessage(message.FromId, message.FromName, message.Message, message.Sent.toString()));
-                this.typingMessageToShow = new TypingMessage('', '');
+        this._signalRService
+            .connectionEstablished
+            .subscribe(() => {
+                this.canSendMessage = true;
             });
-        });
+            
+        this._signalRService
+            .newChatUserAdded
+            .subscribe((newUsers: ChatUser[]) => {
+                this._ngZone.run(() => {
+                    this.newUserAdded = new ChatUser(null, '');
+                    this.allChatUsers = newUsers;
+                });
+            });
+
+        this._signalRService
+            .messageReceived
+            .subscribe((message: ChatMessage) => {
+                console.log('GOT MESSAGE: ', message);
+                this._ngZone.run(() => {
+                    (<HTMLInputElement>document.getElementById('messageToSend')).value = '';
+                    this.messageToSend = new ChatMessage(null, '', '', null);
+                    this.allMessages.push(new ChatMessage(message.FromId, message.FromName, message.Message, message.Sent.toString()));
+                    this.typingMessageToShow = new TypingMessage('', '');
+                });
+            });
         
         this._signalRService
             .typingReceived

@@ -19,4 +19,5 @@ export * from './vivaWalletToken';
 export * from './userFunding';
 export * from './transactionResult';
 export * from './chatMessage';
+export * from './chatUser';
 export * from './typingMessage';
