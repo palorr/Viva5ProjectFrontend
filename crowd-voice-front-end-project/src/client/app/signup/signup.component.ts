@@ -43,7 +43,7 @@ export class SignupComponent {
 		}
         
 		//alert(`registered!!! ${JSON.stringify(this.user)}`);
-		
+		console.log('USER TO REGISTER: ', this.user);
         this.registrationService.registerUser(this.user.username, this.user.name, this.user.password, this.user.repeatPassword)
             .subscribe(
                 (data) => {
