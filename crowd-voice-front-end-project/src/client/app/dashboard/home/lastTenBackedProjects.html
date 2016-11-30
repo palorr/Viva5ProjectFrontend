@@ -1,0 +1,35 @@
+<div *ngIf="backedProjects && backedProjects.length > 0" class="chat-panel card card-default">
+    <div class="card-header">
+        <i class="fa fa-comments fa-fw"></i>
+        Last Donations
+    </div>
+    <!-- /.panel-heading -->
+    <div class="card-block">
+      <ul class="chat">
+        <li *ngFor="let back of backedProjects; let i = index"
+            [ngClass]="{'left': i % 2 == 0, 'right': i % 2 == 1, 'clearfix': true}"
+            >
+          
+          <div class="chat-body clearfix">
+            <div class="header">
+              <strong class="primary-font">
+                <a [routerLink]="['/dashboard/users/view', back.UserId]">
+                  {{back.UserName}}
+                </a>
+                <i class="fa fa-caret-right" aria-hidden="true"></i>
+                <a [routerLink]="['/dashboard/projects/view', back.ProjectId]">
+                  {{back.ProjectTitle}}
+                </a>
+              </strong>
+              <small class="pull-right text-muted">
+                <i class="fa fa-clock-o fa-fw"></i> {{back.WhenDateTime | date:'medium'}}
+              </small>
+            </div>
+            <p>
+              Just donated: {{back.AmountPaid}}  <i class="fa fa-euro"></i>
+            </p>
+          </div>
+        </li>
+    </ul>
+  </div>
+</div>

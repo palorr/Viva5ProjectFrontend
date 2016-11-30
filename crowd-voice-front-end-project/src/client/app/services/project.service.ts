@@ -44,6 +44,23 @@ export class ProjectService {
                    });
         
     }
+
+    getLastTenBackedProjects(){
+        let URL = 'http://viva5webapi.azurewebsites.net/api/projects/lastTenBackedProjects';
+        
+        let headers = new Headers({
+            'Accept': 'application/json'
+        });
+        
+        let options = new RequestOptions({ headers: headers });
+        
+        return this.http
+                   .get(URL, options)
+                   .map((response: Response) => response.json())
+                   .catch(err => {
+                       throw(err.json());
+                   });
+    }
     
     getAllProjectsByCategory(projectCategoryId: number) {
         let URL = 'http://viva5webapi.azurewebsites.net/api/projects/getAllProjectsByCategory/'+projectCategoryId;

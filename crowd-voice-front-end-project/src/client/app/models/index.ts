@@ -21,3 +21,4 @@ export * from './transactionResult';
 export * from './chatMessage';
 export * from './chatUser';
 export * from './typingMessage';
+export * from './backedProject';

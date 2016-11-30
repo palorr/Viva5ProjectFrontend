@@ -3,16 +3,13 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { ProjectService, AlertService, UserService, ProjectCommentService } from '../../services/index';
 
-import { Project, ProjectCommentFromServer, ProjectUpdate, GenericUser } from '../../models/index';
+import { Project, ProjectCommentFromServer, ProjectUpdate, GenericUser , backedProject } from '../../models/index';
 
 import { CurrentUserService } from '../../helpers/index';
 
 import { AuthGuard } from '../../guards/index';
 
-/**
-*	This class represents the lazy loaded HomeComponent.
-*/
-
+///////////////////////////////////////////////////////////////////////
 @Component({
 	moduleId: module.id,
 	selector: 'updatesTimeline-cmp',
@@ -79,7 +76,73 @@ export class UpdatesTimelineComponent implements OnInit, OnDestroy {
 	}
 
 }
+///////////////////////////////////////////////////////////////////////
+@Component({
+	moduleId: module.id,
+	selector: 'lastBacks-cmp',
+	templateUrl: 'lastTenBackedProjects.html'
+})
+export class BacksTimelineComponent implements OnInit, OnDestroy {
 
+	backedProjects: backedProject[] = [];
+
+	isRequestorLoggedIn: boolean;
+
+	timelineIntervals: Array<any> = [];
+
+	constructor(
+		private alertService: AlertService,
+		private authGuard: AuthGuard,
+		private projectService: ProjectService,
+	) { }
+
+	ngOnInit() {
+
+		if (this.authGuard.isUserLoggedIn())
+			this.isRequestorLoggedIn = true;
+
+		if (!localStorage.getItem('currentUser')) {
+			let self = this;
+			// first loading
+			self.projectService
+				.getLastTenBackedProjects()
+				.subscribe(
+				(data: backedProject[]) => {
+					console.log('Last 10 backed projects in home ...');
+					self.backedProjects = data;
+				},
+				(err: any) => {
+					self.alertService.error(err);
+					console.log('ERROR: ', err);
+				});
+			// interval loading	
+			this.timelineIntervals.push(
+				window.setInterval(function () {
+					self.projectService
+						.getLastTenBackedProjects()
+						.subscribe(
+						(data: backedProject[]) => {
+							console.log('Last 10 backed projects in home ...');
+							self.backedProjects = data;
+						},
+						(err: any) => {
+							self.alertService.error(err);
+							console.log('ERROR: ', err);
+						});
+				}, 10000)
+			);
+		}
+	}
+
+	ngOnDestroy() {
+		for (let i = 0; i < this.timelineIntervals.length; i++) {
+			console.log('clear chat interval no', i);
+			window.clearInterval(this.timelineIntervals[i]);
+		}
+	}
+
+}
+///////////////////////////////////////////////////////////////////////
 @Component({
 	moduleId: module.id,
 	selector: 'lastUsersTimeline-cmp',
@@ -130,7 +193,7 @@ export class LastUsersTimelineComponent implements OnInit, OnDestroy {
 							self.alertService.error(err);
 							console.log('ERROR: ', err);
 						});
-				}, 10000)
+				}, 50000)
 			);
 		}
 	}
@@ -143,7 +206,7 @@ export class LastUsersTimelineComponent implements OnInit, OnDestroy {
 	}
 
 }
-
+///////////////////////////////////////////////////////////////////////
 @Component({
 	moduleId: module.id,
 	selector: 'chat-cmp',
@@ -207,7 +270,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 		}
 	}
 }
-
+///////////////////////////////////////////////////////////////////////
 @Component({
 	moduleId: module.id,
 	selector: 'notifications-cmp',
@@ -216,7 +279,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 export class NotificationComponent {
 	@Input() projects: Project[] = [];
 }
-
+///////////////////////////////////////////////////////////////////////
 @Component({
 	moduleId: module.id,
 	selector: 'home-cmp',
@@ -343,3 +406,4 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 	/* END */
 }
+///////////////////////////////////////////////////////////////////////

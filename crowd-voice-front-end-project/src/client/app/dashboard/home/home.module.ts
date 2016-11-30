@@ -4,12 +4,12 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { CarouselModule, DropdownModule, AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
 
-import { UpdatesTimelineComponent, ChatComponent, NotificationComponent , LastUsersTimelineComponent } from './home.component';
+import { UpdatesTimelineComponent, ChatComponent, NotificationComponent , LastUsersTimelineComponent ,BacksTimelineComponent } from './home.component';
 
 @NgModule({
     imports: [RouterModule, CommonModule, CarouselModule, DropdownModule, AlertModule],
-    declarations: [HomeComponent, UpdatesTimelineComponent,LastUsersTimelineComponent, ChatComponent, NotificationComponent],
-    exports: [HomeComponent, UpdatesTimelineComponent,LastUsersTimelineComponent, ChatComponent, NotificationComponent]
+    declarations: [HomeComponent, UpdatesTimelineComponent,LastUsersTimelineComponent, ChatComponent, NotificationComponent, BacksTimelineComponent],
+    exports: [HomeComponent, UpdatesTimelineComponent,LastUsersTimelineComponent, ChatComponent, NotificationComponent, BacksTimelineComponent]
 })
 
 export class HomeModule { }
