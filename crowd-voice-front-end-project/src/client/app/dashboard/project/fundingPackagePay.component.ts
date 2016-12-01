@@ -125,7 +125,7 @@ export class FundingPackagePayComponent implements OnInit {
 			this.loadScript(vivaUrl);
         });
 		
-		jQuery("#amountbox").attr('disabled', true)
+		jQuery("#amountbox").prop('disabled', true);
 		jQuery(".initVivaButtonHref").hide();
 		
 		let self = this;
