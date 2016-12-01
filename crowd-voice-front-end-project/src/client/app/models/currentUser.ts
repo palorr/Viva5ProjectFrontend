@@ -7,4 +7,5 @@ export class CurrentUser {
 	ShortBio: string;
 	AvatarImage: string;
 	Username: string;	
+	IsAdmin: boolean;
 }

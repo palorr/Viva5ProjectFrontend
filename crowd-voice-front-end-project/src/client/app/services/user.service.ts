@@ -109,6 +109,7 @@ export class UserService {
 
 
     }
+    
     getAllUsersByName(searchTerm: string) {
         let URL = 'http://viva5webapi.azurewebsites.net/api/users/getAllUsersByName/' + searchTerm;
 
@@ -126,6 +127,7 @@ export class UserService {
             });
 
     }
+    
     isRequestorThisUser(Username: string) {
 
         if (localStorage.getItem('currentUser').includes(Username)) {
@@ -177,6 +179,19 @@ export class UserService {
                 console.log('CATCH: ', res.json());
                 throw (res.json());
             });
+    }
+    
+    getAdminPanelInfo() {
+        let URL = 'http://viva5webapi.azurewebsites.net/api/users/getAdminPanelInfo';
+
+        let options = this.jwt();
+        return this.http
+                    .get(URL, options)
+                    .map((response: Response) => response.json())
+                    .catch(res => {
+                        console.log('CATCH: ', res.json());
+                        throw (res.json());
+                    });
     }
 
     private jwt() {

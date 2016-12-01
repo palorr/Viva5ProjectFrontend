@@ -14,6 +14,8 @@ import { BlankPageModule } from './blank-page/blankPage.module';
 
 import { ChatPageModule } from './chat/chatPage.module';
 
+import { AdminPanelModule } from './adminPanel/adminPanel.module';
+
 import { DashboardComponent } from './dashboard.component';
 
 import {TopNavComponent} from '../shared/index';
@@ -29,6 +31,7 @@ import {SidebarComponent} from '../shared/index';
         ProjectModule,
     	HomeModule,
         ChatPageModule,
+        AdminPanelModule,
         BlankPageModule,
         UserModule
     ],

@@ -3,6 +3,7 @@ import { ProjectRoutes } from './project/index';
 import { HomeRoutes } from './home/index';
 import { BlankPageRoutes } from './blank-page/index';
 import { ChatPageRoutes } from './chat/index';
+import { AdminPanelRoutes } from './adminPanel/index';
 import { UserRoutes } from './user/user.routes';
 import { DashboardComponent } from './index';
 
@@ -15,7 +16,8 @@ export const DashboardRoutes: Route[] = [
         ...HomeRoutes,
         ...BlankPageRoutes,
         ...UserRoutes,
-        ...ChatPageRoutes
+        ...ChatPageRoutes,
+        ...AdminPanelRoutes
     	]
   	}
 ];

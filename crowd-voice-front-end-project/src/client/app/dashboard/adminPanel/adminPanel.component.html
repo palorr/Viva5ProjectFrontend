@@ -1,0 +1,66 @@
+<div *ngIf="adminPanelView" class="container-fluid">
+	<div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Admin Report Page
+            </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="Javascript:void(0)" routerLink="/dashboard/home">Home</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-lock"></i> Admin Report Page
+                </li>
+            </ol>
+        </div>
+    </div>
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="jumbotron">
+			     <span>
+                    <i class="fa fa-users"></i> Total Registered Users: {{adminPanelView.NoOfTotalUsers}}
+			     </span>
+                 <hr/>
+                 <span>
+                    <i class="fa fa-pencil-square-o"></i> Total Project Updates: {{adminPanelView.NoOfTotalProjectUpdates}}
+                 </span>
+                 <hr/>
+                 <div class="card">
+                    <div class="card-header">Projects By Category</div>
+                    <div style="margin: 10px; padding: 10px;" class="card-body">
+                        <div *ngFor="let projectCountByCat of adminPanelView.NoOfProjectsPerCategory">
+                            Category: {{projectCountByCat.CategoryName}} | Count: {{projectCountByCat.NoOfProjects}}
+                        </div>
+                    </div>
+                 </div>
+                 <hr/>
+                 <div class="card">
+                    <div class="card-header">Projects By Status</div>
+                    <div style="margin: 10px; padding: 10px;" class="card-body">
+                        <div *ngFor="let projectCountByStat of adminPanelView.NoOfProjectsPerStatus">
+                            Status: 
+                            <span [ngSwitch]="projectCountByStat.ProjectStatus">
+                                <span *ngSwitchCase="'CRE'">Under Funding</span>
+                                <span *ngSwitchCase="'COM'">Completed</span>
+                                <span *ngSwitchCase="'FAI'">Failed</span>
+                            </span> 
+                            | Count: {{projectCountByStat.NoOfProjects}}
+                        </div>
+                    </div>
+                 </div>
+                 <hr/>
+                 <span>
+                    <i class="fa fa-money"></i> Total Money Pledged: {{adminPanelView.GlobalProjectStats?.NoOfTotalMoneyPledged}} <i class="fa fa-euro"></i>
+                    <hr/>
+                    <i class="fa fa-share-alt"></i> Total External Shares: {{adminPanelView.GlobalProjectStats?.NoOfTotalExternalShares}}
+                    <hr/>
+                    <i class="fa fa-comment"></i> Total Project Comments: {{adminPanelView.GlobalProjectStats?.NoOfTotalProjectComments}}
+                    <hr/>
+                    <i class="fa fa-euro"></i> Total Project Backings: {{adminPanelView.GlobalProjectStats?.NoOfTotalBackings}}
+                 </span>
+            </div>
+		</div>
+	</div>
+	
+</div>
