@@ -126,7 +126,10 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             .subscribe((message: ChatMessage) => {
                 console.log('GOT MESSAGE: ', message);
                 this._ngZone.run(() => {
-                    (<HTMLInputElement>document.getElementById('messageToSend')).value = '';
+                    if(message.FromId == this.currentUser.Id) {
+                        (<HTMLInputElement>document.getElementById('messageToSend')).value = '';
+                    }
+                    
                     this.messageToSend = new ChatMessage(null, '', '', null);
                     this.allMessages.push(new ChatMessage(message.FromId, message.FromName, message.Message, message.Sent.toString()));
                     this.typingMessageToShow = new TypingMessage('', '');
