@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { SignalRService } from '../../services/index';
@@ -11,7 +11,7 @@ import { ChatMessage, CurrentUser, TypingMessage, ChatUser } from '../../models/
     templateUrl: 'chatPage.component.html'
 })
 
-export class ChatPageComponent implements OnInit {
+export class ChatPageComponent implements OnInit, OnDestroy {
 
     public loading = false;
     
@@ -30,7 +30,7 @@ export class ChatPageComponent implements OnInit {
     
     constructor(private _signalRService: SignalRService, private _ngZone: NgZone, private currentUserService: CurrentUserService) {
         this.subscribeToEvents();
-        this.canSendMessage = _signalRService.connectionExists;
+        this.canSendMessage = this._signalRService.connectionExists;
         
         this.messageToSend = new ChatMessage(null, '', '', null);
         this.allMessages = new Array<ChatMessage>();
@@ -42,7 +42,9 @@ export class ChatPageComponent implements OnInit {
     }
     
     ngOnInit() {
-        this.loading = true;
+        if(!this._signalRService.connectionExists) {
+            this.loading = true;
+        }
         
         if (localStorage.getItem('currentUser')) {
 			this.currentUserService.getUserMainInfo()
@@ -59,6 +61,10 @@ export class ChatPageComponent implements OnInit {
 		}
             
     }
+    
+    ngOnDestroy() {
+        
+	}
     
     public onLoseFocus() {
         this.typingMessageToShow = new TypingMessage('', '');
@@ -100,8 +106,10 @@ export class ChatPageComponent implements OnInit {
         this._signalRService
             .connectionEstablished
             .subscribe(() => {
-                this.loading = false;
-                this.canSendMessage = true;
+                this._ngZone.run(() => {
+                    this.loading = false;
+                    this.canSendMessage = true;
+                });
             });
             
         this._signalRService
