@@ -6,9 +6,11 @@ import { CarouselModule, DropdownModule, AlertModule } from 'ng2-bootstrap/ng2-b
 
 import { UpdatesTimelineComponent, ChatComponent, NotificationComponent , LastUsersTimelineComponent ,BacksTimelineComponent } from './home.component';
 
+import { TruncatePipe }   from '../../pipes/truncate.pipe';
+
 @NgModule({
     imports: [RouterModule, CommonModule, CarouselModule, DropdownModule, AlertModule],
-    declarations: [HomeComponent, UpdatesTimelineComponent,LastUsersTimelineComponent, ChatComponent, NotificationComponent, BacksTimelineComponent],
+    declarations: [TruncatePipe, HomeComponent, UpdatesTimelineComponent,LastUsersTimelineComponent, ChatComponent, NotificationComponent, BacksTimelineComponent],
     exports: [HomeComponent, UpdatesTimelineComponent,LastUsersTimelineComponent, ChatComponent, NotificationComponent, BacksTimelineComponent]
 })
 

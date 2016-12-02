@@ -27,7 +27,7 @@ export class UpdatesTimelineComponent implements OnInit, OnDestroy {
 	constructor(
 		private alertService: AlertService,
 		private authGuard: AuthGuard,
-		private userService: UserService,
+		private userService: UserService
 	) { }
 
 	ngOnInit() {
@@ -159,7 +159,7 @@ export class LastUsersTimelineComponent implements OnInit, OnDestroy {
 	constructor(
 		private alertService: AlertService,
 		private authGuard: AuthGuard,
-		private userService: UserService,
+		private userService: UserService
 	) { }
 
 	ngOnInit() {
@@ -304,16 +304,16 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 	slides: Array<any> = [];
 	imgUrl: Array<any> = [
-		`assets/img/slider.jpg`,
-		`assets/img/slider.jpg`,
-		`assets/img/slider.jpg`,
-		`assets/img/slider.jpg`,
-		`assets/img/slider.jpg`,
-		`assets/img/slider.jpg`,
-		`assets/img/slider.jpg`,
-		`assets/img/slider.jpg`,
-		`assets/img/slider.jpg`,
-		`assets/img/slider.jpg`
+		`assets/img/trending0.jpg`,
+		`assets/img/trending1.jpg`,
+		`assets/img/trending2.jpg`,
+		`assets/img/trending3.jpg`,
+		`assets/img/trending4.jpg`,
+		`assets/img/trending5.jpg`,
+		`assets/img/trending6.jpg`,
+		`assets/img/trending7.jpg`,
+		`assets/img/trending8.jpg`,
+		`assets/img/trending9.jpg`,
 	];
 
 	/* END */
@@ -401,7 +401,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 		this.slides.push({
 			image: this.imgUrl[i],
 			title: this.projects[i].Title,
-			description: this.projects[i].Description
+			description: this.projects[i].Description,
+			projectId: this.projects[i].Id
 		});
 	}
 	/* END */
