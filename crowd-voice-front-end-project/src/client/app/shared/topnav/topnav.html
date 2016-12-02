@@ -17,7 +17,7 @@
                                 <a class="dropdown-item"  [routerLink]="['users/edit', currentUser.Id]"><i class="fa fa-fw fa-edit"></i> Edit Profile</a>
                             </li>
                             <li *ngIf="currentUser.IsAdmin">
-                                <a class="dropdown-item"  [routerLink]="['users/edit', currentUser.Id]"><i class="fa fa-fw fa-lock"></i> Admin Panel</a>
+                                <a class="dropdown-item"  [routerLink]="['adminPanel']"><i class="fa fa-fw fa-lock"></i> Admin Panel</a>
                             </li>
                             <li class="divider"></li>
                             <li>
