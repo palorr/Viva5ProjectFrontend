@@ -13,7 +13,6 @@ import { SignupModule } from './signup/signup.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
 
-import { AlertComponent } from './directives/index';
 import { 
 	AlertService, 
 	AuthenticationService, 
@@ -44,8 +43,7 @@ import { CurrentUserService } from './helpers/index'
 		SharedModule.forRoot()
 	],
 	declarations: [
-		AppComponent,
-        AlertComponent
+		AppComponent
 	],
 	providers: [
 		{

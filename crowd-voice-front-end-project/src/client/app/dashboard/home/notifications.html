@@ -1,7 +1,7 @@
 <div *ngIf="projects" class="panel-body">
   <div class="list-group">
     <span *ngIf="projects">
-      <a href="#" class="list-group-item" *ngFor="let project of projects">
+      <a href="#" [routerLink]="['/dashboard/projects/view', project.Id]" class="list-group-item" *ngFor="let project of projects">
         <i class="fa fa-comment fa-fw"></i> {{project.Title}}
               <span class="pull-right text-muted small">
                 <em><i class="fa fa-clock-o"></i> {{project.UpdatedDate | date:'medium'}}</em>
