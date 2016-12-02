@@ -46,13 +46,9 @@
 				
                 <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!createProjectUpdateForm.form.valid">Create Project Update</button>
 				<span *ngIf="loading">
-					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
-					<span class="sr-only">Loading...</span>
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> Creating Project Update...
 				</span>
                 
-                <!--
-                    <button type="reset" class="btn btn-secondary" (click)="form.reset();">Reset</button>
-                -->
             </form>
 
         </div>

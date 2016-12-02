@@ -13,6 +13,8 @@ import { ChatMessage, CurrentUser, TypingMessage, ChatUser } from '../../models/
 
 export class ChatPageComponent implements OnInit {
 
+    public loading = false;
+    
     public messageToSend: ChatMessage;
     public allMessages: ChatMessage[];
     
@@ -40,6 +42,8 @@ export class ChatPageComponent implements OnInit {
     }
     
     ngOnInit() {
+        this.loading = true;
+        
         if (localStorage.getItem('currentUser')) {
 			this.currentUserService.getUserMainInfo()
 				.subscribe(
@@ -96,6 +100,7 @@ export class ChatPageComponent implements OnInit {
         this._signalRService
             .connectionEstablished
             .subscribe(() => {
+                this.loading = false;
                 this.canSendMessage = true;
             });
             

@@ -53,12 +53,8 @@
                 <!--loading-->
                 <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!editUserForm.form.valid">Save</button>
 				<span *ngIf="loading">
-					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
-					<span class="sr-only">Loading...</span>
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> Saving changes...
 				</span>
-                <!--
-                    <button type="reset" class="btn btn-secondary" (click)="form.reset();">Reset</button>
-                -->
             </form>
 
         </div>
