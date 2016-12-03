@@ -1,51 +1,50 @@
 <div class="container-fluid">
 	<div class="row">
-        <div class="col-lg-12">
-            <h2 class="page-header">
-                Chat Page
-            </h2>
-            <ol class="breadcrumb">
-                <li>
-                    <i class="fa fa-dashboard"></i>  <a href="Javascript:void(0)" routerLink="/dashboard/home">Home</a>
-                </li>
-                <li class="active">
-                    <i class="fa fa-comment"></i> Chat Page
-                </li>
-            </ol>
-        </div>
-    </div>
-	
+		<div class="col-lg-12">
+			<h2 class="page-header">
+				Chat Page
+			</h2>
+			<ol class="breadcrumb">
+				<li>
+					<i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" routerLink="/dashboard/home">Home</a>
+				</li>
+				<li class="active">
+					<i class="fa fa-comment"></i> Chat Page
+				</li>
+			</ol>
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-lg-12">
 			<ul class="jumbotron">
-				<li *ngFor="let chatMessage of allMessages; let i = index" 
-					[ngClass]="{'light-red-color': chatMessage.FromId == currentUser.Id, 'light-green-color': chatMessage.FromId != currentUser.Id}"
+				<li *ngFor="let chatMessage of allMessages; let i = index" [ngClass]="{'light-red-color': chatMessage.FromId == currentUser.Id, 'light-green-color': chatMessage.FromId != currentUser.Id}"
 					style="list-style: none;">
-					<i class="fa fa-comment"></i> On {{chatMessage.Sent | date:'medium' }} | <a [routerLink]="['/dashboard/users/view', chatMessage.FromId]">{{chatMessage.FromName}}</a> wrote:<br/><strong>{{chatMessage.Message}}</strong>
+					<i class="fa fa-comment"></i> On {{chatMessage.Sent | date:'medium' }} | <a [routerLink]="['/dashboard/users/view', chatMessage.FromId]">{{chatMessage.FromName}}</a>					wrote:<br/><strong>{{chatMessage.Message}}</strong>
 				</li>
 			</ul>
 		</div>
 	</div>
-	
+
 	<div *ngIf="typingMessageToShow" class="row">
 		<div class="col-lg-12">
 			{{typingMessageToShow.Message}}
 		</div>
 	</div>
-	
+
 	<br/>
-	
-	<div *ngIf="!loading" class="row">
-		<div class="col-lg-12">
-			<div class="form-group">
-				<label for="message">Message</label>
-				<input (keyup)="typeMessage($event)" (blur)="onLoseFocus()" type="text" class="form-control" id="messageToSend"
-					#messageToSendToClients name="messageToSend" placeholder="Enter your message...">
+	<form>
+		<div *ngIf="!loading" class="row">
+			<div class="col-lg-12">
+				<div class="form-group">
+					<label for="message">Message</label>
+					<input (keyup)="typeMessage($event)" (blur)="onLoseFocus()" type="text" class="form-control" id="messageToSend" #messageToSendToClients
+						name="messageToSend" placeholder="Enter your message...">
+				</div>
+				<button type="submit" (click)="sendMessage(messageToSendToClients.value);" class="btn btn-default" [disabled]="!canSendMessage">Send</button>
 			</div>
-			<button (click)="sendMessage(messageToSendToClients.value)" class="btn btn-default" [disabled]="!canSendMessage">Send</button>
 		</div>
-	</div>
-	<span *ngIf="loading">
-		<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> Connecting to Chat Server...
-	</span>
+		<span *ngIf="loading">
+			<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> Connecting to Chat Server...
+		</span>
+	</form>
 </div>
