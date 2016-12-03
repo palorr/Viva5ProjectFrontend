@@ -233,13 +233,6 @@ deleteAttachment(id:number){
 this.getAttachments();
 	});
 }
-over(e :AttachmentModel){
-	e.class = true;
-	
-	
-}
-out(e:AttachmentModel){
-	e.class = false;
-}
+
    
 }
