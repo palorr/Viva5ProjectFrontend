@@ -72,6 +72,8 @@
 		<hr/>
 		<p>{{project.Description}}</p>
 		<hr/>
+		<div class="row">
+			<div class="col-lg-6">
 		<p><i class="fa fa-calendar"></i> Created on: {{project.CreatedDate | date:'medium'}}</p>
 		<p><i class="fa fa-calendar"></i> Updated on: {{project.UpdatedDate | date:'medium'}}</p>
 		<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}} <i class="fa fa-euro"></i></p>
@@ -90,13 +92,14 @@
 				Failed
 			</span>
 		</p>
-		<div class="row">
-			<div class="col-lg-9"></div>
-			<strong *ngIf="projectStat" class="col-lg-3 project-stats">
+		</div>
+			<div class="col-lg-6 project-stats">
+			<strong *ngIf="projectStat">
 				<p>Money Pledged / Funding Goal (in <i class="fa fa-euro"></i>): {{projectStat.MoneyPledged}} / {{project.FundingGoal}}</p> 
-				<p>{{completedPercentage}}% complete</p>
+				<p>{{completedPercentage | number}}% complete</p>
 				<p>Backed {{projectStat.BackersNo}} time(s).</p>
 			</strong>
+		</div>
 		</div>
 	</div>
 
@@ -109,8 +112,8 @@
 					<tab heading="Funding Packages" *ngIf="fundingPackages && fundingPackages.length > 0">
 						<div *ngFor="let fundingPackage of fundingPackages">
 							<div class="jumbotron">
-								<a href="javascript:void(0)" *ngIf="fundingPackage.IsRequestorProjectCreator && fundingPackage.PledgeAmount" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'edit']">Edit Funding Package</a>
-								<h1>{{fundingPackage.Title}}</h1>
+								<a href="javascript:void(0)" *ngIf="fundingPackage.IsRequestorProjectCreator && fundingPackage.PledgeAmount" [routerLink]="['/dashboard/projects/', project.Id, 'fundingPackages', fundingPackage.Id, 'edit']" class="edit-project"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Funding Package</a>
+								<h2>{{fundingPackage.Title}}</h2>
 								<p><i class="fa fa-trophy"></i> Reward: {{fundingPackage.Description}}</p>
 								<p *ngIf="fundingPackage.PledgeAmount"><i class="fa fa-money"></i> Pledge Amount: {{fundingPackage.PledgeAmount}} <i class="fa fa-euro"></i></p>
 								<p><i class="fa fa-clock-o"></i> {{fundingPackage.WhenDateTime | date:'medium'}}</p>
@@ -125,8 +128,8 @@
 					<tab heading="Project Updates" *ngIf="projectUpdates && projectUpdates.length > 0">
 						<div *ngFor="let update of projectUpdates">
 							<div class="jumbotron">
-								<a *ngIf="update.IsRequestorProjectCreator" [routerLink]="['/dashboard/projects/', project.Id, 'updates', update.Id, 'edit']">Edit Project Update</a>
-								<h1>{{update.Title}}</h1>
+								<a *ngIf="update.IsRequestorProjectCreator" [routerLink]="['/dashboard/projects/', project.Id, 'updates', update.Id, 'edit']" class="edit-project"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Project Update</a>
+								<h2>{{update.Title}}</h2>
 								<p>{{update.Description}}</p>
 								<p><i class="fa fa-clock-o"></i> {{update.WhenDateTime | date:'medium'}}</p>
 							</div>
@@ -138,8 +141,7 @@
 						<div *ngFor="let comment of projectComments">
 							<div class="jumbotron">
 								<span *ngIf="comment.IsRequestorProjectCommentCreator">
-									<a [routerLink]="['/dashboard/projects/', project.Id, 'comments', comment.Id, 'edit']">Edit Project Comment</a>
-									<br/><br/>
+									<a [routerLink]="['/dashboard/projects/', project.Id, 'comments', comment.Id, 'edit']" class="edit-project"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Project Comment</a>
 								</span>
 								<i class="fa fa-user"></i> <a [routerLink]="['/dashboard/users/view', comment.UserId]">{{comment.Name}}</a>
 								<p>{{comment.Description}}</p>

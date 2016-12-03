@@ -14,17 +14,13 @@
 			</ol>
 		</div>
 	</div>
-	<div *ngFor="let user of users">
-		<div class="col-lg-12 jumbotron card card-block">
+		<div class="col-lg-3 jumbotron card card-block user-list" *ngFor="let user of users">
 			<h3><a [routerLink]="['/dashboard/users/view', user.Id]">{{user.Name}}</a></h3>
-			<hr/>
-			
-			<img [src]="user.AvatarImage" alt="AvatarImage" style="max-width: 150px; max-height: 150px; display: block;">
-			<br/>
+			<!--<hr/>-->
+			<img [src]="user.AvatarImage" alt="AvatarImage" style="max-width: 150px; height: 150px; display: block;">
 			<p><i class="fa fa-registered"></i> Registered on: {{user.CreatedDateTime | date:'medium'}}</p>
 		</div>
-		<hr/>
-	</div>
+		<!--<hr/>-->
 	<span *ngIf="users && users.length == 0">
 		<div class="alert alert-info">
 			I am sorry. No users for you here.

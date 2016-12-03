@@ -1,6 +1,13 @@
 <nav class="navbar navbar-dark bg-inverse navbar-fixed-top topnav">
+    <div class="site-nav__left">
+    <a [routerLink]="['projects/all']" [routerLinkActive]="['router-link-active']"><i class="fa fa-wpexplorer" aria-hidden="true"></i>Explore</a>
+    <a [routerLink]="['/dashboard/projects/create']">Create Project</a>
+    </div>
+    <div class="site-nav__middle">
+    <a class="navbar-brand" [routerLink]="['/dashboard/home']"><i class="fa fa-users"></i> CrowdVoice</a>
+    </div>
+    <div class="site-nav__right">
     <div class="collapse navbar-toggleable-xs clearfix text-center">
-        <a class="navbar-brand" [routerLink]="['/dashboard/home']"><i class="fa fa-users"></i> CrowdVoice</a>
         
         <ul class="nav navbar-nav top-nav navbar-right pull-xs-right top-right-nav">
             <span [ngSwitch]="isLoggedIn">
@@ -42,5 +49,6 @@
                 </span>
             </span>
         </ul>
+    </div>
     </div>
 </nav>

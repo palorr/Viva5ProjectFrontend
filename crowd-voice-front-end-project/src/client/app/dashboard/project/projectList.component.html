@@ -16,10 +16,14 @@
 	</div>
 	<div *ngFor="let project of projects">
 		<div class="col-lg-12 jumbotron card card-block">
+		<div class="row">
+				
 			<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
 			<hr/>
+			<div class="col-lg-6 list-project-desc">
 			<p>{{project.Description | limitTo: 450}}</p>
-			<hr/>
+			</div>
+			<div class="col-lg-6 multi-columns">
 			<p><i class="fa fa-calendar"></i> Created on: {{project.CreatedDate | date:'medium'}}</p>
 			<p><i class="fa fa-calendar"></i> Updated on: {{project.UpdatedDate | date:'medium'}}</p>
 			<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}} <i class="fa fa-euro"></i></p>
@@ -38,8 +42,8 @@
 					Failed
 				</span>
 			</p>
+			</div>
 		</div>
-		<hr/>
 	</div>
 	<span *ngIf="projects && projects.length == 0">
 		<div class="alert alert-info">

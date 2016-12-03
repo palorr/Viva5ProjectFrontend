@@ -1,9 +1,9 @@
 <div *ngIf="user" class="container-fluid">
 	<div class="row">
-		<div class="col-lg-12">
-			<h2 class="page-header">
+		<div class="col-lg-4">
+			<!--<h2 class="page-header">
 				User Profile Page
-			</h2>
+			</h2>-->
 			<ol class="breadcrumb">
 				<li>
 					<a href="Javascript:void(0)" routerLink="/dashboard/home">Home</a>
@@ -13,10 +13,10 @@
 				</li>
 			</ol>
 		</div>
-	</div>
-	<!--here we have the options for logedInAndMyself user-->
-	<div class="row" *ngIf="isRequestorThisUser">
-        <div class="col-lg-12">
+		<div class="col-lg-4">
+		</div>
+		<div class="row" *ngIf="isRequestorThisUser">
+        <div class="col-lg-4">
             <ol class="breadcrumb">
                 <li>
                     <i class="fa fa-edit"></i> <a [routerLink]="['/dashboard/users/edit', user.Id]">Edit Profile</a>
@@ -28,11 +28,13 @@
         </div>
 		<hr/>
     </div>
+	</div>
+	<!--here we have the options for logedInAndMyself user-->
 
 	<!-- /.row -->
-	<div class="col-lg-12 card card-block" *ngIf="user">
+	<div class="col-lg-12 card card-block bio" *ngIf="user">
 		<div class="col-lg-12">
-			<img [src]="user.AvatarImage" alt="AvatarImage" style="max-width: 500px; max-height: 500px; display: block; margin-left: auto; margin-right: auto;">
+			<img [src]="user.AvatarImage" alt="AvatarImage" style="border-radius: 50%; width: 150px; display: block; margin-left: auto; margin-right: auto;">
 			<br/>
 			<h3>{{user.Name}}</h3>
 			<p><i class="fa fa-registered"></i> Registered on: {{user.CreatedDateTime | date:'medium'}}</p>
@@ -49,12 +51,16 @@
 					
 					<tab heading="Owned Projects" *ngIf="createdProjects && createdProjects.length > 0">
 						<div *ngFor="let project of createdProjects">
-							<div class="jumbotron">
+							<div class="jumbotron project-details">
+								<div class="col-lg-6">
 								<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
 								<p>{{project.Description}}</p>
+								</div>
+								<div class="col-lg-6">
 								<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}}<i class="fa fa-euro"></i></p>
 								<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | date:'medium'}}</p>
 								<p><i class="fa fa-list"></i> Project Category: {{project.ProjectCategoryDesc}}</p>
+								</div>
 							</div>
 							<hr/>
 						</div>
@@ -62,14 +68,18 @@
 	
 					<tab heading="Backed Projects" *ngIf="backedProjects && backedProjects.length > 0">
 						<div *ngFor="let project of backedProjects">
-							<div class="jumbotron">
+							<div class="jumbotron project-details">
+								<div class="col-lg-6">
 								<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
 								<p>{{project.Description}}</p>
+								</div>
+								<div class="col-lg-6">
 								<p><i class="fa fa-user"></i> Project Owner: <a [routerLink]="['/dashboard/users/view', project.OwnerId]">{{project.OwnerName}}</a></p>
 								<p><i class="fa fa-clock-o"></i> Created on: {{project.CreatedDate | date:'medium'}}</p>
 								<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}}<i class="fa fa-euro"></i></p>
 								<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | date:'medium'}}</p>
 								<p><i class="fa fa-list"></i> Project Category: {{project.ProjectCategoryDesc}}</p>
+								</div>
 							</div>
 							<hr/>
 						</div>
