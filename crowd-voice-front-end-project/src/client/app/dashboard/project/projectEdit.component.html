@@ -1,3 +1,5 @@
+<tabset>
+<tab heading="Project Edit" >
 <div *ngIf="project" class="container-fluid">
     <!-- Page Heading -->
     <div class="row">
@@ -60,9 +62,13 @@
 				
                 <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!editProjectForm.form.valid">Edit Project</button>
 				<span *ngIf="loading">
-					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> Saving your changes...
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+					<span class="sr-only">Loading...</span>
 				</span>
                 
+                <!--
+                    <button type="reset" class="btn btn-secondary" (click)="form.reset();">Reset</button>
+                -->
             </form>
 
         </div>
@@ -71,3 +77,75 @@
     <a [routerLink]="['/dashboard/projects/view', project.Id]">Back to View Project</a>
     <!-- /.row -->
 </div>
+</tab>
+<tab heading="Attachments">
+<div class="row" style="padding-top:20px;">
+ <tabset>
+    <tab  style="background: #e6e6e6;padding: 20px;">
+         <template tabHeading>
+      <i class="fa fa-file-image-o" aria-hidden="true"></i> Image Upload
+      </template>
+
+<div class="form-inline" >
+  <div class="form-group">
+    <label for="file"></label>
+     <input type="file" (change)="fileChange($event)" class="btn btn-default" placeholder="Upload file" accept=".png , .jpg"/>
+  </div>
+    <div class="form-group">
+    <label for="Name">Title</label>
+    <input type="text" class="form-control" id="Name" [(ngModel)]="newAttachment.Name" name="Name"/>
+  </div>
+  <div class="form-group">
+    <label for="order">Order</label>
+    <input type="number" class="form-control" id="order"  style="width:80px;" [(ngModel)]="newAttachment.OrderNo" name="OrderNo"/>
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-sm" (click)="saveimage()">Save </button>
+</div>
+    </tab>
+    
+    <tab style="background: #e6e6e6;padding: 20px;" >
+      <template tabHeading>
+       <i class="fa fa-youtube" aria-hidden="true"></i> Video Upload
+      </template>
+<div class="form-inline" >
+     <div class="form-group">
+    <label for="video">Insert Youtube Video Url</label>
+    <input type="text" class="form-control" id="video"  style="width:250px;" name="HtmlCode" [(ngModel)]="videoAttachment.HtmlCode" />
+    </div>
+    <div class="form-group">
+    <label for="Name">Title</label>
+    <input type="text" class="form-control" id="Name" [(ngModel)]="videoAttachment.Name" name="Name"/>
+  </div>
+  <div class="form-group">
+    <label for="order">Order</label>
+    <input type="number" class="form-control" id="order"  style="width:80px;" [(ngModel)]="videoAttachment.OrderNo" name="OrderNo"/>
+  </div>
+    <button type="submit" class="btn btn-primary btn-sm" (click)="saveVideo()">Save </button>
+</div>
+    </tab>
+  </tabset>
+</div>
+<div style="width:100%;" >
+<div class="card" *ngFor="let item of attachments" style="width:300px;float:left;padding:10px;height:250px;" [ngClass]="{'cc-gh':item.class}" (mouseover)='over(item)' (mouseout)="out(item)">
+  <img class="card-img-top" *ngIf="item.FilePath != null" src="{{item.FilePath}}" alt="Card image cap" style="width:100%;height:calc(100% - 35px);">
+    <div *ngIf="item.HtmlCode != null" >
+        <iframe style="width:100%;height:calc(100% - 35px);" [src]='item.url' frameborder="0" allowfullscreen></iframe>
+    </div>
+  <div class="card-block">
+    <p class="card-title">{{item.Name}} <i class="fa fa-trash-o" style="color:red;float:right;cursor:pointer" (click)="deleteAttachment(item.Id)"></i></p> 
+  </div>
+</div>
+</div>
+
+</tab>
+</tabset>
+
+<style>
+.cc-gh{
+    
+    width:350px!important;
+    height:350px!important;
+    
+}
+</style>

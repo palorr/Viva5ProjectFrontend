@@ -26,3 +26,4 @@ export * from './projectCountByStatusModel';
 export * from './projectCountByCategoryModel';
 export * from './globalProjectStatsModel';
 export * from './adminPanelViewModel';
+export * from './attachmentModel';

@@ -3,7 +3,7 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { Project, ProjectUpdate, VivaWalletToken, UserFunding } from '../models/index';
+import { Project, ProjectUpdate, VivaWalletToken, UserFunding  ,AttachmentModel} from '../models/index';
  
 @Injectable()
 export class ProjectService {
@@ -223,6 +223,52 @@ export class ProjectService {
         else {
             return new RequestOptions({});
         }
+    }
+
+
+    /////
+saveProjectAttachemetImage(attachment:AttachmentModel , projectId:number)
+    {
+        let URL ='http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/image';
+        let options = this.jwt();
+
+        let toSend = JSON.stringify(attachment);
+
+        return this.http.post(URL , toSend , options)
+        .map((response:Response) =>response.json())
+       .catch(res => {
+                console.log('CATCH: ', res.json());
+                throw(res.json());
+            });
+    }
+
+    getProjectAttachments(projectId :number)
+    {
+         let URL ='http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/attachmets';
+        let options = this.jwt();
+
+       
+
+        return this.http.get(URL ,  options)
+        .map((response:Response) =>response.json())
+       .catch(res => {
+                console.log('CATCH: ', res.json());
+                throw(res.json());
+            });
+    }
+
+    deleteAttachment(attachmentId:number){
+        let URL ='http://viva5webapi.azurewebsites.net/api/projects/'+attachmentId+'/delete';
+        let options = this.jwt();
+
+       
+
+        return this.http.post(URL ,  null, options)
+        .map((response:Response) =>response.json())
+       .catch(res => {
+                console.log('CATCH: ', res.json());
+                throw(res.json());
+            });
     }
  
 }
