@@ -9,6 +9,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { AlertService } from '../services/index';
+
+import { CONFIGURATION } from '../shared/app.constants';
  
 @Injectable()
 export class AuthorizationGuard {
@@ -21,7 +23,8 @@ export class AuthorizationGuard {
     
     isRequestorProjectCreator(projectId: number) {
         
-        let url = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/isCurrentUserProjectCreator';
+        let url = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/isCurrentUserProjectCreator';
+        //let url = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/isCurrentUserProjectCreator';
         
         let options = this.jwt();
         

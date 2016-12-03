@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { ProjectStat } from '../models/index';
+
+import { CONFIGURATION } from '../shared/app.constants';
  
 @Injectable()
 export class ProjectStatService {
@@ -16,12 +18,14 @@ export class ProjectStatService {
         let options: RequestOptions;
 		
 		if(isLoggedIn) {
-            projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/stats';
+            projectURL = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/stats';
+            //projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/stats';
         
             options = this.jwt();
         }
         else {
-            projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/stats/allowAll';
+            projectURL = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/stats/allowAll';
+            //projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/stats/allowAll';
             
             headers = new Headers({
                 'Accept': 'application/json', 

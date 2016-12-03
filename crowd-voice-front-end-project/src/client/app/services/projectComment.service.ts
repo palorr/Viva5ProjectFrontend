@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { ProjectComment } from '../models/index';
+
+import { CONFIGURATION } from '../shared/app.constants';
  
 @Injectable()
 export class ProjectCommentService {
@@ -16,12 +18,14 @@ export class ProjectCommentService {
         let options: RequestOptions;
         
         if(isLoggedIn) {
-            URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments';
+            URL = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/comments';
+            //URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments';
         
             options = this.jwt();
         }
         else {
-            URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments/allowAll';
+            URL = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/comments/allowAll';
+            //URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments/allowAll';
             
             headers = new Headers({
                 'Accept': 'application/json', 
@@ -43,7 +47,8 @@ export class ProjectCommentService {
         let headers: Headers;
         let options: RequestOptions;
         
-        URL = 'http://viva5webapi.azurewebsites.net/api/projects/getAllCurrentUserCreatedProjectComments';
+        URL = CONFIGURATION.azureUrls.webApi+'api/projects/getAllCurrentUserCreatedProjectComments';
+        //URL = 'http://viva5webapi.azurewebsites.net/api/projects/getAllCurrentUserCreatedProjectComments';
         
         options = this.jwt();
         
@@ -60,7 +65,8 @@ export class ProjectCommentService {
         let headers: Headers;
         let options: RequestOptions;
         
-        URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments/'+commentId;
+        URL = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/comments/'+commentId;
+        //URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments/'+commentId;
         
         options = this.jwt();
         
@@ -73,7 +79,9 @@ export class ProjectCommentService {
     }
     
     createNewProjectComment(projectId: number, newProjectComment: ProjectComment) {
-        let createProjectCommentURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments';
+        
+        let createProjectCommentURL = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/comments';
+        //let createProjectCommentURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments';
         
         let options = this.jwt();
         
@@ -88,7 +96,9 @@ export class ProjectCommentService {
     }
     
     editProjectComment(projectId: number, commentId: number, editedProjectComment: ProjectComment) {
-        let editProjectCommentURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments/'+commentId;
+        
+        let editProjectCommentURL = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/comments/'+commentId;
+        //let editProjectCommentURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments/'+commentId;
         
         let options = this.jwt();
         
@@ -103,7 +113,9 @@ export class ProjectCommentService {
     }
     
     deleteProjectComment(projectId: number, commentId: number) {
-        let deleteProjectCommentURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments/'+commentId;
+        
+        let deleteProjectCommentURL = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/comments/'+commentId;
+        //let deleteProjectCommentURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/comments/'+commentId;
         
         let options = this.jwt();
         

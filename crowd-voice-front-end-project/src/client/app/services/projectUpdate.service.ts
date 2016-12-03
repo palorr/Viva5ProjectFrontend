@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { ProjectUpdate } from '../models/index';
+
+import { CONFIGURATION } from '../shared/app.constants';
  
 @Injectable()
 export class ProjectUpdateService {
@@ -16,12 +18,14 @@ export class ProjectUpdateService {
         let options: RequestOptions;
         
         if(isLoggedIn) {
-            projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates';
+            projectURL = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/updates';
+            //projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates';
         
             options = this.jwt();
         }
         else {
-            projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates/allowAll';
+            projectURL = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/updates/allowAll';
+            //projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates/allowAll';
             
             headers = new Headers({
                 'Accept': 'application/json', 
@@ -39,13 +43,12 @@ export class ProjectUpdateService {
     }
     
     getProjectUpdateById(projectId: number, updateId: number, isLoggedIn: boolean) {
-        let projectURL: string;
         let headers: Headers;
-        let options: RequestOptions;
         
-        projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates/'+updateId;
+        let projectURL = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/updates/'+updateId;
+        //let projectURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates/'+updateId;
         
-        options = this.jwt();
+        let options = this.jwt();
         
         return this.http.get(projectURL, options)
             .map((response: Response) => response.json())
@@ -56,7 +59,8 @@ export class ProjectUpdateService {
     }
     
     createNewProjectUpdate(projectId: number, newProjectUpdate: ProjectUpdate) {
-        let createProjectUpdateURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates';
+        let createProjectUpdateURL = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/updates';
+        //let createProjectUpdateURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates';
         
         let options = this.jwt();
         
@@ -71,7 +75,8 @@ export class ProjectUpdateService {
     }
     
     editProjectUpdate(projectId: number, updateId: number, editedProjectUpdate: ProjectUpdate) {
-        let editProjectUpdateURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates/'+updateId;
+        let editProjectUpdateURL = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/updates/'+updateId;
+        //let editProjectUpdateURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates/'+updateId;
         
         let options = this.jwt();
         
@@ -86,7 +91,8 @@ export class ProjectUpdateService {
     }
     
     deleteProjectUpdate(projectId: number, updateId: number) {
-        let deleteProjectUpdateURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates/'+updateId;
+        let deleteProjectUpdateURL = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/updates/'+updateId;
+        //let deleteProjectUpdateURL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/updates/'+updateId;
         
         let options = this.jwt();
         

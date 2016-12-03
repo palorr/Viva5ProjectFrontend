@@ -161,7 +161,7 @@ export class ProjectProfileComponent implements OnInit {
 			.subscribe(
 				(data) => {
 					console.log('NEW PROJECT EXTERNAL SHARE CREATED: ', data);
-					this.alertService.success('Project external share created successfully!');
+					//this.alertService.success('Project external share created successfully!');
 				},
 				(err) => {
 					this.alertService.error(err);

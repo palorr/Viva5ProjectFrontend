@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
+
+import { CONFIGURATION } from '../shared/app.constants';
  
 @Injectable()
 export class AuthenticationService {
@@ -9,7 +11,8 @@ export class AuthenticationService {
  
     login(username: string, password: string) {
         
-        let loginURL = 'http://viva5authserver.azurewebsites.net/oauth2/token';
+        let loginURL = CONFIGURATION.azureUrls.authServer+'oauth2/token';
+        //let loginURL = 'http://viva5authserver.azurewebsites.net/oauth2/token';
         
         let headers = new Headers({ 
             'Accept': 'application/json',
@@ -17,8 +20,6 @@ export class AuthenticationService {
         });
         
         let postRequestBody = 'grant_type=password&username='+username+'&password='+password+'&client_id=8737e3f7a7984167b4d09f658a76bf32';
-        
-        //JSON.stringify({ grant_type: 'password', username: username, password: password })
         
         let options = new RequestOptions({ headers: headers });
         

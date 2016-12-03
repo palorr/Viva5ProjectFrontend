@@ -57,11 +57,11 @@ export class ProjectUpdateCreateComponent implements OnInit {
 				(data) => {
 					console.log('NEW PROJECT UPDATE CREATED: ', data);
 					// set success message and pass true paramater to persist the message after redirecting
-					this.alertService.success('Project update created successfully!');
+					this.alertService.success('Project update created successfully!', true);
 					
 					this.loading = false;
 					
-					//this.router.navigate(['/dashboard/projects/view/'+this.projectId]);
+					this.router.navigate(['/dashboard/projects/view/'+this.projectId]);
 				},
 				(err) => {
 					this.alertService.error(err);

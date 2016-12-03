@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { ProjectExternalShare } from '../models/index';
+
+import { CONFIGURATION } from '../shared/app.constants';
  
 @Injectable()
 export class ProjectExternalShareService {
@@ -12,7 +14,8 @@ export class ProjectExternalShareService {
     
     createExternalShare(projectId: number, newProjectExternalShare: ProjectExternalShare) {
         
-		let URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/externalShares';
+        let URL = CONFIGURATION.azureUrls.webApi+'api/projects/'+projectId+'/externalShares';
+		//let URL = 'http://viva5webapi.azurewebsites.net/api/projects/'+projectId+'/externalShares';
         
         let postRequestBody = JSON.stringify(newProjectExternalShare);
         

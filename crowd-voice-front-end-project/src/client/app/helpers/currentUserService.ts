@@ -3,6 +3,7 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+import { CONFIGURATION } from '../shared/app.constants';
 
 @Injectable()
 export class CurrentUserService {
@@ -11,7 +12,8 @@ export class CurrentUserService {
    
     getUserMainInfo() {
         
-        let userURL = 'http://viva5webapi.azurewebsites.net/api/users/findByUsername';
+        let userURL = CONFIGURATION.azureUrls.webApi+'api/users/findByUsername';
+        //let userURL = 'http://viva5webapi.azurewebsites.net/api/users/findByUsername';
         
         let options = this.jwt();
         

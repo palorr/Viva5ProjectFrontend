@@ -6,6 +6,8 @@ import { ChatMessage, TypingMessage, ChatUser } from '../models/index';
 import 'signalr';
 import * as jQuery from 'jquery';
 
+import { CONFIGURATION } from '../shared/app.constants';
+
 @Injectable()
 export class SignalRService {
 
@@ -32,7 +34,7 @@ export class SignalRService {
         
         this.connectionExists = false;
 
-        this.connection = jQuery.hubConnection('http://viva5chat.azurewebsites.net');
+        this.connection = jQuery.hubConnection(CONFIGURATION.azureUrls.chatServer);
   
         this.proxy = this.connection.createHubProxy(this.proxyName);
 

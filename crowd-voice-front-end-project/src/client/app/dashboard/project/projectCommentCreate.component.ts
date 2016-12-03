@@ -42,9 +42,9 @@ export class ProjectCommentCreateComponent implements OnInit {
 			.subscribe(
 				(data) => {
 					console.log('NEW PROJECT COMMENT CREATED: ', data);
-					this.alertService.success('Project comment created successfully!');
+					this.alertService.success('Project comment created successfully!', true);
 					this.loading = false;
-					//this.router.navigate(['/dashboard/projects/view/'+this.projectId]);
+					this.router.navigate(['/dashboard/projects/view/'+this.projectId]);
 				},
 				(err) => {
 					this.alertService.error(err);
