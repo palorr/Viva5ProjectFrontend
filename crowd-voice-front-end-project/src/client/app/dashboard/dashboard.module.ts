@@ -21,7 +21,7 @@ import { DashboardComponent } from './dashboard.component';
 import {TopNavComponent} from '../shared/index';
 import {SidebarComponent} from '../shared/index';
 
-import { AlertComponent } from '../directives/index';
+import { AlertModule } from '../directives/alert.module';
 
 @NgModule({
     imports: [
@@ -34,10 +34,11 @@ import { AlertComponent } from '../directives/index';
         ChatPageModule,
         AdminPanelModule,
         BlankPageModule,
-        UserModule
+        UserModule,
+        AlertModule
     ],
-    declarations: [AlertComponent, DashboardComponent, TopNavComponent, SidebarComponent],
-    exports: [AlertComponent, DashboardComponent, TopNavComponent, SidebarComponent]
+    declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
+    exports: [DashboardComponent, TopNavComponent, SidebarComponent]
 })
 
 export class DashboardModule { }

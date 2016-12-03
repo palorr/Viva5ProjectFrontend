@@ -5,11 +5,14 @@ import { FormsModule } from '@angular/forms';
 
 import { SignupComponent } from './signup.component';
 
+import { AlertModule } from '../directives/alert.module';
+
 @NgModule({
     imports: [
         CommonModule, 
         RouterModule, 
-        FormsModule
+        FormsModule,
+        AlertModule
     ],
     declarations: [SignupComponent],
     exports: [SignupComponent]
