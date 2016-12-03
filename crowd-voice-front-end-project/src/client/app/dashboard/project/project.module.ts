@@ -25,6 +25,8 @@ import { ProjectStatScreenComponent } from './projectStatScreen.component';
 
 import { ProjectComponent } from './project.component';
 
+import { TruncateModule }   from '../../pipes/truncate.module';
+
 import {
 		TabsModule,
         ModalModule
@@ -36,7 +38,8 @@ import {
         RouterModule, 
         FormsModule,
         TabsModule,
-        ModalModule
+        ModalModule,
+        TruncateModule
     ],
     declarations: [
         ProjectComponent, 
