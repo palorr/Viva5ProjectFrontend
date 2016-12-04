@@ -14,38 +14,36 @@
 			</ol>
 		</div>
 	</div>
-	<div *ngFor="let project of projects">
-		<div class="col-lg-12 jumbotron card card-block">
-		<div class="row">
-				
-			<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
-			<hr/>
-			<img  *ngIf="project.MainPhoto" src="{{project.MainPhoto}}" alt="Card image cap">
-			<div class="col-lg-6 list-project-desc">
-			<p>{{project.Description | limitTo: 450}}</p>
-			</div>
-			<div class="col-lg-6 multi-columns">
-			<p><i class="fa fa-calendar"></i> Created on: {{project.CreatedDate | date:'medium'}}</p>
-			<p><i class="fa fa-calendar"></i> Updated on: {{project.UpdatedDate | date:'medium'}}</p>
-			<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}} <i class="fa fa-euro"></i></p>
-			<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | date:'medium'}}</p>
-			<p><i class="fa fa-user"></i> Project Owner: <a [routerLink]="['/dashboard/users/view', project.OwnerId]">{{project.OwnerName}}</a></p>
-			<p><i class="fa fa-list"></i> Project Category: {{project.ProjectCategoryDesc}}</p>
-			<p>
-				<i class="fa fa-code-fork"></i> Status: 
-				<span *ngIf="project.Status == 'CRE'">
-					Under Funding
-				</span>
-				<span *ngIf="project.Status == 'COM'">
-					Completed
-				</span>
-				<span *ngIf="project.Status == 'FAI'">
-					Failed
-				</span>
-			</p>
-			</div>
+	<div class="row jumbotron card card-block" *ngFor="let project of projects">
+	<div class="row">
+			
+		<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
+		<hr/>
+		<div class="col-lg-6 list-project-desc">
+		<img  *ngIf="project.MainPhoto" src="{{project.MainPhoto}}" alt="Card image cap">
+		<p>{{project.Description | limitTo: 450}}</p>
 		</div>
-	</div>
+		<div class="col-lg-6 multi-columns">
+		<p><i class="fa fa-calendar"></i> Created on: {{project.CreatedDate | date:'medium'}}</p>
+		<p><i class="fa fa-calendar"></i> Updated on: {{project.UpdatedDate | date:'medium'}}</p>
+		<p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}} <i class="fa fa-euro"></i></p>
+		<p><i class="fa fa-clock-o"></i> Funding End Date: {{project.FundingEndDate | date:'medium'}}</p>
+		<p><i class="fa fa-user"></i> Project Owner: <a [routerLink]="['/dashboard/users/view', project.OwnerId]">{{project.OwnerName}}</a></p>
+		<p><i class="fa fa-list"></i> Project Category: {{project.ProjectCategoryDesc}}</p>
+		<p>
+			<i class="fa fa-code-fork"></i> Status: 
+			<span *ngIf="project.Status == 'CRE'">
+				Under Funding
+			</span>
+			<span *ngIf="project.Status == 'COM'">
+				Completed
+			</span>
+			<span *ngIf="project.Status == 'FAI'">
+				Failed
+			</span>
+		</p>
+		</div>
+</div>
 	<span *ngIf="projects && projects.length == 0">
 		<div class="alert alert-info">
 			I am sorry. No projects for you here.
