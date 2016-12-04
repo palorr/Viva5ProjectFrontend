@@ -6,7 +6,7 @@
             </h2>
             <ol class="breadcrumb">
                 <li>
-                    <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" routerLink="/dashboard/home">Home</a>
+                    <a href="Javascript:void(0)" routerLink="/dashboard/home"> <i class="fa fa-fw fa-home" aria-hidden="true"></i> Home</a>
                 </li>
                 <li class="active">
                     <i class="fa fa-profile"></i> My Projects
@@ -17,9 +17,10 @@
     <div *ngFor="let project of createdProjects">
         <div class="col-lg-12 jumbotron card card-block">
             <h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
-            <hr/>
-            <p>{{project.Description}}</p>
-            <hr/>
+            <div class="col-lg-6 list-project-desc">
+		<img  *ngIf="project.MainPhoto" src="{{project.MainPhoto}}" alt="Card image cap" />
+		<p>{{project.Description}}</p>
+		</div>
             <p><i class="fa fa-calendar"></i> Created on: {{project.CreatedDate | date:'medium'}}</p>
             <p><i class="fa fa-calendar"></i> Updated on: {{project.UpdatedDate | date:'medium'}}</p>
             <p><i class="fa fa-money"></i> Funding Goal: {{project.FundingGoal}} <i class="fa fa-euro"></i></p>
