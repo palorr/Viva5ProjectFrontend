@@ -303,17 +303,20 @@ export class HomeComponent implements OnInit, OnDestroy {
 	index: number = 0;
 
 	slides: Array<any> = [];
-	imgUrl: Array<any> = [
-		`assets/img/trending0.jpg`,
-		`assets/img/trending1.jpg`,
-		`assets/img/trending2.jpg`,
-		`assets/img/trending3.jpg`,
-		`assets/img/trending4.jpg`,
-		`assets/img/trending5.jpg`,
-		`assets/img/trending6.jpg`,
-		`assets/img/trending7.jpg`,
-		`assets/img/trending8.jpg`,
-		`assets/img/trending9.jpg`,
+	
+	imgUrl: Array<string> = [
+		`http://combiboilersleeds.com/images/blue/blue-2.jpg`,
+		`http://combiboilersleeds.com/images/blue/blue-2.jpg`,
+		`http://combiboilersleeds.com/images/blue/blue-2.jpg`,
+		`http://combiboilersleeds.com/images/blue/blue-2.jpg`,
+		`http://combiboilersleeds.com/images/blue/blue-2.jpg`,
+		`http://combiboilersleeds.com/images/blue/blue-2.jpg`,
+		`http://combiboilersleeds.com/images/blue/blue-2.jpg`,
+		`http://combiboilersleeds.com/images/blue/blue-2.jpg`,
+		`http://combiboilersleeds.com/images/blue/blue-2.jpg`,
+		`http://combiboilersleeds.com/images/blue/blue-2.jpg`,
+		`http://combiboilersleeds.com/images/blue/blue-2.jpg`
+
 	];
 
 	/* END */
@@ -336,6 +339,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 				this.projects = data;
 				console.log('this.projects: ', this.projects);
 				for (let i = 0; i < data.length; i++) {
+					if(this.projects[i].MainPhoto!=null){
+						//this.imgUrl[i]=this.projects[i].MainPhoto ; 
+						this.imgUrl[i]= "http://viva5webapi.azurewebsites.net/IOIGWGHXCB15M9KHQKDTCZY24.jpg" ; 
+					}
+					else{
+						this.imgUrl[i]= "http://combiboilersleeds.com/images/blue/blue-2.jpg" ; 
+					}
 					this.addSlide();
 				}
 			},
