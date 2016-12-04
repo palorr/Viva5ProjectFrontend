@@ -12,4 +12,5 @@ export class Project {
 	Status: string;
 	OwnerId: number;
 	OwnerName: string;
+	MainPhoto: string; 
 }

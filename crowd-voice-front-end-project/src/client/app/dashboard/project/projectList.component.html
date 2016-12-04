@@ -20,6 +20,7 @@
 				
 			<h3><a [routerLink]="['/dashboard/projects/view', project.Id]">{{project.Title}}</a></h3>
 			<hr/>
+			<img  *ngIf="project.MainPhoto" src="{{project.MainPhoto}}" alt="Card image cap">
 			<div class="col-lg-6 list-project-desc">
 			<p>{{project.Description | limitTo: 450}}</p>
 			</div>
