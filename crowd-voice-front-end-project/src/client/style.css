@@ -76,20 +76,36 @@ input#username:focus{
     border: 1px solid lightpink;
 }
 
-.login-page #username, .login-page #password::-webkit-input-placeholder {
-   color:#000 !important;
+.login-page #username::-webkit-input-placeholder,
+.login-page #password::-webkit-input-placeholder,
+.login-page #name::-webkit-input-placeholder,
+.login-page #repeatPassword::-webkit-input-placeholder {
+    color:#ccc !important;
+    font-size: 14px;
 }
 
-.login-page #username, .login-page #password:-moz-placeholder { /* Firefox 18- */
-   color:#000 !important;  
+.login-page #username::-moz-placeholder,
+.login-page #password::-moz-placeholder,
+.login-page #name::-moz-placeholder,
+.login-page #repeatPassword::-moz-placeholder { /* Firefox 18- */
+    color:#ccc !important;
+    font-size: 14px;  
 }
 
-.login-page #username, .login-page #password::-moz-placeholder {  /* Firefox 19+ */
-   color:#000 !important;  
+.login-page #username:-ms-input-placeholder,
+.login-page #password:-ms-input-placeholder,
+.login-page #name:-ms-input-placeholder,
+.login-page #repeatPassword:-ms-input-placeholder {  /* Firefox 19+ */
+    color:#ccc !important;
+    font-size: 14px; 
 }
 
-.login-page #username, .login-page #password:-ms-input-placeholder {  
-   color:#000 !important;  
+.login-page #username:-moz-placeholder,
+.login-page #password:-moz-placeholder,
+.login-page #name:-moz-placeholder,
+.login-page #repeatPassword:-moz-placeholder {  
+    color:#ccc !important;
+    font-size: 14px;
 }
 
 /* Home Page */
