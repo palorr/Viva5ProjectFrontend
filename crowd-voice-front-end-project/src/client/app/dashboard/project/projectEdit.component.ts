@@ -192,7 +192,7 @@ saveAttachment(source:AttachmentModel)
 						
                     }
                     
-                    this.alertService.error('I am sorry, something went wrong. Please try again later!');
+                    //this.alertService.error('I am sorry, something went wrong. Please try again later!');
                     this.loading = false;
                 });
 }

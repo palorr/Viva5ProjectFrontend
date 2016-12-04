@@ -34,13 +34,13 @@
                 </fieldset>
                 
                 <fieldset class="form-group" [ngClass]="{ 'has-error': createFundingPackageForm.submitted && !description.valid }">
-                    <label for="description">Description (*)</label>
+                    <label for="description">Reward (*)</label>
                     <textarea class="form-control input-underline input-lg" 
-                        name="description" id="description" placeholder="Enter Funding Package Description..."
+                        name="description" id="description" placeholder="Enter Funding Package Reward..."
                         required [(ngModel)]="fundingPackage.Description" rows="6"
                         #description="ngModel"></textarea>
                     <div [hidden]="description.valid || description.pristine" class="error">
-                        Project Update Description is required!
+                        Project Update Reward is required!
                     </div>
                 </fieldset>
 				
