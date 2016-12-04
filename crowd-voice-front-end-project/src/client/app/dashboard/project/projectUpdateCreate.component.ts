@@ -64,7 +64,7 @@ export class ProjectUpdateCreateComponent implements OnInit {
 					this.router.navigate(['/dashboard/projects/view/'+this.projectId]);
 				},
 				(err) => {
-					this.alertService.error(err);
+					this.alertService.error('I am sorry, something went wrong. Please try again later!');
 					this.loading = false;
 				});
 			

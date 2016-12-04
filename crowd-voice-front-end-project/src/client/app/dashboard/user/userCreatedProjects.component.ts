@@ -45,7 +45,7 @@ export class UserCreatedProjectsComponent implements OnInit {
 					console.log('Created Projects Data: ', this.createdProjects);
 				},
 				(err) => {
-					this.alertService.error(err);
+					this.alertService.error('I am sorry, something went wrong. Please try again later!');
 				}
 			);
 			///////////////////////////////

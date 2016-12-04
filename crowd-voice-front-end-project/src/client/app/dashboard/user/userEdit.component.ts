@@ -50,7 +50,7 @@ export class UserEditComponent implements OnInit {
                     }
 				},
 				(err) => {
-					this.alertService.error(err);
+					this.alertService.error('I am sorry, something went wrong. Please try again later!');
 				}
 				);
 
@@ -81,7 +81,7 @@ export class UserEditComponent implements OnInit {
                         });
                     }
                     
-                    this.alertService.error(errorString);
+                    this.alertService.error('I am sorry, something went wrong. Please try again later!');
                     this.loading = false;
                 });
 	}

@@ -31,7 +31,7 @@ export class UserSearchComponent{
                                console.log('Projects Data: ', this.users);
                            },
                            (err) => {
-                               this.alertService.error(err);
+                               this.alertService.error('I am sorry, something went wrong. Please try again later!');
                            }
                        );
         }

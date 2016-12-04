@@ -83,7 +83,7 @@ export class ProjectProfileComponent implements OnInit {
 					console.log('Project Profile View Data: ', this.project);
 				},
 				(err) => {
-					this.alertService.error(err);
+					this.alertService.error('I am sorry, something went wrong. Please try again later!');
 				}
 				);
 
@@ -94,7 +94,7 @@ export class ProjectProfileComponent implements OnInit {
 					console.log('Project Updates Data: ', this.projectUpdates);
 				},
 				(err) => {
-					this.alertService.error(err);
+					this.alertService.error('I am sorry, something went wrong. Please try again later!');
 				}
 				);
 
@@ -105,7 +105,7 @@ export class ProjectProfileComponent implements OnInit {
 					console.log('Project Comments Data: ', this.projectComments);
 				},
 				(err) => {
-					this.alertService.error(err);
+					this.alertService.error('I am sorry, something went wrong. Please try again later!');
 				}
 				);
 
@@ -116,7 +116,7 @@ export class ProjectProfileComponent implements OnInit {
 					console.log('Project Funding Packages Data: ', this.fundingPackages);
 				},
 				(err) => {
-					this.alertService.error(err);
+					this.alertService.error('I am sorry, something went wrong. Please try again later!');
 				}
 				);
 
@@ -135,7 +135,7 @@ export class ProjectProfileComponent implements OnInit {
 					console.log('Project Stats Data: ', this.projectStat);
 				},
 				(err) => {
-					this.alertService.error(err);
+					this.alertService.error('I am sorry, something went wrong. Please try again later!');
 				}
 				);
 		});
@@ -171,7 +171,7 @@ export class ProjectProfileComponent implements OnInit {
 				//this.alertService.success('Project external share created successfully!');
 			},
 			(err) => {
-				this.alertService.error(err);
+				this.alertService.error('I am sorry, something went wrong. Please try again later!');
 			}
 			);
 			this.getAttachments() ; 

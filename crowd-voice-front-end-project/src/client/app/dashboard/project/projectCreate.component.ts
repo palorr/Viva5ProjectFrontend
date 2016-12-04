@@ -35,7 +35,7 @@ export class ProjectCreateComponent implements OnInit {
                     console.log('Project Categories Data: ', this.projectCategoryOptions);
                 },
                 (err) => {
-                    this.alertService.error(err);
+                    this.alertService.error('I am sorry, something went wrong. Please try again later!');
                 }
 			);
 	}
@@ -62,7 +62,7 @@ export class ProjectCreateComponent implements OnInit {
                     this.router.navigate(['/dashboard/projects/edit/'+data]);
                 },
                 (err) => {
-                    this.alertService.error(err);
+                    this.alertService.error('I am sorry, something went wrong. Please try again later!');
 					this.loading = false;
                 });
 	}

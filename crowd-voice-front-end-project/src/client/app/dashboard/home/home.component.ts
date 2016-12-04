@@ -46,7 +46,7 @@ export class UpdatesTimelineComponent implements OnInit, OnDestroy {
 					self.currentUserFundedProjectUpdates = data;
 				},
 				(err: any) => {
-					self.alertService.error(err);
+					self.alertService.error('I am sorry, something went wrong. Please try again later!');
 					console.log('ERROR: ', err);
 				});
 			// interval loading	
@@ -60,7 +60,7 @@ export class UpdatesTimelineComponent implements OnInit, OnDestroy {
 							self.currentUserFundedProjectUpdates = data;
 						},
 						(err: any) => {
-							self.alertService.error(err);
+							self.alertService.error('I am sorry, something went wrong. Please try again later!');
 							console.log('ERROR: ', err);
 						});
 				}, 30000)
@@ -112,7 +112,7 @@ export class BacksTimelineComponent implements OnInit, OnDestroy {
 					self.backedProjects = data;
 				},
 				(err: any) => {
-					self.alertService.error(err);
+					self.alertService.error('I am sorry, something went wrong. Please try again later!');
 					console.log('ERROR: ', err);
 				});
 			// interval loading	
@@ -126,7 +126,7 @@ export class BacksTimelineComponent implements OnInit, OnDestroy {
 							self.backedProjects = data;
 						},
 						(err: any) => {
-							self.alertService.error(err);
+							self.alertService.error('I am sorry, something went wrong. Please try again later!');
 							console.log('ERROR: ', err);
 						});
 				}, 10000)
@@ -176,7 +176,7 @@ export class LastUsersTimelineComponent implements OnInit, OnDestroy {
 					self.lastUsers = data;
 				},
 				(err: any) => {
-					self.alertService.error(err);
+					self.alertService.error('I am sorry, something went wrong. Please try again later!');
 					console.log('ERROR: ', err);
 				});
 			// interval loading	
@@ -190,7 +190,7 @@ export class LastUsersTimelineComponent implements OnInit, OnDestroy {
 							self.lastUsers = data;
 						},
 						(err: any) => {
-							self.alertService.error(err);
+							self.alertService.error('I am sorry, something went wrong. Please try again later!');
 							console.log('ERROR: ', err);
 						});
 				}, 50000)
@@ -241,7 +241,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 					self.currentUserProjectComments = data;
 				},
 				(err: any) => {
-					self.alertService.error(err);
+					self.alertService.error('I am sorry, something went wrong. Please try again later!');
 					console.log('ERROR: ', err);
 				});
 			// interval loading
@@ -255,7 +255,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 							self.currentUserProjectComments = data;
 						},
 						(err: any) => {
-							self.alertService.error(err);
+							self.alertService.error('I am sorry, something went wrong. Please try again later!');
 							console.log('ERROR: ', err);
 						});
 				}, 30000)
@@ -340,7 +340,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 				}
 			},
 			(err) => {
-				this.alertService.error(err);
+				this.alertService.error('I am sorry, something went wrong. Please try again later!');
 			});
 
 		if (localStorage.getItem('currentUser')) {
@@ -350,7 +350,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 					this.currentUser = data;
 				},
 				(err) => {
-					this.alertService.error(err);
+					this.alertService.error('I am sorry, something went wrong. Please try again later!');
 					console.log('ERROR: ', err);
 				});
 
@@ -364,7 +364,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 							self.projectsToNotify = data;
 						},
 						(err: any) => {
-							self.alertService.error(err);
+							self.alertService.error('I am sorry, something went wrong. Please try again later!');
 							console.log('ERROR: ', err);
 						});
 			//intervals
@@ -378,7 +378,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 							self.projectsToNotify = data;
 						},
 						(err: any) => {
-							self.alertService.error(err);
+							self.alertService.error('I am sorry, something went wrong. Please try again later!');
 							console.log('ERROR: ', err);
 						});
 				}, 5000)

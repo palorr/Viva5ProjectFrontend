@@ -64,7 +64,7 @@ export class FundingPackagePayComponent implements OnInit {
 						this.fundingPackage = data;
 					}, 
 					err => {
-						this.alertService.error(err);
+						this.alertService.error('I am sorry, something went wrong. Please try again later!');
 					}
 				);
 			
@@ -149,7 +149,7 @@ export class FundingPackagePayComponent implements OnInit {
 							self.saveTransactionToDB(data.TransactionId, self.isDonationPackage);
 					},
 					(err) => {
-						self.alertService.error(err);
+						self.alertService.error('I am sorry, something went wrong. Please try again later!');
 						self.loading = false;
 					}
 				);	
@@ -183,7 +183,7 @@ export class FundingPackagePayComponent implements OnInit {
 					this.loading = false;
 				},
 				(err) => {
-					this.alertService.error(err);
+					this.alertService.error('I am sorry, something went wrong. Please try again later!');
 					this.loading = false;
 				}
 			);

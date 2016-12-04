@@ -54,7 +54,7 @@ export class ProjectCommentEditComponent implements OnInit {
 							console.log('Project Comment Data: ', this.projectCommentFromServer);
 						},
 						(err) => {
-							this.alertService.error(err.Message);
+							this.alertService.error('I am sorry, something went wrong. Please try again later!');
 						}
 					);
 			
@@ -76,7 +76,7 @@ export class ProjectCommentEditComponent implements OnInit {
 				(err) => {
 					console.log('ERROR IN COMMENT EDIT: ', err);
 					
-					this.alertService.error(err);
+					this.alertService.error('I am sorry, something went wrong. Please try again later!');
 					this.loading = false;
 				});	
 		
@@ -103,7 +103,7 @@ export class ProjectCommentEditComponent implements OnInit {
 							this.router.navigate(['/dashboard/projects/view/'+this.projectId]);
 						},
 						(err) => {
-							this.alertService.error(err);
+							this.alertService.error('I am sorry, something went wrong. Please try again later!');
 							this.loading = false;
 						});	
 		}

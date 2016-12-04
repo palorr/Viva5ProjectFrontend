@@ -30,7 +30,7 @@ export class ProjectSearchComponent implements OnInit {
                     console.log('Project Categories Data: ', this.projectCategoryOptions);
                 },
                 (err) => {
-                    this.alertService.error(err);
+                    this.alertService.error('I am sorry, something went wrong. Please try again later!');
                 }
 			);
     }
@@ -46,7 +46,7 @@ export class ProjectSearchComponent implements OnInit {
                            console.log('Projects Data: ', this.projects);
                        },
                        (err) => {
-                           this.alertService.error(err);
+                           this.alertService.error('I am sorry, something went wrong. Please try again later!');
                        }
                    );
     }
@@ -61,7 +61,7 @@ export class ProjectSearchComponent implements OnInit {
                                console.log('Projects Data: ', this.projects);
                            },
                            (err) => {
-                               this.alertService.error(err);
+                               this.alertService.error('I am sorry, something went wrong. Please try again later!');
                            }
                        );
         }

@@ -61,7 +61,7 @@ export class ProjectEditComponent implements OnInit {
 							console.log('Project Data: ', this.project);
 						},
 						(err) => {
-							this.alertService.error(err.Message);
+							this.alertService.error('I am sorry, something went wrong. Please try again later!');
 						}
 					);
 			
@@ -73,7 +73,7 @@ export class ProjectEditComponent implements OnInit {
                     console.log('Project Categories Data: ', this.projectCategoryOptions);
                 },
                 (err) => {
-                    this.alertService.error(err.error_description);
+                    this.alertService.error('I am sorry, something went wrong. Please try again later!');
                 }
 			);
 			
@@ -103,7 +103,7 @@ export class ProjectEditComponent implements OnInit {
                         });
                     }
                     
-                    this.alertService.error(errorString);
+                    this.alertService.error('I am sorry, something went wrong. Please try again later!');
                     this.loading = false;
                 });
 	}
@@ -170,9 +170,8 @@ saveAttachment(source:AttachmentModel)
 		
 	   this.projectService.saveProjectAttachemetImage( source, this.project.Id ) .subscribe(
                 (data) => {
-					console.log('SUCCESS IN EDIT: ', data);
-                    // set success message
-                    this.alertService.success('Project edited successfully!');
+					// set success message
+                    this.alertService.success('Project attachment saved successfully!');
                 	this.loading = false;
 					this.newAttachment = new AttachmentModel();
 					this.videoAttachment = new AttachmentModel();
@@ -193,7 +192,7 @@ saveAttachment(source:AttachmentModel)
 						
                     }
                     
-                    this.alertService.error(errorString);
+                    this.alertService.error('I am sorry, something went wrong. Please try again later!');
                     this.loading = false;
                 });
 }

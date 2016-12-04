@@ -53,7 +53,7 @@ export class ProjectStatScreenComponent implements OnInit {
                         }
                     }, 
                     (err) => {
-                        this.alertService.error(err);
+                        this.alertService.error('I am sorry, something went wrong. Please try again later!');
                     }
                 );
 			
@@ -87,7 +87,7 @@ export class ProjectStatScreenComponent implements OnInit {
                         
                     },
                     (err) => {
-                        this.alertService.error(err);
+                        this.alertService.error('I am sorry, something went wrong. Please try again later!');
                     }
                 );
 			
