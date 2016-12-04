@@ -1,5 +1,5 @@
 <div *ngIf="slides && projectsToNotify" class="container-fluid">
-    <h2 class="text-muted">Trending <small>Projects</small></h2>
+    <h2 class="text-muted">Trending Projects</h2>
     <div class="row">
         <div class="col-md-12">
             <carousel [interval]="myInterval" [noWrap]="noWrapSlides">
@@ -8,7 +8,7 @@
                     <a [routerLink]="['/dashboard/projects/view/', slidez.projectId]" href="javascript:void(0)">
                         <div class="carousel-caption">
                             <h4>{{slidez.title}}</h4>
-                            <p>{{slidez.description | limitTo: 350}}</p>
+                            <p>{{slidez.description | limitTo: 150}}</p>
                         </div>
                     </a>
                 </slide>
@@ -32,8 +32,7 @@
         <br>
     </div>
 
-    <div class="row">
-        <!--///////////////////////-->
+    <!--<div class="row">
         <div *ngIf="currentUser" class="col-xl-6 col-lg-6">
             <div class="card card-primary card-inverse">
                 <div class="card-header card-primary">
@@ -54,9 +53,9 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!--///////////////////////////-->
-        <div *ngIf="currentUser" class="col-xl-6 col-lg-6">
+        <!--<div *ngIf="currentUser" class="col-xl-6 col-lg-6">
             <div class="card card-primary card-inverse">
                 <div class="card-header card-primary">
                     <div class="row">
@@ -76,7 +75,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!--///////////////////////////-->
         <!--<div *ngIf="currentUser" class="col-xl-6 col-lg-6">
             <div class="card card-primary card-inverse">
@@ -98,13 +97,9 @@
                     </a>
                 </div>
             </div>
-        </div>-->
-        <!--///////////////////////////-->
-
-    </div>
-    <hr/>
-    <div *ngIf="currentUser">
-        <div class="col-lg-12">
+        </div>
+    </div>-->
+        <div class="row" *ngIf="currentUser">
             <span class="col-lg-7">
                 <updatesTimeline-cmp></updatesTimeline-cmp>
             </span>
@@ -112,7 +107,6 @@
                 <chat-cmp></chat-cmp>
             </span>
         </div>
-    </div>
     <!--///////////////////////////-->
     <div class="row" *ngIf="!currentUser">
         <span class="col-lg-7">

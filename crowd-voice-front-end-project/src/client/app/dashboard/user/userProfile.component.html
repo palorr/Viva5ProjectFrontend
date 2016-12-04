@@ -6,7 +6,7 @@
 			</h2>-->
 			<ol class="breadcrumb">
 				<li>
-					<a href="Javascript:void(0)" routerLink="/dashboard/home">Home</a>
+					<a href="Javascript:void(0)" routerLink="/dashboard/home"><i class="fa fa-fw fa-home" aria-hidden="true"></i> Home</a>
 				</li>
 				<li class="active">
 					<i class="fa fa-profile"></i> User Profile Page
@@ -17,7 +17,7 @@
 		</div>
 		<div class="row" *ngIf="isRequestorThisUser">
         <div class="col-lg-4">
-            <ol class="breadcrumb">
+            <ol class="breadcrumb editProfile">
                 <li>
                     <i class="fa fa-edit"></i> <a [routerLink]="['/dashboard/users/edit', user.Id]">Edit Profile</a>
                 </li>
