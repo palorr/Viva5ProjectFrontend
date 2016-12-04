@@ -94,7 +94,7 @@ export class FundingPackagePayComponent implements OnInit {
 	}
 	
 	_keyPress(event: any) {
-		const pattern = /[0-9\+\-\ ]/;
+		const pattern = /[0-9]/;
 		let inputChar = String.fromCharCode(event.charCode);
 		
 		if (!pattern.test(inputChar)) {

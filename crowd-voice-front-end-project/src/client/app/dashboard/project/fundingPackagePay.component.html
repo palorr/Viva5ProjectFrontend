@@ -37,7 +37,8 @@
 				
 					<input 
 						(keypress)="_keyPress($event)"
-						type="text"
+						type="number"
+						min="0"
 						class="form-control input-underline input-lg" 
 						name="amountbox" id="amountbox" placeholder="Enter Amount to donate..."
 						#amountbox [(ngModel)]="donationAmount" required>
