@@ -141,6 +141,8 @@ export class FundingPackagePayComponent implements OnInit {
 					(data: TransactionResult) => {
 						console.log('SUCCESS IN BACKING: ', data);
 						
+						self.loading = true;
+						
 						window.document.getElementById("viva-wallet-button").innerHTML = '<span id="viva-wallet-button"></span>';
 						
 						if(data.TransactionId && data.ErrorCode === 0)
@@ -172,7 +174,7 @@ export class FundingPackagePayComponent implements OnInit {
 				(data) => {
 					console.log('SUCCESS IN SAVING BACKING: ', data);
 					// set success message
-					alert('Successfully backed project!');
+					//alert('Successfully backed project!');
 					
 					//this.alertService.success('Payment done successfully!');
 					
