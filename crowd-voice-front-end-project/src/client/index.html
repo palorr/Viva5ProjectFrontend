@@ -1,410 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <base href="<%= APP_BASE %>">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>
-        <%= APP_TITLE %>
-    </title>
+    <title><%= APP_TITLE %></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-        
-        dashboard-cmp .alert-component {
-            position: fixed;
-            bottom: 138px;
-            right: 25px;
-        }
-        
-        h2 {
-            font-size: 1.75rem !important;
-            margin-bottom: 20px !important;
-        }
-        
-        h3 {
-            font-size: 1.3rem !important;
-        }
-        
-        #wrapper {
-            min-height: 100%;
-            position: relative;
-        }
-        /* Login Page */
-        
-        .login-page {
-            background: #F8F9FD !important;
-        }
-        
-        .login-page .col-lg-4 {
-            padding: 30px !important;
-            background: #fff;
-            color: #0275d8;
-            border: 1px solid #add8e6;
-            border-radius: 6px;
-            -webkit-box-shadow: 4px 4px 10px 0px rgba(50, 50, 50, 0.5);
-            -moz-box-shadow: 4px 4px 10px 0px rgba(50, 50, 50, 0.5);
-            box-shadow: 4px 4px 10px 0px rgba(50, 50, 50, 0.5);
-        }
-        
-        .login-page .col-lg-4 img {
-            max-width: 100px;
-        }
-        
-        .login-page h1 {
-            font-size: 30px !important;
-            margin-bottom: 20px !important;
-        }
-        
-        .login-page input {
-            color: #0275d8 !important;
-            border-bottom: 2px solid #0275d8 !important;
-        }
-        
-        .login-page .form-content {
-            padding: 0px !important;
-        }
-        
-        input#username:focus {
-            background: #F8F9FD !important;
-            border: 1px solid lightpink;
-        }
-        
-        .login-page #username,
-        .login-page #password::-webkit-input-placeholder {
-            color: #000 !important;
-        }
-        
-        .login-page #username,
-        .login-page #password:-moz-placeholder {
-            /* Firefox 18- */
-            color: #000 !important;
-        }
-        
-        .login-page #username,
-        .login-page #password::-moz-placeholder {
-            /* Firefox 19+ */
-            color: #000 !important;
-        }
-        
-        .login-page #username,
-        .login-page #password:-ms-input-placeholder {
-            color: #000 !important;
-        }
-        /* Top Nav */
-        
-        .topnav {
-            flex-wrap: nowrap;
-            display: flex;
-            box-shadow: 0px 4px 10px 0 rgba(22, 22, 22, 0.08);
-            z-index: 99 !important;
-            height: 50px;
-            background: #2E3345 !important;
-            margin: 0px;
-            padding: 0px;
-            position: relative;
-        }
-        
-        .navbar-dark .navbar-brand,
-        .navbar-dark .navbar-nav .nav-link {
-            color: #fff !important;
-        }
-        
-        .navbar-dark .navbar-nav .nav-link {
-            align-self: center;
-            white-space: nowrap;
-            margin: 0px 20px;
-        }
-        
-        .navbar-dark .navbar-brand .fa {
-            color: #0275d8;
-        }
-        
-        .navbar-nav .nav-item + .nav-item {
-            margin-left: 0px !important;
-        }
-        
-        .topnav a {
-            align-self: center;
-            white-space: nowrap;
-            margin: 0px 20px;
-        }
-        
-        .navbar-brand {
-            float: none !important;
-            text-align: center;
-        }
-        
-        .navbar-brand > img {
-            display: inline-block !important;
-        }
-        
-        a.navbar-brand:hover,
-        a.nav-link:hover {
-            color: #0275d8 !important;
-        }
-        
-        .site-nav__left,
-        .site-nav__middle,
-        .site-nav__right {
-            display: flex;
-        }
-        
-        .site-nav__left a:hover,
-        .site-nav__middle a:hover,
-        .site-nav__right a:hover {
-            color: #fff !important;
-        }
-        
-        .site-nav__left {
-            flex: 2;
-            order: 2;
-        }
-        
-        .site-nav__left a {
-            color: #fff;
-        }
-        
-        .site-nav__middle {
-            flex: 1;
-            justify-content: center;
-            order: 2;
-        }
-        
-        .site-nav__middle a span {
-            vertical-align: bottom;
-        }
-        /* .navbar-brand{margin-left:1rem;} */
-        
-        .site-nav__right {
-            flex: 2;
-            order: 3;
-            justify-content: flex-end;
-        }
-        
-        .dropdown-item {
-            margin: 0px !important;
-        }
-        /* Main Container Section */
-        
-        .main-container {
-            padding: 20px 10px 100px 10px !important;
-            border-left: 1px solid lightblue;
-        }
-        
-        .jumbotron {
-            padding: 2rem !important;
-        }
-        
-        .card {
-            margin-bottom: 2rem !important;
-        }
-        
-        .card-header {
-            background-color: #2E3345 !important;
-            color: #fff;
-        }
-        
-        .card-block {
-            font-size: 14px;
-        }
-        /* Left Sidebar */
-        
-        .sidebar {
-            top: 60px !Important;
-            z-index: 0 !important;
-        }
-        
-        .sidebar {
-            background-color: #fff !important;
-        }
-        
-        .sidebar .list-group a.list-group-item {
-            background: #fff !important;
-        }
-        
-        .sidebar .list-group a.router-link-active {
-            background: #fff !important;
-            color: #0275d8 !important;
-        }
-        
-        .sidebar .list-group a:hover,
-        .nested-menu .expand ul.submenu li a:hover {
-            color: #0275d8 !important;
-        }
-        
-        .nested-menu .expand ul.submenu li a {
-            color: #999 !important;
-        }
-        /* Page Profile View */
-        /* .breadcrumb{
-    margin-right: 0.75rem;
-}*/
-        
-        .bio {
-            text-align: center;
-        }
-        /* Project Profile View */
-        
-        .multi-columns {
-            -webkit-column-count: 2;
-            /* Chrome, Safari, Opera */
-            -moz-column-count: 2;
-            /* Firefox */
-            column-count: 2;
-            -webkit-column-gap: 40px;
-            /* Chrome, Safari, Opera */
-            -moz-column-gap: 40px;
-            /* Firefox */
-            column-gap: 40px;
-        }
-        
-        .list-project-desc {
-            padding-right: 20px;
-            display: inline-block;
-            margin-bottom: 2rem;
-        }
-        
-        .list-project-desc img {
-            max-width: 250px;
-            display: inline-block;
-            margin-left: -15px;
-            margin-right: 25px;
-        }
-        
-        .multi-columns p {
-            display: inline-block;
-        }
-        
-        .project-details {
-            display: -webkit-box;
-            padding: 2rem !important;
-        }
-        
-        .edit-project {
-            float: right;
-            display: inline-block;
-        }
-        /* User List View */
-        
-        .user-list {
-            margin: 0px 20px;
-            max-width: 280px;
-            background-color: #fff !important;
-            -webkit-box-shadow: 4px 4px 10px 0px rgba(50, 50, 50, 0.5);
-            -moz-box-shadow: 4px 4px 10px 0px rgba(50, 50, 50, 0.5);
-            box-shadow: 4px 4px 10px 0px rgba(50, 50, 50, 0.5);
-        }
-        
-        .user-list h3,
-        h4.timeline-title {
-            width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .user-list a {
-            margin-bottom: 20px;
-        }
-        
-        .user-list img {
-            margin: 0px auto 20px auto;
-        }
-        
-        .user-list p {
-            text-align: center;
-        }
-        /* Footer Section */
-        
-        .main-footer {
-            margin: 50px 0 0 0px;
-            padding: 0px;
-            -ms-overflow-x: hidden;
-            overflow-x: hidden;
-            width: 100%;
-            height: auto;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-        }
-        
-        .main-footer footer {
-            background-color: #020621;
-            padding: 30px;
-        }
-        
-        .main-footer p {
-            margin: 0px;
-            color: #fff;
-        }
-        
-        .main-footer .right {
-            float: right;
-        }
-        
-        .main-footer .right li {
-            display: inline-block;
-            float: left;
-            position: relative;
-            margin-right: 10px;
-        }
-        
-        @media (min-width: 640px) {
-            .site-nav__left,
-            .site-nav__middle,
-            .site-nav__right {
-                height: auto;
-            }
-            .site-nav__left {
-                order: 1;
-                display: flex;
-            }
-            .site-nav__middle {
-                display: flex;
-                width: 150px;
-            }
-            .site-nav__right {
-                order: 3;
-            }
-        }
-        
-        @media (max-width: 639px) {
-            .list-project-desc img {
-                display: block;
-                margin: 0px auto 2rem auto;
-                float: none;
-            }
-            .main-footer p {
-                margin: 0px 0px 20px 0px;
-                color: #fff;
-                text-align: center;
-            }
-            .main-footer .right {
-                float: none;
-                margin: 0 auto;
-                display: table;
-            }
-            .main-footer .right .mr5 {
-                width: initial;
-                display: table-header-group;
-                text-align: center;
-            }
-        }
-    </style>
+    <link href="style.css" media="screen" rel="stylesheet">
+    <link href="favicon.ico" rel="icon" type="image/x-icon">
     <!-- inject:css -->
     <!-- endinject -->
 </head>
-
 <body>
     <script>
         window.fbAsyncInit = function() {
@@ -425,13 +32,13 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <div id="wrapper">
-        <sd-app>
-            <div class="spinner">
-                <div class="bounce1"></div>
-                <div class="bounce2"></div>
-                <div class="bounce3"></div>
-            </div>
-        </sd-app>
+    <sd-app>
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </sd-app>
     </div>
 
     <script>
@@ -443,25 +50,24 @@
     <!-- endinject -->
 
     <% if (ENV === 'dev') { %>
-        <script src="<%= APP_BASE %>app/system-config.js"></script>
-        <% } %>
+    <script src="<%= APP_BASE %>app/system-config.js"></script>
+    <% } %>
 
-            <!-- libs:js -->
-            <!-- endinject -->
+    <!-- libs:js -->
+    <!-- endinject -->
 
-            <!-- inject:js -->
-            <!-- endinject -->
+    <!-- inject:js -->
+    <!-- endinject -->
 
-            <% if (ENV === 'dev') { %>
-                <script>
+    <% if (ENV === 'dev') { %>
+    <script>
         System.import('<%= BOOTSTRAP_MODULE %>')
         .catch(function (e) {
             console.error(e,
                 'Report this error at https://github.com/mgechev/angular2-seed/issues');
         });
     </script>
-                <% } %>
+    <% } %>
 
 </body>
-
 </html>
